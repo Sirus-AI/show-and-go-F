@@ -1,0 +1,87 @@
+.main{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    
+    /* padding: 90px 0 90px 0; */
+    background-color: rgba(252, 252, 252);
+  }
+  .sub-main{
+    display: flex;
+    justify-content: center;
+    height: 450px;
+    width: 35%;
+    box-shadow: 11px 12px 13px 12px rgb(124, 118, 206);
+    margin-top: 50px;
+    /* border-radius: 60px; */
+    background-color: white;
+  
+  }
+  
+  .img {
+     display: flex;
+     justify-content: right;
+     padding-top: 20px;
+  }
+  .container-image{
+  
+    align-items: center;
+    display: flex;
+    height: 115px;
+    width: 115px;
+  }
+  .profile{
+    height: 100px;
+    width: 100px;
+    /* text-align: center; */
+  }
+  
+  h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    color: rgb(91, 202, 230);
+    margin-top: 40px;
+    
+  
+  } 
+  input{
+    width: 200px;
+    height: 40px;
+    box-shadow: inset 0px 0px 20px 0px rgba(231, 229, 229, 0.925);
+  }
+  .user{
+    height: 30px;
+    width: 30px;
+    
+    padding: 7px 0 0 0px;
+  }
+  .name:hover{
+    cursor: pointer;
+  }
+  .name{
+    padding-left: 50px;
+    font-size: 15px;
+  }
+  .btn{
+    
+    margin-top: 30px;
+    
+  }
+  button{
+    
+       height: 35px;
+       width: 200px;
+       border: 1px solid black;
+       border-radius: 10px;
+      
+       color:#111;
+      
+  }
+  button:hover{
+  cursor: pointer;
+  background-color: green;
+  color:white;
+  }
+  
