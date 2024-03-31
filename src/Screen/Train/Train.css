@@ -1,0 +1,12 @@
+.train-nav{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+}
+.train{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
