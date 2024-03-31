@@ -1,0 +1,12 @@
+.userdashboard-nav{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+}
+.userdashboard{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
