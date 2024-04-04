@@ -1,8 +1,12 @@
 import React from 'react'
 
+
 const Report = () => {
     return (
-    <h2> hey this is report component ! </h2>
+      <>
+      <h1> View Attendance Report</h1>
+      <h4>Admin can check attandence report of all users</h4>
+      </>
     )
  } 
 

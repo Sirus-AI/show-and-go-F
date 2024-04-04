@@ -1,5 +1,5 @@
 import React from 'react'
-import Report from './Component/Attendancere.jsx';
+import Report from './Component/Attendancere'
 
 const App = () => {
   return (
@@ -9,5 +9,5 @@ const App = () => {
   )
 }
 
-export default App
+export default Report
 
