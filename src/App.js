@@ -1,5 +1,6 @@
 import React from 'react'
-import Report from './Attendancere'
+import Report from './App' 
+
 
 const App = () => {
   return (
