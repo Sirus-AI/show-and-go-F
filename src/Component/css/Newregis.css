@@ -1,0 +1,64 @@
+.box{
+    height: 77vh;
+    width: 31vw;
+    margin: 40px 420px;
+    box-shadow: 14px 8px 8px 12px #4bafe9;
+    border-radius: 10px;
+    border: none;
+}
+h1{
+    text-align: center;
+    color: #6cc3fd;
+    padding-top: 8px;
+}
+.user{
+    height: 27px;
+    width: 110px;
+    border-radius: 10px;
+    border-color: rgba(161, 159, 157, 0.432);
+    padding: 2px 4px;  
+    margin: 2px 29px
+}
+
+.email{
+    height: 27px;
+    width: 300px;
+    padding-top: 5px;
+    border-radius: 10px;
+    margin: 8px 27px;
+    border-color: rgba(161, 159, 157, 0.432);
+}
+.radio{
+    color: rgb(72, 72, 76);
+    padding-left: 120px;
+    font-size: 13px;
+    display: flex;
+    margin-top: 5px;
+}
+.radio:hover{
+   cursor: pointer;
+}
+button{
+    width: 290px;
+    height: 30px;
+    background-color: rgb(7, 163, 85);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    border: transparent;
+    border-radius: 15px;
+    margin: 15px 38px;
+    
+}
+button:hover{
+    cursor: pointer;
+    background: rgb(2, 124, 63);
+}
+p{
+   font-size: 13px; 
+   text-align: center;
+   color: blue;
+}
