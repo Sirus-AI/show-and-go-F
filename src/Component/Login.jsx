@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import './Login.css';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import server from '../Server';
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [visible, setVisible] = useState(false);
   const [messageColor, setMessageColor] = useState('green');
-   const navigate=useNavigate();
+  const navigate = useNavigate();
   const togglePassword = () => {
     if (passwordType === 'password') {
       setPasswordType('text')
@@ -28,34 +28,47 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      handleError('Email  and password are required.');
+      handleError('Email and password are required.');
       return;
-    }
-   else{
-    server.post(
-      'api/users/login/',{
-        email:email,
-        password:password,
-      }
-    ) .then((response) => {
-      if (response.status === 200) {
-          setMessageColor('green');
-          setMessage(response.data.msg);
+    } else {
+      server.post(
+        'api/users/login/',
+        {
+          email: email,
+          password: password,
+        }
+      )
+      .then((response) => {
+        const userData = {
+          token: response.data.token,
+          user: response.data.user,
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        if (response.data.token.access) {
+          // Assuming response.data.token.access contains the access token
+          document.cookie = `token=${response.data.token.access}; path=/`;
+          navigate('/Admindashboard', { replace: true });
+        } else {
+          console.log(response.data.msg);
           setVisible(true);
-          navigate('/Admindashboard')
-      }else {
-        setMessageColor('red');
-        setMessage(response.data.message);
+          setMessage(response.data.msg); // Assuming msg contains error message
+          setMessageColor('red');
+        }
+      })
+      .catch((error) => {
+        console.error('Login failed:', error);
         setVisible(true);
-      }
-    })
-    .catch((error) => {
-      setMessageColor('red');
-      setMessage(error.response.data.message);
-      setVisible(true);
-    });
-   }
+        setMessageColor('red');
+        setMessage('An error occurred during login.'); // Set a generic error message
+      });
+    }
   };
+  useEffect(() => {
+   
+    if (localStorage.getItem('userData')) {
+      navigate('/Admindashboard', { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div>

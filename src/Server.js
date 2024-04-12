@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 const server = axios.create({
+    baseURL: 'http://127.0.0.1:8000/',
+    // baseURL: 'http://134.209.144.236:8000/',
+});
 
-       baseURL: process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8000/',
- });
-
-
- server.interceptors.request.use((req) => {
+server.interceptors.request.use((req) => {
     const cookies = document.cookie.split(';');
     let token = null;
 
@@ -17,11 +16,11 @@ const server = axios.create({
             break;
         }
     }
-    if (token) {
-        req.headers.authorization = `Bearer ${token}`
+    
+    if (token && !req.url.includes('/login') && !req.url.includes('/register')) {
+        req.headers.authorization = `Bearer ${token}`;
     }
-    return req
-})
+    return req;
+});
 
-
-export default server
+export default server;

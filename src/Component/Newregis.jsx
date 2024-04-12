@@ -70,9 +70,11 @@ const Newregis = () => {
   .then((response) => {
     if (response.status === 201) {
         setMessageColor('green');
-        setMessage(response.msg.msg);
+        setMessage(response.data.msg);
         setVisible(true);
-        navigate('/')
+        setTimeout(() => {
+          navigate('/')
+        }, 2000); 
     }else {
       setMessageColor('red');
       setMessage(response.data.message);
@@ -81,7 +83,7 @@ const Newregis = () => {
   })
   .catch((error) => {
     setMessageColor('red');
-    setMessage(error.response.data.message);
+    setMessage('something went wrong please try again');
     setVisible(true);
   });
     }
