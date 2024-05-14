@@ -1,5 +1,5 @@
 import React from 'react'
-import './Navbar.css'
+
 import Sidebar from './Sidebar'
 import { useState } from 'react'
 

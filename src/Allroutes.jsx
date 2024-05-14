@@ -3,6 +3,7 @@ import Admindashboard from './Screen/Admin_dashboard/Admindashboard'
 import Captureface from './Screen/Capture_face/Captureface'
 import Train from './Screen/Train/Train'
 import Veiwattendance from './Screen/Veiw_attendace/Veiwattendance'
+import Profile from './Screen/Profile/Profile'
 
 import Login from './Component/Login'
 import Newregis from './Component/Newregis'
@@ -19,6 +20,7 @@ const Allroutes = () => {
           <Route path='/Train' element={<Train/>}/>
           <Route path='/Veiw_attendance_report' element={<Veiwattendance/>}/>
           <Route path='/Admindashboard' element={<Admindashboard/>}/>
+          <Route path='/Profile' element={<Profile/>}/>
       
         </Routes>
       </Router>

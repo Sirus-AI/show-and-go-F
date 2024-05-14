@@ -1,5 +1,4 @@
 import React from 'react'
-import './Admindashboard.css'
 import Navbar from '../../Component/Navigation/Navbar'
 import { useState } from 'react'
 import Admin from '../../static_content/admin_content/Screenshot.png'
@@ -53,14 +52,6 @@ const Admindashboard = () => {
                                 <p>Total</p>
                                 <p>375 <span>65%</span></p>
                             </div>
-                        </div>
-                    </div>
-                    <div className='user'>
-                    <div className='user-info'>
-                        <img src={Admin} alt='image' />
-                        <div className='info'>
-                            Note that the development build is not optimized.
-                        </div>
                         </div>
                     </div>
                 </div>
