@@ -1,7 +1,6 @@
 import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
-import './Login.css';
 import { Link } from 'react-router-dom';
 import server from '../Server';
 const Login = () => {

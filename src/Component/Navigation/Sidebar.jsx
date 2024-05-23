@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import './sidebar.css'
 import Logo from '../../static_content/admin_content/Screenshot.png'
 import { Link } from 'react-router-dom'
 import server from '../../Server'
@@ -54,11 +53,12 @@ const Sidebar = () => {
                     </div>
                     <div className='list'>
                         <ul className='ul-list'>
-                            <Link to='/'> <li className='item'><i class="fa-solid fa-circle-half-stroke"></i><p>Dashboard</p></li></Link>
-                            <Link to='/register_newuser'>  <li className='item'><i class="fa-solid fa-circle-half-stroke"></i><p>Register new user</p></li></Link>
-                            <Link to='/Capture_face'><li className='item'><i class="fa-solid fa-camera-retro"></i><p>Capture face</p></li></Link>
-                            <Link to='/Train'><li className='item'><i class="fa-solid fa-brain"></i><p>Train</p></li></Link>
-                            <Link to='/Veiw_attendance_report'>       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>Veiw attendance report</p></li></Link>
+                            <Link to='/' className="link-color"> <li className='item'><i class="fa-solid fa-circle-half-stroke"></i><p>Dashboard</p></li></Link>
+                            <Link to='/Profile' className="link-color">       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>Profile</p></li></Link>
+                            <Link to='/register_newuser' className="link-color">  <li className='item'><i class="fa-solid fa-circle-half-stroke"></i><p>Register new user</p></li></Link>
+                            <Link to='/Capture_face' className="link-color"><li className='item'><i class="fa-solid fa-camera-retro"></i><p>Capture face</p></li></Link>
+                            <Link to='/Train' className="link-color"><li className='item'><i class="fa-solid fa-brain"></i><p>Train</p></li></Link>
+                            <Link to='/Veiw_attendance_report' className="link-color">       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>Veiw attendance report</p></li></Link>
                             <li className='item' onClick={logoutHandler}><i class="fa-solid fa-right-from-bracket"></i><p>Log out</p></li>
                         </ul>
                     </div>
