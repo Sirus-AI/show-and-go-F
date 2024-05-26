@@ -1,5 +1,4 @@
 import React from 'react'
-import './Captureface.css'
 import { useState } from 'react'
 import Navbar from '../../Component/Navigation/Navbar'
 const Captureface = () => {

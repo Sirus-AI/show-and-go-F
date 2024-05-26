@@ -1,5 +1,5 @@
 import React from 'react'
-import './Veiwattendance.css'
+
 import Navbar from '../../Component/Navigation/Navbar'
 import { useState } from 'react'
 const Veiwattendance = () => {
