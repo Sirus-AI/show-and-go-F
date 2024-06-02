@@ -592,8 +592,28 @@ form {
   border-radius: 15px;
 
 }
-
-
+.modalbody{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-para{
+  text-align: center;
+  font-size: 1.1rem;
+}
+.modal-btn{
+  padding: 0.8rem 1.3rem;
+  background-color: #0f5ddb;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 10px;
+ 
+}
 
 @media (max-width: 900px) {
   .dashboard-card {
