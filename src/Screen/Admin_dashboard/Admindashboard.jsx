@@ -12,10 +12,11 @@ const Admindashboard = () => {
     const [name, setName] = useState('');
     const [about, setAbout] = useState('');
     const [location, setLocation] = useState('');
-    const [added_date, setAddedDate] = useState('');
     const [organisations, setOrganisations] = useState([]);
     const [users, setUsers] = useState([]);
-console.log(users)
+    const [registeruser, setRegisterUsers] = useState();
+    // console.log(users.id)
+    console.log(registeruser)
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
@@ -27,7 +28,23 @@ console.log(users)
         setFormVisible(true)
         setVisible(false)
     }
-    const fetchUserdata= useCallback(async () => {
+    const fetchUserRegister = useCallback(async () => {
+        server
+            .get(`api/org/access-request/user-org/`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    
+                },
+            })
+            .then((response) => {
+                setRegisterUsers(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    })
+    const fetchUserdata = useCallback(async () => {
         server
             .get(`api/users/user/profile/`, {
                 headers: {
@@ -42,23 +59,45 @@ console.log(users)
                 console.log(error);
             });
     })
-    const handleSubmit = (e) => {
+    const handleRegisteruser = async (e) => {
         e.preventDefault();
-        if (!name || !about || !location || !added_date || !organisations) {
-            setMessage('All fields are required');
-        } else {
-            setMessage('');
-            console.log('Form submitted', { name, about, location, added_date, organisations });
-            setFormVisible(false);
+            if (!name || !about || !location || !organisations) {
+                setMessage('All fields are required');
+                return ;
+            }
+         else {
+            try {
+                await server.post(
+                    'api/org/register-user-org/',
+                    {
+                        name: name,
+                        about: about,
+                        location: location,
+                        org_id: organisations,
+                        users: users.id,
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    }
+                );
+                
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 
     useEffect(() => {
         btnModal()
+        fetchUserRegister()
         fetchUserdata();
     }, []);
     return (
         <div>
+            {/* {registeruser? null : ( */}
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}
@@ -80,6 +119,7 @@ console.log(users)
                     </CButton>
                 </CModalFooter>
             </CModal>
+            {/* )} */}
             <CModal
                 visible={formVisible}
                 onClose={() => setFormVisible(false)}
@@ -87,67 +127,42 @@ console.log(users)
                 alignment="center"
             >
                 <CModalHeader onClose={() => setFormVisible(false)}>
-                    <CModalTitle id="LiveDemoExampleLabel" >Harry up</CModalTitle>
+                    {/* <CModalTitle id="LiveDemoExampleLabel" >Harry up</CModalTitle> */}
                 </CModalHeader>
                 <CModalBody>
                     <div className="register-display">
                         <div className='modal-form'>
-                            <h3 className='h1'>ORGANISATION REGISTRATION</h3>
-                            <form className='form' onClick={handleSubmit}>
+                            <h5 >ORGANISATION REGISTRATION</h5>
+                            <form className='form' onSubmit={handleRegisteruser}>
                                 <div className='credential'>
-                                   
-                                        <div className='credential'>
-                                            <div className='flex'>
-                                                <label htmlFor="fname">Name</label>
-                                            </div>
-                                            <input
-                                                type="text"
-                                                name="fname"
-                                                id="fname"
-                                                placeholder="Name"
-                                                className='email'
-                                                onChange={(e) => setName(e.target.value.trim())}
-                                            />
+
+                                    <div className='credential'>
+                                        <div className='flex'>
+                                            <label htmlFor="fname">Name</label>
                                         </div>
-                                       
-                                   <div className='credential'>
-                                            <div className='flex'>
-                                                <label htmlFor="lname">About</label>
-                                            </div>
-                                            <input
-                                                type="text"
-                                                name="lname"
-                                                id="lname"
-                                                placeholder="About"
-                                                className='email'
-                                                onChange={(e) => setAbout(e.target.value.trim())}
-                                            />
+                                        <input
+                                            type="text"
+                                            name="fname"
+                                            id="fname"
+                                            placeholder="Name"
+                                            className='email'
+                                            onChange={(e) => setName(e.target.value.trim())}
+                                        />
+                                    </div>
+
+                                    <div className='credential'>
+                                        <div className='flex'>
+                                            <label htmlFor="lname">About</label>
                                         </div>
-                                </div>
-                                <div className='credential'>
-                                    <div className='flex'>
-                                        <label htmlFor="email">Location</label>
+                                        <input
+                                            type="text"
+                                            name="About"
+                                            id="About"
+                                            placeholder="About"
+                                            className='about'
+                                            onChange={(e) => setAbout(e.target.value.trim())}
+                                        />
                                     </div>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        placeholder="location"
-                                        className='email'
-                                        onChange={(e) => setLocation(e.target.value.trim())}
-                                    />
-                                </div>
-                                <div className='credential'>
-                                    <div className='flex'>
-                                        <label htmlFor="phone">Added Date</label>
-                                    </div>
-                                    <input
-                                        type="date"
-                                        name="dob"
-                                        placeholder="date*"
-                                        className='email'
-                                        onChange={(e) => setAddedDate(e.target.value.trim())}
-                                    />
                                 </div>
                                 <div className='credential'>
                                     <div className='flex'>
@@ -157,10 +172,22 @@ console.log(users)
                                         type="tel"
                                         name="phone"
                                         placeholder="Organisations"
-                                        className='email'
+                                        className='org'
                                         onChange={(e) => setOrganisations(e.target.value.trim())}
                                     />
                                 </div>
+                                <div className='credential'>
+                                    <div className='flex'>
+                                        <label htmlFor="email">Location</label>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="location"
+                                        className='location'
+                                        onChange={(e) => setLocation(e.target.value.trim())}
+                                    />
+                                </div>
+
                                 <button className='regis' type="submit">Register</button>
                             </form>
                         </div>
