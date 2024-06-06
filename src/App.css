@@ -703,12 +703,150 @@ form {
   width: 100%;
   overflow-x: hidden;
 }
-
-.attendance {
+.attendance{
   display: flex;
+}
+.frnt{
+  color: #626263;
+  margin: 12px 0px ;
+}
+.open{
+  margin: 15px 15px;
+  font-size: 35px;
+  color: #0f5ddb;
+}
+.line{
+  margin: 0px 65px;
+}
+.srch{
+  font-size: 25px;
+  margin: 40px 60px;
+}
+.by{
+   margin: 17px 50px;
+   height: 7vh;
+   width: 18vw;
+   display: flex;
+   justify-content: space-between;
+   transition: 0.5s;
+}
+.by:hover{
+  transform: scale(1);
+}
+.emp{
+ background-color: #0f5ddb; 
+   color: white;
+   border: none;
+   border-radius: 10px ; 
+   width: 8vw;
+   transition: 0.5s;   
+}
+.emp:hover{
+  font-size: 15px;
+  transform: scale(1.5);
+}
+.today{
+  margin: 55px 60px ;
+  font-size: 30px;
+  color: #000;
+}
+.rect{
+  display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   text-align: center;
+   width: 100%;
+   margin: 0% 3%;
+}
+.rect2{
+  width: 20vw;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  text-align: center;
+  border: none;
+  background-color: rgb(9, 143, 20);
+  color: white;
+  transition: 0.5s;
+}
+.rect3{
+    width: 20vw;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  background-color: rgb(223, 16, 44);
+  color: white;
+  transition: 0.5s;
+}
+.rect2:hover{
+  transform: scale(1.5);
+  cursor: pointer;
+  font-size: 14px;
+}
+.rect3:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  font-size: 15px;
+}
+@media (max-width:900px) {
+   .frnt{
+     font-size: 25px;
+   }
+   .open{
+     font-size: 35px;
+     margin: 11px 15px;
+   }
+   .by{
+    margin: 10px 40px;
+    height: 9vh;
+    width: 35vw;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.5s;
+ }
+ .line{
+  margin: 0px 35px;
+  font-size: 20px;
+}
+.srch{
+  font-size: 25px;
+  margin: 40px 35px;
+}
+.emp{
+  background-color: #0f5ddb; 
+    color: white;
+    border: none;
+    border-radius: 10px ; 
+    width: 15vw;
+    height: 5vh;
+    transition: 0.5s;   
+ }
+ .emp:hover{
+  font-size: 15px;
+  transform: scale(1.5);
+}
+.rect2{
+  width: 25vw;
+  height: 10vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  background-color: rgb(9, 143, 20);
+  color: white;
+  transition: 0.5s;
+}
+.rect3{
+    width: 25vw;
+    height: 10vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  background-color: rgb(223, 16, 44);
+  color: white;
+  transition: 0.5s;
+}
 }
 
 /*  Veiwattendance page css is end here  */
