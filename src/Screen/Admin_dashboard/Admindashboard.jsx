@@ -34,7 +34,6 @@ const Admindashboard = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': '{{ csrf_token }}',
-                    
                 },
             })
             .then((response) => {
@@ -61,7 +60,7 @@ const Admindashboard = () => {
     })
     const handleRegisteruser = async (e) => {
         e.preventDefault();
-            if (!name || !about || !location || !organisations) {
+            if (!name || !about || !location) {
                 setMessage('All fields are required');
                 return ;
             }
@@ -73,17 +72,14 @@ const Admindashboard = () => {
                         name: name,
                         about: about,
                         location: location,
-                        org_id: organisations,
                         users: users.id,
-                    },
-                    {
+                    }, {
                         headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': '{{ csrf_token }}',
+                          'Content-Type': 'application/json',
+                          'X-CSRFToken': '{{ csrf_token }}',
                         },
-                    }
-                );
-                
+                      } )
+            
             } catch (error) {
                 console.log(error);
             }
@@ -163,18 +159,6 @@ const Admindashboard = () => {
                                             onChange={(e) => setAbout(e.target.value.trim())}
                                         />
                                     </div>
-                                </div>
-                                <div className='credential'>
-                                    <div className='flex'>
-                                        <label htmlFor="phone">Organisations</label>
-                                    </div>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        placeholder="Organisations"
-                                        className='org'
-                                        onChange={(e) => setOrganisations(e.target.value.trim())}
-                                    />
                                 </div>
                                 <div className='credential'>
                                     <div className='flex'>
