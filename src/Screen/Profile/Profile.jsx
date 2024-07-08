@@ -49,7 +49,7 @@ const Profile = () => {
     useEffect(() => {
         fetchInfo();
 
-    }, [fetchInfo]);
+    }, []);
     return (
         <div>
             <CModal
