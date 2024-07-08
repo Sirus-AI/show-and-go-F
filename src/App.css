@@ -725,6 +725,7 @@ form {
   flex-direction: column;
   width: 100%;
   overflow-x: hidden;
+  flex-wrap: wrap;
 }
 .attendance{
   display: flex;
@@ -745,28 +746,36 @@ form {
   font-size: 25px;
   margin: 40px 60px;
 }
-.by{
+.by1{
    margin: 17px 50px;
    height: 7vh;
-   width: 18vw;
+   width: 450px;
    display: flex;
    justify-content: space-between;
    transition: 0.5s;
+   
 }
-.by:hover{
-  transform: scale(1);
-}
-.emp{
+.omp{
  background-color: #0f5ddb; 
    color: white;
    border: none;
-   border-radius: 10px ; 
-   width: 8vw;
+   border-radius: 8px ; 
+   width: 180px;
+   text-align: center;
    transition: 0.5s;   
 }
-.emp:hover{
-  font-size: 15px;
-  transform: scale(1.5);
+.omp1{
+  background-color: #0f5ddb; 
+    color: white;
+    border: none;
+    border-radius: 8px ; 
+    width: 150px;
+    text-align: center;
+    transition: 0.5s;   
+ }
+.op{
+  background-color: white;
+  color: black;
 }
 .today{
   margin: 55px 60px ;
@@ -778,27 +787,43 @@ form {
    align-items: center;
    justify-content: space-evenly;
    text-align: center;
+   height: 50vh;
    width: 100%;
-   margin: 0% 3%;
+   margin: 0% 1%;
+   font-weight: 600;
 }
 .rect2{
-  width: 20vw;
+  height: 200px;
+  width: 170px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: none;
-  background-color: rgb(9, 143, 20);
-  color: white;
+  border: 1px solid rgb(165, 179, 194);
+  border-radius: 10px;
+  box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
   transition: 0.5s;
 }
+.total1{
+  background: #c0d0ec;
+  border-radius: 50%;
+  font-size: 50px;
+  width: 70px;
+}
+.presnt{
+  background: #c0d0ec;
+  border-radius: 50%;
+  font-size: 50px;
+  width: 70px;
+}
 .rect3{
-    width: 20vw;
+  height: 200px;
+    width: 170px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: none;
-  background-color: rgb(223, 16, 44);
-  color: white;
+  border: 1px solid rgb(165, 179, 194);
+  border-radius: 10px;
+  box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
   transition: 0.5s;
 }
 .rect2:hover{
@@ -812,6 +837,17 @@ form {
   font-size: 15px;
 }
 @media (max-width:900px) {
+  .attendance-nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .attendance{
+    display: flex;
+    flex-wrap: wrap;
+  }
    .frnt{
      font-size: 25px;
    }
@@ -819,57 +855,74 @@ form {
      font-size: 35px;
      margin: 11px 15px;
    }
-   .by{
-    margin: 10px 40px;
-    height: 9vh;
-    width: 35vw;
+   .line{
+    margin: 0px 35px;
+  }
+   .by1{
+    margin: 17px 16px;
+    height: 7vh;
+    width: 320px;
     display: flex;
     justify-content: space-between;
     transition: 0.5s;
  }
- .line{
-  margin: 0px 35px;
-  font-size: 20px;
-}
-.srch{
-  font-size: 25px;
-  margin: 40px 35px;
-}
-.emp{
+ .omp{
   background-color: #0f5ddb; 
     color: white;
     border: none;
-    border-radius: 10px ; 
-    width: 15vw;
-    height: 5vh;
+    border-radius: 8px ; 
+    height: 50px;
+    width: 140px;
+    font-size: 15px;
+    text-align: center;
     transition: 0.5s;   
  }
- .emp:hover{
-  font-size: 15px;
-  transform: scale(1.5);
-}
-.rect2{
-  width: 25vw;
-  height: 10vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: none;
-  background-color: rgb(9, 143, 20);
-  color: white;
-  transition: 0.5s;
-}
-.rect3{
-    width: 25vw;
-    height: 10vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: none;
-  background-color: rgb(223, 16, 44);
-  color: white;
-  transition: 0.5s;
-}
+ .omp1{
+   background-color: #0f5ddb; 
+     color: white;
+     border: none;
+     border-radius: 8px ; 
+     height: 50px;
+     width: 140px;
+     font-size: 15px;
+     text-align: center;
+     transition: 0.5s;   
+  }
+  .rect{
+    display: flex;
+     align-items: center;
+     justify-content: space-evenly; 
+      text-align: center;
+     flex-direction: column;
+     flex-wrap: wrap;
+     height: 90vh;
+     width: 900px;
+    margin-left: -250px;
+     font-weight: 600;
+  }
+  .rect2{
+    height: 200px;
+    width: 170px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgb(165, 179, 194);
+    border-radius: 10px;
+    box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
+    transition: 0.5s;
+  }
+  .rect3{
+    height: 200px;
+    width: 170px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgb(165, 179, 194);
+    border-radius: 10px;
+    box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
+    transition: 0.5s;
+  }
+   
 }
 
 /*  Veiwattendance page css is end here  */
