@@ -16,7 +16,6 @@ const Admindashboard = () => {
     const [users, setUsers] = useState([]);
     const [registeruser, setRegisterUsers] = useState();
     // console.log(users.id)
-    console.log(registeruser)
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
@@ -67,7 +66,7 @@ const Admindashboard = () => {
          else {
             try {
                 await server.post(
-                    'api/org/register-user-org/',
+                    'api/org/register-company/',
                     {
                         name: name,
                         about: about,
