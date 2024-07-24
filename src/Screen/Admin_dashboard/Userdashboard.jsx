@@ -81,9 +81,10 @@ const Userdashboard = () => {
         fetchUserRegister()
        
     }, []);
+    
     return (
         <div>
-            {(usertype === 1 || usertype === 2) && registeruser===true ? null: (
+            {(usertype === 1 || usertype === 2) || registeruser===true ? null: (
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}

@@ -62,7 +62,6 @@ const Admindashboard = () => {
                         name: name,
                         about: about,
                         location: location,
-                        users: users.id,
                     }, {
                         headers: {
                             'Content-Type': 'application/json',
@@ -83,7 +82,7 @@ const Admindashboard = () => {
     }, []);
     return (
         <div>
-            {/* {(usertype === 1 || usertype === 2) && registeruser===true ? null: (
+            {(usertype === 1 || usertype === 2) || registeruser===true ? null: (
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}
@@ -105,7 +104,7 @@ const Admindashboard = () => {
                     </CButton>
                 </CModalFooter>
             </CModal>
-            )} */}
+            )}
             <CModal
                 visible={formVisible}
                 onClose={() => setFormVisible(false)}
