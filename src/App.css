@@ -1013,3 +1013,55 @@ form {
     width: 100%;
   }
 }
+/* user Acess data */
+.user_req {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.userAcesscard {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+}
+
+.userAcesscard h3 {
+  margin-top: 0;
+}
+
+.userAcess-details {
+  margin-top: 10px;
+}
+
+.userAcess-details p {
+  margin: 5px 0;
+}
+.userAcess-func{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.userAcess-toggle-btn button{
+  border: 0;
+  padding: 0.3rem 0.9rem;
+  background-color: rgb(79, 190, 246);
+  border-radius: 2rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.userAcess-delete-btn button{
+  border: 0;
+  padding: 0.3rem 0.9rem;
+  background-color: rgb(246, 79, 79);
+  border-radius: 2rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+}

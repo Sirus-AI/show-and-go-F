@@ -4,7 +4,7 @@ import Navbar from '../../Component/Navigation/Navbar'
 import server from '../../Server'
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import Admin from '../../static_content/admin_content/Screenshot.png'
-const Admindashboard = () => {
+const Userdashboard = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
@@ -17,7 +17,7 @@ const Admindashboard = () => {
     const [registeruser, setRegisterUsers] = useState();
     const [usertype,setUsertype]=useState()
    
-
+     
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
@@ -57,7 +57,7 @@ const Admindashboard = () => {
             try {
                 
                 await server.post(
-                    'api/org/register-company/',
+                    'api/org/register-user-org/',
                     {
                         name: name,
                         about: about,
@@ -83,7 +83,7 @@ const Admindashboard = () => {
     }, []);
     return (
         <div>
-            {/* {(usertype === 1 || usertype === 2) && registeruser===true ? null: (
+            {(usertype === 1 || usertype === 2) && registeruser===true ? null: (
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}
@@ -105,7 +105,7 @@ const Admindashboard = () => {
                     </CButton>
                 </CModalFooter>
             </CModal>
-            )} */}
+            )}
             <CModal
                 visible={formVisible}
                 onClose={() => setFormVisible(false)}
@@ -182,7 +182,7 @@ const Admindashboard = () => {
 
                             <div className='card'>
                                 <span class="material-symbols-outlined card-span">
-                                  person
+                                    person
                                 </span>
                                 <div className='present'>
                                     <p>Total</p>
@@ -222,4 +222,4 @@ const Admindashboard = () => {
     )
 }
 
-export default Admindashboard
+export default Userdashboard
