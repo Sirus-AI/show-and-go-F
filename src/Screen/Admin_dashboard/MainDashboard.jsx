@@ -5,7 +5,8 @@ import server from '../../Server';
 
 const MainDashboard = () => {
     const [usertype, setUsertype] = useState();
-
+    const [users, setUsers] = useState([]);
+    const [registeruser, setRegisterUsers] = useState();
     const fetchUser = useCallback(async () => {
         try {
             const response = await server.get('api/users/user/profile/', {
@@ -14,24 +15,25 @@ const MainDashboard = () => {
                     'X-CSRFToken': '{{ csrf_token }}',
                 },
             });
-            setUsertype(response.data.user_type);
+            setRegisterUsers(response.data.organisation_status.has_organisation);
+            setUsers(response.data);
+            setUsertype(response.data.user_type)
         } catch (error) {
             console.log(error);
         }
-    }, []); // Ensure an empty dependency array to avoid creating a new function on each render
+    }, []);
 
     useEffect(() => {
         fetchUser();
-    }, [fetchUser]); // Add fetchUser as a dependency to useEffect
-
+    }, [fetchUser]);
     return (
         <div>
             {usertype === 3 ? (
-                <Admindashboard />
+                <Admindashboard registerUser={registeruser} usertype={usertype} users={users}/>
             ) : usertype === 4 ? (
-                <Userdashboard />
+                <Userdashboard registerUser={registeruser} usertype={usertype} users={users}/>
             ) : (
-                <Admindashboard />
+                <Admindashboard registerUser={registeruser} usertype={usertype} users={users}/>
             )}
         </div>
     );

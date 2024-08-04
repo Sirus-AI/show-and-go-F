@@ -4,7 +4,7 @@ import Navbar from '../../Component/Navigation/Navbar'
 import server from '../../Server'
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import Admin from '../../static_content/admin_content/Screenshot.png'
-const Admindashboard = () => {
+const Admindashboard = ({registerUser ,usertype, users}) => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
@@ -13,9 +13,7 @@ const Admindashboard = () => {
     const [about, setAbout] = useState('');
     const [location, setLocation] = useState('');
     const [organisations, setOrganisations] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [registeruser, setRegisterUsers] = useState();
-    const [usertype,setUsertype]=useState()
+   
    
 
     const toggleSidebar = () => {
@@ -29,23 +27,7 @@ const Admindashboard = () => {
         setFormVisible(true)
         setVisible(false)
     }
-    const fetchUserRegister = useCallback(async () => {
-        server
-            .get(`api/users/user/profile/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}',
-                },
-            })
-            .then((response) => {
-                setRegisterUsers(response.data.organisation_status.has_organisation);
-                setUsers(response.data);
-                setUsertype(response.data.user_type)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    })
+  
    
     const handleRegisteruser = async (e) => {
         e.preventDefault();
@@ -77,12 +59,12 @@ const Admindashboard = () => {
  
     useEffect(() => {
         btnModal()
-        fetchUserRegister()
+      
        
     }, []);
     return (
         <div>
-            {(usertype === 1 || usertype === 2) || registeruser===true ? null: (
+            {(usertype === 1 || usertype === 2) || registerUser===true ? null: (
             <CModal
                 visible={visible}
                 onClose={() => setVisible(false)}
