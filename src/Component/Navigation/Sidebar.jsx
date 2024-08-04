@@ -33,7 +33,7 @@ const Sidebar = ({ usertype }) => {
         navigate('/', { replace: true });
       });
   };
-  console.log("jai ho shubham baba")
+  
 
   return (
 
