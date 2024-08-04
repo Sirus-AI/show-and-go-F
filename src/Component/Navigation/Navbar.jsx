@@ -1,15 +1,36 @@
 import React from 'react'
-
+import { useState, useCallback, useEffect } from 'react'
+import server from '../../Server'
 import Sidebar from './Sidebar'
-import { useState } from 'react'
 
 const Navbar = ({ toggleSidebar }) => {
     const [showSidebar, setShowSidebar] = useState(false);
 
     const handleToggleSidebar = () => {
         setShowSidebar(!showSidebar);
-        toggleSidebar(); 
+        toggleSidebar();
     };
+    const [usertype, setUsertype] = useState()
+    const fetchUser = useCallback(async () => {
+        server
+            .get(`api/users/user/profile/`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then((response) => {
+
+                setUsertype(response.data.user_type)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    })
+    useEffect(() => {
+        fetchUser()
+
+    }, []);
     return (
         <div className='nav-bar'>
 
@@ -23,9 +44,15 @@ const Navbar = ({ toggleSidebar }) => {
                             </span>
                         </span>
                         <div className='name'>
-                            <span className='admin'>
-                                Admin Dashboard
-                            </span>
+                            {usertype === 1 ? (
+                                <span className='admin'>Super Admin Dashboard</span>
+                            ) : usertype === 2 ? (
+                                <span className='admin'>Admin Dashboard</span>
+                            ) : usertype === 3 ? (
+                                <span className='admin'>Organization Admin Dashboard</span>
+                            ) : usertype === 4 ? (
+                                <span className='admin'>User Dashboard</span>
+                            ):( <span className='admin'>Loading....</span>)}
                             <p>Overall Report of institution</p>
                         </div>
 
@@ -38,7 +65,7 @@ const Navbar = ({ toggleSidebar }) => {
             </div>
 
             <div className={showSidebar ? 'side-off' : 'side-bar-nav '}>
-                <Sidebar />
+                <Sidebar  usertype={usertype} />
             </div>
 
         </div>
