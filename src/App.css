@@ -325,8 +325,13 @@
   justify-content: center;
   align-items: center;
 }
-
-.email {
+.modal-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.email,.org,.location,.about {
   height: 2rem;
   width: 100%;
   margin-top: 0.5rem;
@@ -507,7 +512,25 @@ form {
 .home-page.navbar-open .dashboard-content {
   margin-left: 250px;
 }
+.select-org {
+  width: 100%;
+  padding: 8px 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
+.select-org:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
 .content-cover {
   padding: 20px 20px 20px 5px;
   width: 100%;
@@ -592,8 +615,28 @@ form {
   border-radius: 15px;
 
 }
-
-
+.modalbody{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-para{
+  text-align: center;
+  font-size: 1.1rem;
+}
+.modal-btn{
+  padding: 0.8rem 1.3rem;
+  background-color: #0f5ddb;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 10px;
+ 
+}
 
 @media (max-width: 900px) {
   .dashboard-card {
@@ -702,13 +745,204 @@ form {
   flex-direction: column;
   width: 100%;
   overflow-x: hidden;
+  flex-wrap: wrap;
 }
-
-.attendance {
+.attendance{
   display: flex;
+}
+.frnt{
+  color: #626263;
+  margin: 12px 0px ;
+}
+.open{
+  margin: 15px 15px;
+  font-size: 35px;
+  color: #0f5ddb;
+}
+.line{
+  margin: 0px 65px;
+}
+.srch{
+  font-size: 25px;
+  margin: 40px 60px;
+}
+.by1{
+   margin: 17px 50px;
+   height: 7vh;
+   width: 450px;
+   display: flex;
+   justify-content: space-between;
+   transition: 0.5s;
+   
+}
+.omp{
+ background-color: #0f5ddb; 
+   color: white;
+   border: none;
+   border-radius: 8px ; 
+   width: 180px;
+   text-align: center;
+   transition: 0.5s;   
+}
+.omp1{
+  background-color: #0f5ddb; 
+    color: white;
+    border: none;
+    border-radius: 8px ; 
+    width: 150px;
+    text-align: center;
+    transition: 0.5s;   
+ }
+.op{
+  background-color: white;
+  color: black;
+}
+.today{
+  margin: 55px 60px ;
+  font-size: 30px;
+  color: #000;
+}
+.rect{
+  display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   text-align: center;
+   height: 50vh;
+   width: 100%;
+   margin: 0% 1%;
+   font-weight: 600;
+}
+.rect2{
+  height: 200px;
+  width: 170px;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  text-align: center;
+  border: 1px solid rgb(165, 179, 194);
+  border-radius: 10px;
+  box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
+  transition: 0.5s;
+}
+.total1{
+  background: #c0d0ec;
+  border-radius: 50%;
+  font-size: 50px;
+  width: 70px;
+}
+.presnt{
+  background: #c0d0ec;
+  border-radius: 50%;
+  font-size: 50px;
+  width: 70px;
+}
+.rect3{
+  height: 200px;
+    width: 170px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgb(165, 179, 194);
+  border-radius: 10px;
+  box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
+  transition: 0.5s;
+}
+.rect2:hover{
+  transform: scale(1.5);
+  cursor: pointer;
+  font-size: 14px;
+}
+.rect3:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  font-size: 15px;
+}
+@media (max-width:900px) {
+  .attendance-nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  .attendance{
+    display: flex;
+    flex-wrap: wrap;
+  }
+   .frnt{
+     font-size: 25px;
+   }
+   .open{
+     font-size: 35px;
+     margin: 11px 15px;
+   }
+   .line{
+    margin: 0px 35px;
+  }
+   .by1{
+    margin: 17px 16px;
+    height: 7vh;
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.5s;
+ }
+ .omp{
+  background-color: #0f5ddb; 
+    color: white;
+    border: none;
+    border-radius: 8px ; 
+    height: 50px;
+    width: 140px;
+    font-size: 15px;
+    text-align: center;
+    transition: 0.5s;   
+ }
+ .omp1{
+   background-color: #0f5ddb; 
+     color: white;
+     border: none;
+     border-radius: 8px ; 
+     height: 50px;
+     width: 140px;
+     font-size: 15px;
+     text-align: center;
+     transition: 0.5s;   
+  }
+  .rect{
+    display: flex;
+     align-items: center;
+     justify-content: space-evenly; 
+      text-align: center;
+     flex-direction: column;
+     flex-wrap: wrap;
+     height: 90vh;
+     width: 900px;
+    margin-left: -250px;
+     font-weight: 600;
+  }
+  .rect2{
+    height: 200px;
+    width: 170px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgb(165, 179, 194);
+    border-radius: 10px;
+    box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
+    transition: 0.5s;
+  }
+  .rect3{
+    height: 200px;
+    width: 170px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgb(165, 179, 194);
+    border-radius: 10px;
+    box-shadow: 3px 2px 4px 6px rgba(3, 3, 3, 0.095);
+    transition: 0.5s;
+  }
+   
 }
 
 /*  Veiwattendance page css is end here  */
@@ -798,4 +1032,56 @@ form {
     align-items: center;
     width: 100%;
   }
+}
+/* user Acess data */
+.user_req {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.userAcesscard {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+}
+
+.userAcesscard h3 {
+  margin-top: 0;
+}
+
+.userAcess-details {
+  margin-top: 10px;
+}
+
+.userAcess-details p {
+  margin: 5px 0;
+}
+.userAcess-func{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.userAcess-toggle-btn button{
+  border: 0;
+  padding: 0.3rem 0.9rem;
+  background-color: rgb(79, 190, 246);
+  border-radius: 2rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.userAcess-delete-btn button{
+  border: 0;
+  padding: 0.3rem 0.9rem;
+  background-color: rgb(246, 79, 79);
+  border-radius: 2rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
 }
