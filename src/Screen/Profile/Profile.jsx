@@ -10,6 +10,7 @@ const Profile = () => {
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
     const [userTypeDisplay, setUserTypeDisplay] = useState();
+    const [userorganization,setUserorganization]=useState([]);
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
@@ -41,15 +42,34 @@ const Profile = () => {
                 else {
                     setUserTypeDisplay('Organization User')
                 }
+                fecthUserOrganisation();
             })
             .catch((error) => {
                 console.log(error);
             });
     })
+
+    const fecthUserOrganisation=async() =>{
+        server
+        .get(`api/org/user-organisation/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+        })
+        .then((response) => {
+            
+            setUserorganization(response.data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+    
     useEffect(() => {
         fetchInfo();
-
-    }, [fetchInfo]);
+        
+    }, []);
     return (
         <div>
             <CModal
@@ -104,6 +124,14 @@ const Profile = () => {
                                         {profile != null ? (
                                             <p>{userTypeDisplay}</p>) : (<p>user email</p>)}
                                     </div>
+                                    {(userTypeDisplay==='Organization Admin' || userTypeDisplay==='Organization User')?(<div className='prof-name email'>
+                                        <p>organisation-name :</p>
+                                        { userorganization ? (
+                                            <p>{userorganization.name}</p>
+                                        ) : (
+                                            <p>xyz-name</p>
+                                        )}
+                                    </div>):null}
                                     {/*  <div className='prof-name orgnozation' >
                                         <p>Name :</p>
                                         {profile != null ? (

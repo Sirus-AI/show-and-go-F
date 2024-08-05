@@ -1,12 +1,13 @@
 import React from 'react'
-import Admindashboard from './Screen/Admin_dashboard/Admindashboard'
+import MainDashboard from './Screen/Admin_dashboard/MainDashboard'
 import Captureface from './Screen/Capture_face/Captureface'
 import Train from './Screen/Train/Train'
 import Veiwattendance from './Screen/Veiw_attendace/Veiwattendance'
 import Profile from './Screen/Profile/Profile'
-
+import Useraccess from './Screen/Admin_Acesss/Useraccess'
 import Login from './Component/Login'
 import Newregis from './Component/Newregis'
+import OrguserAccess from './Screen/Organization_Acess/OrguserAccess'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const Allroutes = () => {
   return (
@@ -19,9 +20,10 @@ const Allroutes = () => {
           <Route path='/Capture_face' element={<Captureface/>}/>
           <Route path='/Train' element={<Train/>}/>
           <Route path='/Veiw_attendance_report' element={<Veiwattendance/>}/>
-          <Route path='/Admindashboard' element={<Admindashboard/>}/>
+          <Route path='/Admindashboard' element={<MainDashboard/>}/>
           <Route path='/Profile' element={<Profile/>}/>
-      
+          <Route path='/useraccess'  element={<Useraccess/>}/>
+          <Route path='/orguseraccess'  element={<OrguserAccess/>}/>
         </Routes>
       </Router>
     </div>
