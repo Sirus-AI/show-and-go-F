@@ -66,6 +66,7 @@ const Sidebar = ({ usertype }) => {
                  : usertype === 3 ? (<Link to='/orguseraccess' className="link-color">       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>User Request</p></li></Link>):null}
 
               <li className='item' onClick={logoutHandler}><i class="fa-solid fa-right-from-bracket"></i><p>Log out</p></li>
+              <Link to='/Mark-in' className="link-color"> <li className='item'><i class="fa-solid fa-circle-half-stroke"></i><p>Mark in</p></li></Link>
             </ul>
           </div>
           <div className='big-logo'>

@@ -1,0 +1,39 @@
+.attendance-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+video, img {
+    border: 2px solid #000;
+    margin: 10px;
+    width: 400px;
+    height: 300px;
+}
+
+.status {
+    font-size: 1.2em;
+    margin: 10px;
+}
+
+#buttons {
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.camera-selection {
+    margin: 20px;
+}
+
+#cameraSelect {
+    margin-left: 10px;
+    padding: 5px;
+}
