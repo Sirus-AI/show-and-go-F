@@ -8,6 +8,7 @@ import Useraccess from './Screen/Admin_Acesss/Useraccess'
 import Login from './Component/Login'
 import Newregis from './Component/Newregis'
 import OrguserAccess from './Screen/Organization_Acess/OrguserAccess'
+import Attendance from './Screen/Mark_Attendance/Attendance'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const Allroutes = () => {
   return (
@@ -24,6 +25,7 @@ const Allroutes = () => {
           <Route path='/Profile' element={<Profile/>}/>
           <Route path='/useraccess'  element={<Useraccess/>}/>
           <Route path='/orguseraccess'  element={<OrguserAccess/>}/>
+          <Route path='/Mark-in' element = {<Attendance/>}/>
         </Routes>
       </Router>
     </div>
