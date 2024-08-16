@@ -22,6 +22,7 @@ const Navbar = ({ toggleSidebar }) => {
             .then((response) => {
 
                 setUsertype(response.data.user_type)
+                localStorage.setItem('user_type', JSON.stringify(response.data.user_type));
             })
             .catch((error) => {
                 console.log(error);
@@ -29,6 +30,7 @@ const Navbar = ({ toggleSidebar }) => {
     })
     useEffect(() => {
         fetchUser()
+
 
     }, []);
     return (
