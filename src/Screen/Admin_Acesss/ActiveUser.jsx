@@ -33,7 +33,7 @@ const ActiveUser = () => {
     }
     const fecthOrganzationList = () => {
 
-        server.get(`api/org/list-organisations/`, {
+        server.get(`api/org/alluser-list/`, {
             header: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}',
@@ -49,8 +49,9 @@ const ActiveUser = () => {
     }
     useEffect(() => {
         fecthUserList()
+        fecthOrganzationList()
     }, [])
-    
+    console.log(userReq)
     const getorgid = (orgId) => {
         setSelectOrgnization(orgId)
         setVisible(true)
@@ -76,23 +77,17 @@ const ActiveUser = () => {
                             {selectUser ? (
                                 <div className='profile-details'>
                                     <div className='org-name'>
-                                        <p>Name: {selectUser.users.f_name} {selectUser.users.l_name}</p>
+                                        <p>Name: {selectUser.f_name} {selectUser.l_name}</p>
                                     </div>
                                     <div className='org-namee mob'>
-                                        <p>Email: {selectUser.users.email}</p>
+                                        <p>Email: {selectUser.email}</p>
                                     </div>
                                     <div className='org-name username'>
-                                        <p>Phone: {selectUser.users.phone}</p>
+                                        <p>Phone: {selectUser.phone}</p>
                                     </div>
-                                    <div className='org-name username'>
-                                        <p>About: {selectUser.about}</p>
-                                    </div>
-                                    <div className='org-name username'>
-                                        <p>Location: {selectUser.location}</p>
-                                    </div>
-                                    <div className='org-name username'>
+                                    {/* <div className='org-name username'>
                                         <p>Status: {selectUser.users.is_active === true ? (<span> Active</span>) : (<span> Active</span>)}</p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             ) : (
                                 <p>Loading...</p>
@@ -111,10 +106,10 @@ const ActiveUser = () => {
                         <div className='dashboard-content'>
                             <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
                                 <p className='overview'>Active User</p>
-                                {organizationReq && organizationReq.map(org => (
+                                {userReq && userReq.map(org => (
                                     <div className='Active-user' onClick={() => getUser(org)}>
-                                        <div className={`active-user-cover ${org.users.is_active ? 'inactive' : 'active'}`}>
-                                            <h6>  {org.users.f_name} {org.users.l_name}</h6>
+                                        <div className="active-user-cover">
+                                            <h6>  {org.f_name} {org.l_name}</h6>
                                         </div>
                                     </div>
                                 ))}

@@ -31,7 +31,7 @@ const Useraccess = () => {
     const deleteOrgniztionReq = async (org_id) => {
 
         try {
-            await server.post(`api/org/access-request/${org_id}/delete/`)
+            await server.delete(`api/org/access-request/${org_id}/delete/`)
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +39,7 @@ const Useraccess = () => {
     const AcessOrgniztionReq = async (org_id) => {
 
         try {
-            await server.post(`api/org/access-request/${org_id}/toggle/`)
+            await server.patch(`api/org/access-request/${org_id}/toggle/`)
         } catch (error) {
             console.log(error);
         }
@@ -63,7 +63,7 @@ const Useraccess = () => {
     const deleteUserReq = async (user_id) => {
 
         try {
-            await server.post(`api/org/access-request/user-org/${user_id}/delete/`)
+            await server.delete(`api/org/access-request/user-org/${user_id}/delete/`)
         } catch (error) {
             console.log(error);
         }
@@ -71,7 +71,7 @@ const Useraccess = () => {
     const AcessUserReq = async (user_id) => {
 
         try {
-            await server.post(`api/org/access-request/user-org/${user_id}/toggle/`)
+            await server.patch(`api/org/access-request/user-org/${user_id}/toggle/`)
         } catch (error) {
             console.log(error);
         }
@@ -130,8 +130,7 @@ const Useraccess = () => {
                                 {organizationReq && organizationReq.inactive_organisations.map(org => (
                                     <div className="userAcesscard" key={org.org_id}>
                                         <h5>  {org.users.f_name} {org.users.l_name}</h5>
-                                        <h5>  {org.org_id}</h5>
-                                        <div className="userAcess-details">
+                                            <div className="userAcess-details">
                                             <p><strong>About:</strong> {org.about}</p>
                                             <p><strong>Location:</strong> {org.location}</p>
                                             <p><strong>User Name:</strong> {userTypeDisplay}</p>
