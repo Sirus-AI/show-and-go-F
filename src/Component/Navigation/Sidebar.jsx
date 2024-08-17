@@ -62,9 +62,9 @@ const Sidebar = ({ usertype }) => {
               <Link to='/Capture_face' className="link-color"><li className='item'><span>📸 </span><p>Capture face</p></li></Link>
               <Link to='/Train' className="link-color"><li className='item'><span>📚 </span><p>Train</p></li></Link>
               <Link to='/Veiw_attendance_report' className="link-color"> <li className='item'><span>📝 </span><p>View attendance report</p></li></Link>
-              {(usertype === 1 || usertype === 2) ?
+              {(usertype === 1 || usertype === 2 || usertype === 3) ?
                 (<Link to='/useraccess' className="link-color"> <li className='item'><span>❓ </span><p>User Request</p></li></Link>)
-                : usertype === 3 ? (<Link to='/orguseraccess' className="link-color"> <li className='item'><span>🔧 </span><p>User Request</p></li></Link>) : null}
+                 : null}
              {(usertype === 1 || usertype === 2 || usertype === 3) ?
                 (<Link to='/ActiveUser' className="link-color">       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>Active User</p></li></Link>)
                 : null}

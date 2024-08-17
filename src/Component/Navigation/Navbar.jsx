@@ -5,6 +5,7 @@ import Sidebar from './Sidebar'
 
 const Navbar = ({ toggleSidebar }) => {
     const [showSidebar, setShowSidebar] = useState(false);
+    const [username , setUsername] = (useState(''))
 
     const handleToggleSidebar = () => {
         setShowSidebar(!showSidebar);
@@ -20,7 +21,7 @@ const Navbar = ({ toggleSidebar }) => {
                 },
             })
             .then((response) => {
-
+                 setUsername(response.data.f_name +" "+response.data.l_name)
                 setUsertype(response.data.user_type)
                 localStorage.setItem('user_type', JSON.stringify(response.data.user_type));
             })
@@ -59,7 +60,7 @@ const Navbar = ({ toggleSidebar }) => {
                                 ) : usertype === 4 ? (
                                     <span className='admin'>User Dashboard</span>
                                 ) : (<span className='admin'>Loading....</span>)}
-                                <p className='shiv'><b>Overall Report of institution, welcome back !!..<span>"Admin Name"</span></b></p>
+                                <p className='shiv'><b>Overall Report of institution, welcome back !!..<span>{username}</span></b></p>
                             </div>
 
                         </div>
