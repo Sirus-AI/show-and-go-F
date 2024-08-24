@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const server = axios.create({
-//     baseURL: 'http://127.0.0.1:8000/',
-    baseURL: 'http://139.59.48.40:8000/',
+    baseURL: 'http://127.0.0.1:8000/',
+    // baseURL: 'http://139.59.48.40:8000/',
 });
 
 const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://139.59.48.40:8080/';
