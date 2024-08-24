@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 const server = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
-    // baseURL: 'http://13.60.94.148/',
+//     baseURL: 'http://127.0.0.1:8000/',
+    baseURL: 'http://139.59.48.40:8000/',
 });
 
+const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://139.59.48.40:8080/';
 const getCookie = (name) => {
     const cookies = document.cookie.split(';');
     for (const cookie of cookies) {
@@ -31,4 +32,4 @@ server.interceptors.request.use((req) => {
     return Promise.reject(error);
 });
 
-export default server;
+export { server, WEBSOCKET_URL };
