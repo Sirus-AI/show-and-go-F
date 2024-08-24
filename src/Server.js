@@ -1,11 +1,12 @@
 import axios from 'axios';
 
 const server = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
-    // baseURL: 'http://139.59.48.40:8000/',
+    // baseURL: 'http://127.0.0.1:8000/',
+    baseURL: 'http://139.59.48.40:80',
 });
 
-const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://139.59.48.40:8080/';
+const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://139.59.48.40:8000/';
+// const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.01:8080/';
 const getCookie = (name) => {
     const cookies = document.cookie.split(';');
     for (const cookie of cookies) {
@@ -18,7 +19,7 @@ const getCookie = (name) => {
 };
 
 server.interceptors.request.use((req) => {
-    const token = getCookie('token');
+    const token = getCookie('token');   
     if (token) {
         req.headers.authorization = `Bearer ${token}`;
     }
