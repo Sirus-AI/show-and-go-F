@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { Link } from 'react-router-dom';
-import server from '../Server';
+import {server} from '../Server';
 import { useNavigate } from 'react-router-dom';
 const Newregis = () => {
   const [fname, setFname] = useState('');

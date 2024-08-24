@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Navbar from '../../Component/Navigation/Navbar';
 import './Attendance.css';
+import { WEBSOCKET_URL } from '../../Server';
 
 const Attendance = () => {
     const [wsIn, setWsIn] = useState(null);
@@ -65,7 +66,7 @@ const Attendance = () => {
     }, [selectedInCamera, selectedOutCamera, wsIn, wsOut]);
 
     const startWebSocket = (type) => {
-        const wsUrl = `ws://localhost:8000/ws/attendance_${type}/1/`;
+        const wsUrl = `${WEBSOCKET_URL}ws/attendance_${type}/1/`;
         let ws;
         const statusUpdater = type === 'in' ? setInStatus : setOutStatus;
         const frameUpdater = type === 'in' ? inFrameRef : outFrameRef;

@@ -1,5 +1,5 @@
 import React from 'react'
-import server from '../../Server'
+import {server} from '../../Server'
 import Navbar from '../../Component/Navigation/Navbar'
 import { useState ,useEffect} from 'react'
 const Train = () => {

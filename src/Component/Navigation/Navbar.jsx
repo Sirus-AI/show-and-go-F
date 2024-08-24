@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useCallback, useEffect } from 'react'
-import server from '../../Server'
+import {server} from '../../Server'
 import Sidebar from './Sidebar'
 
 const Navbar = ({ toggleSidebar }) => {
