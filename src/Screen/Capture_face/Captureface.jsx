@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './Captureface.css';
 import Navbar from '../../Component/Navigation/Navbar';
-import { WEBSOCKET_URL } from '../../Server';
 
 const Captureface = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -22,7 +21,7 @@ const Captureface = () => {
       return;
     }
 
-    socketRef.current = new WebSocket(`${WEBSOCKET_URL}ws/face_capture/`);
+    socketRef.current = new WebSocket('ws://localhost:8000/ws/face_capture/');
 
     socketRef.current.onopen = () => {
       console.log('WebSocket connection opened.');

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Admindashboard from './Admindashboard';
 import Userdashboard from './Userdashboard';
-import {server} from '../../Server';
+import server from '../../Server';
 
 const MainDashboard = () => {
     const [usertype, setUsertype] = useState();

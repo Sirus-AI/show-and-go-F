@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useCallback, useEffect } from 'react'
 import Navbar from '../../Component/Navigation/Navbar'
-import {server} from '../../Server'
+import server from '../../Server'
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import Admin from '../../static_content/admin_content/Screenshot.png'
 const Admindashboard = ({registerUser ,usertype, users}) => {

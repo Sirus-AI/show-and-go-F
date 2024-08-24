@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../static_content/admin_content/Screenshot.png';
 import { Link } from 'react-router-dom';
-import {server} from '../../Server';
+import server from '../../Server';
 import { useState } from 'react';
 
 const Sidebar = ({ usertype }) => {

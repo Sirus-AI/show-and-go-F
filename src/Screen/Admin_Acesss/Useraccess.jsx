@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useCallback, useEffect } from 'react'
 import Navbar from '../../Component/Navigation/Navbar';
-import {server} from '../../Server';
+import server from '../../Server';
 const Useraccess = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [userReq, setUserReq] = useState()
