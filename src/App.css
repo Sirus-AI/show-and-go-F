@@ -9,18 +9,25 @@
 
 /* navbar css is start here  */
 .nav-bar {
-  padding: 0.5rem;
+  padding: 1rem;
+  /* display: flex; */
+  /* justify-content: space-around; */
+  margin-left: 17vw;
 }
 
 .nav-cover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: .1rem 2rem  ;
+  /* margin-left: 17rem; */
+  background-color: #ffffff;
 }
 
+
 .navigation {
-  box-shadow: 0.5px 0.5px 2px 0.5px rgba(0, 0, 0, 0.196);
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  
 }
 
 .heading {
@@ -31,6 +38,10 @@
 
 .name {
   margin-left: 2rem;
+  color: rgb(23, 0, 128);
+}
+.shiv span{
+  color: rgb(241, 0, 20);
 }
 
 .admin {
@@ -43,8 +54,8 @@
 
 .bar span {
   font-size: 2rem;
-  font-weight: 500;
-  color: #0f5ddb;
+  font-weight: 600;
+  color:#3d2b35;
 
 }
 
@@ -59,6 +70,11 @@
   font-size: 1rem;
   border-radius: 10px;
 }
+.show-go-btn:hover {
+  background-color: #1a73e8; 
+  transform: scale(1.05); 
+  box-shadow: 0 4px 8px rgba(10, 10, 10, 0.2); 
+}
 
 .side-off {
   position: absolute;
@@ -69,11 +85,93 @@
 
 .side-bar-nav {
   position: absolute;
-  width: 25%;
-  top: 12%;
+  width: 19%;
+  /* top: 120%; */
+  /* margin-top: -; */
 
 }
 
+
+/*========================= Media Queries ===============================*/
+/* ========================= Sidebar and navabar Responsive Code ============================ */
+
+/* Mobile view (max-width: 450px) */
+@media (max-width: 450px) {
+  .side-bar {
+    transform: translateX(100%);
+    position: absolute;
+    width: 70%;
+    top: 7%;
+  }
+
+  .side-bar-open {
+    transform: translateX(0);
+    width: 100%;
+    /* display: ; */
+  }
+
+  .side-bar-toggle {
+    display: block;
+  }
+
+  .admin-logo, .logo-admin, .sirus-logo, .item p {
+    /* display: none; */
+    visibility: hidden;
+    background-color: none;
+  }
+
+  .side-bar-cover {
+    margin-right: 1rem;
+  }
+
+  .item {
+    display: none;
+    box-shadow: none;
+  }
+
+  .start-btn {
+    padding: 0.4rem 1rem;
+  }
+}
+
+/* Tablet and small desktop view (min-width: 451px and max-width: 900px) */
+@media (min-width: 451px) and (max-width: 900px) {
+  .side-bar {
+    position: absolute;
+    width: 30%;
+    top: 7%;
+  }
+
+  .side-bar-open {
+    width: 100%;
+    display: block;
+  }
+
+  .side-bar-toggle {
+    display: none;
+  }
+
+  .admin-logo, .logo-admin, .sirus-logo, .item p {
+    display: none;
+    visibility: hidden;
+    background:white;
+  }
+  /* .link-color{
+    background: white;
+  } */
+  .ul-list{
+    padding: 2rem;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-right: 1rem;
+    margin-top: -4rem;
+  }
+  .side-bar-cover {
+    box-shadow: none;
+  }
+}
+
+/* Extra small view (max-width: 300px) */
 @media (max-width: 300px) {
   .name {
     margin-left: 1rem;
@@ -85,17 +183,39 @@
 
   .nav-bar {
     padding: 0.5rem;
+    margin-left: 1rem;
   }
 
   .nav-cover {
     padding: 0rem;
   }
 
-  .show-go-btn {
+  .show-go-btn, .start-btn {
     padding: 0.3rem 0.8rem;
     font-size: 1rem;
   }
+
+  .sirus-logo, .admin-logo, .item {
+    display: none;
+  }
+
+  .item {
+    box-shadow: none;
+  }
+  .side-bar-cover{
+    box-shadow: none;
+  }
+  .ul-list{
+    padding: 2rem;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-right: 1rem;
+    margin-top: -4rem;
+  }
+
 }
+
+
 
 @media (min-width: 300px) and (max-width: 550px) {
   .name {
@@ -108,6 +228,7 @@
 
   .nav-bar {
     padding: 1rem;
+    margin-left: 1rem;
   }
 
   .nav-cover {
@@ -118,39 +239,40 @@
     padding: 0.3rem 0.8rem;
     font-size: 1rem;
   }
-}
 
-@media (max-width: 450px) {
-  .side-off {
-    position: absolute;
-    width: 70%;
-    top: 12%;
-    display: flex;
+  .start-btn {
+    padding: 0.6rem 1rem;
   }
 
-  .side-bar-nav {
-    position: absolute;
-    width: 0%;
-    top: 12%;
-    display: none;
-
+  .ul-list{
+    padding: 2rem;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-right: 1rem;
+    margin-top: -4rem;
   }
 }
 
-@media (min-width: 450px) and (max-width: 900px) {
-  .side-off {
-    position: absolute;
-    width: 30%;
-    top: 12%;
-    display: flex;
+/* Medium screen view (min-width: 550px and max-width: 800px) */
+@media (min-width: 550px) and (max-width: 800px) {
+  .nav-bar {
+    margin-left: 1rem;
   }
 
-  .side-bar-nav {
-    position: absolute;
-    width: 0%;
-    top: 12%;
-    display: none;
+  .admin-logo, .logo-admin, .item p {
+    /* display: none; */
+    visibility: hidden;
+  }
+}
 
+/* General styles for mobile and small screens (min-width: 300px and max-width: 900px) */
+@media (min-width: 300px) and (max-width: 900px) {
+  .start-btn {
+    padding: 0.4rem 1rem;
+  }
+
+  .sirus-logo, .admin-logo {
+    display: none;
   }
 }
 
@@ -163,23 +285,23 @@
   border-radius: 5px;
   height: 100%;
   z-index: 1;
-  background-color: #ffffff;
+  background-color: #eee7e7;
 }
-
 .side-bar-cover {
-  box-shadow: 3px 0px 5px 2px rgba(0, 0, 0, 0.095);
-  padding: 0.5rem;
+  box-shadow: 3px 0px 5px 2px rgba(173, 56, 56, 0.095);
+  padding: .5rem 1rem ;
   border-radius: 10px;
   z-index: 1;
 }
 
 .admin-logo {
   padding: 0.3rem 1.5rem;
-  box-shadow: 3px 0px 5px 2px rgba(0, 0, 0, 0.095);
+  box-shadow: 3px 0px 5px 2px rgba(248, 232, 232, 0.095);
   margin: 0.8rem 0.2rem;
   display: flex;
   align-items: center;
   border-radius: 5px;
+  background:#d0d0d6;
 }
 
 .logo-admin {
@@ -190,7 +312,7 @@
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .admin-logo img {
@@ -205,19 +327,31 @@
 
 .link-color {
   text-decoration: none;
-  color: #000;
+  color: #272525;
 }
 
 .item {
-  background: #c0d1f0;
-  padding: 0.8rem;
-  margin: 0.5rem;
+  background: #eee7e7;
+  padding: .8rem;
+  margin: .5rem;
   border-radius: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
+  transition: background-color 300ms, transform 200ms;
+  cursor: pointer; /* Indicate that the item is clickable */
 }
+
+.item:hover {
+  background-color: #d1d1d1; /* Change color on hover */
+  transform: scale(1.02); /* Slightly increase size on hover */
+  font-weight:bold;
+}
+
+.item.active {
+  background-color: #b0b0b0; /* Change color on click */
+}
+
 
 .item p {
   margin: 0.08rem 0rem 0rem 0.8rem;
@@ -226,14 +360,14 @@
 }
 
 .logo {
-  padding: 0.5rem 1.5rem;
+  padding: 0.7rem ;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-}
+  /* justify-content: space-evenly; */
+   margin-left: 20px;}
 
 .cng-logo {
-  color: #0f5ddb;
+  color: #da4141;
   font-size: 2rem;
 }
 
@@ -243,24 +377,35 @@
   font-weight: 800;
   font-style: normal;
   color: #0f5ddb;
+  margin-left: 13px;
+}
+
+.item span {
+  font-size: 1.6rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vw;
+  height: 2vw;
 }
 
 .big-logo {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   flex-direction: column;
   margin: 1rem 0rem 1rem 0rem;
-  padding: 1rem;
-  background: #c0d1f0;
+  /* padding: -10rem; */
+  /* background: #d0d0d6; */
   border-radius: 8px;
+  margin-top: 5vw;
 
 }
 
-.big-logo i {
+/* .big-logo i {
   font-size: 5rem;
   color: #0f5ddb;
-}
+} */
 
 .big-logo h5 {
   font-size: 1.2rem;
@@ -294,17 +439,7 @@
   width: 100%;
 }
 
-@media (max-width: 300px) {
-  .start-btn {
-    padding: 0.4rem 1rem;
-  }
-}
 
-@media (min-width: 300px) and (max-width: 900px) {
-  .start-btn {
-    padding: 0.6rem 1rem;
-  }
-}
 
 /* sidebar css is end here  */
 /* ******************************************************************** */
@@ -1084,4 +1219,20 @@ form {
   color: white;
   font-size: 1rem;
   font-weight: 600;
+}
+.Active-user{
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
+  cursor: pointer;
+}
+.active-user-cover{
+padding: 0.5rem 1rem;
+box-shadow: 2px 2px 5px 2px rgb(82, 81, 81);
+}
+.active {
+  border: 2px solid green;
+ 
+}
+
+.inactive {
+  border: 2px solid red;
 }
