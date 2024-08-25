@@ -1,8 +1,10 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './AttendanceData.css'
 import Navbar from '../../Component/Navigation/Navbar';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
+import {server} from '../../Server';
+
 const OrgAdminFromToAttendance = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [toDate ,SetToDate]=useState()
@@ -10,7 +12,9 @@ const OrgAdminFromToAttendance = () => {
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
     const [messageColor, setMessageColor] = useState('green');
-const toggleSidebar = () => {
+    const[attendanceData , setAttendanceData]=useState()
+
+    const toggleSidebar = () => {
   setIsNavbarOpen(!isNavbarOpen);
 };
 const handleError = (e) => {
@@ -18,20 +22,39 @@ const handleError = (e) => {
     setMessage(e);
     setMessageColor('red')
   }
-const Handledate=(e)=>{
+  
+  const Handledate = async (e) => {
     e.preventDefault();
-    if(!toDate || !fromDate){
-        handleError('toDate fromDate are required.');
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    if (!toDate || !fromDate) {
+        handleError('Both "To Date" and "From Date" are required.');
+    } else if (new Date(toDate) > new Date(currentDate) || new Date(fromDate) > new Date(currentDate)) {
+        handleError('Dates should not be greater than the current date.');
+    } else if (toDate === fromDate) {
+        handleError('"To Date" cannot be the same as "From Date".');
+    } else if (new Date(toDate) < new Date(fromDate)) {
+        handleError('"To Date" cannot be earlier than "From Date".');
+    } else {
+        try {
+            const response = await server.get('/attendance/dateRange-attendance-report/', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                params: {
+                    from_date: fromDate,  // Updated to match the backend parameter names
+                    to_date: toDate       // Updated to match the backend parameter names
+                }
+            });
+            setAttendanceData(response.data);
+        } catch (error) {
+            console.log(error);
+            handleError('An error occurred while fetching the data.');
+        }
     }
-    else if(toDate <fromDate){
-        handleError('To Date is greater than from date');
-    }
-    else{
-        console.log(fromDate)
-        console.log(toDate)
-    }
-}
-   
+};
+  
     return (
         <div>
              <CModal

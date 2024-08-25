@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import './AttendanceData.css'
 import Navbar from '../../Component/Navigation/Navbar';
+import {server} from '../../Server';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 
 const UserFromToAttendance = () => {
@@ -11,7 +12,9 @@ const UserFromToAttendance = () => {
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
     const [messageColor, setMessageColor] = useState('green');
-const toggleSidebar = () => {
+    const[attendanceData , setAttendanceData]=useState()
+
+    const toggleSidebar = () => {
   setIsNavbarOpen(!isNavbarOpen);
 };
 const handleError = (e) => {
@@ -19,21 +22,63 @@ const handleError = (e) => {
     setMessage(e);
     setMessageColor('red')
   }
-const Handledate=(e)=>{
+  
+  const Handledate = async (e) => {
     e.preventDefault();
-    if(!toDate || !fromDate){
-        handleError('toDate fromDate are required.');
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    if (!toDate || !fromDate) {
+        handleError('Both "To Date" and "From Date" are required.');
+    } else if (new Date(toDate) > new Date(currentDate) || new Date(fromDate) > new Date(currentDate)) {
+        handleError('Dates should not be greater than the current date.');
+    } else if (toDate === fromDate) {
+        handleError('"To Date" cannot be the same as "From Date".');
+    } else if (new Date(toDate) < new Date(fromDate)) {
+        handleError('"To Date" cannot be earlier than "From Date".');
+    } else {
+        try {
+            const response = await server.get('/attendance/dateRange-userAttendancereport/', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                params: {
+                    from_date: fromDate,  
+                    to_date: toDate      
+                }
+            });
+           if (response.status === 200) {
+                setAttendanceData(response.data);
+            } else {
+                // Handle error responses
+                const errorData = await response.json();
+                handleError(errorData.error || errorData.message || 'An unknown error occurred.');
+            }
+        } catch (response) {
+            handleError(response.error);
+        }
     }
-    else if(toDate <fromDate){
-        handleError('from Date is greater than To date');
-    }
-    else{
-        console.log(fromDate)
-        console.log(toDate)
-    }
-}
+};
+  
   return (
     <div>
+             <CModal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        aria-labelledby="LiveDemoExampleLabel"
+      >
+        <CModalHeader onClose={() => setVisible(false)}>
+          <CModalTitle id="LiveDemoExampleLabel">Alert</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <p style={{ color: messageColor }}>{message}</p>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setVisible(false)}>
+            Close
+          </CButton>
+        </CModalFooter>
+      </CModal>
          <CModal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -57,7 +102,7 @@ const Handledate=(e)=>{
                 <div className='attendance-heading'>Date Attendence</div>
                 <div className='user-AttendanceData'>
                         <div className='cover-user-Attendance'>
-                        <form  className='date-form'>
+                        <form  className='date-form' onSubmit={Handledate}>
                         <div className='input-date'>
                                 <input
                                     type="date"
@@ -76,7 +121,7 @@ const Handledate=(e)=>{
                                 </div>
                             
                             <div className='input-date-button'>
-                                <button className='show-go-btn'>Select</button>
+                                <button type="submit" className='show-go-btn'>Select</button>
                             </div>
                             </form>
                             <div className='attendance-table-cover'>
