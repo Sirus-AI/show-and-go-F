@@ -66,7 +66,7 @@ const Useraccess = () => {
             await server.delete(`api/org/access-request/user-org/${user_id}/delete/`)
         } catch (error) {
             console.log(error);
-        }
+        } 
     }
     const AcessUserReq = async (user_id) => {
 
