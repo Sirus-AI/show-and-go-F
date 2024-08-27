@@ -68,6 +68,16 @@ const Sidebar = ({ usertype }) => {
              {(usertype === 1 || usertype === 2 || usertype === 3) ?
                 (<Link to='/ActiveUser' className="link-color">       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>Active User</p></li></Link>)
                 : null}
+                {( usertype === 3) ?
+                (<Link to='/OrgAdminAttendance' className="link-color">       <li className='item'><span>📝 </span><p>Today Attendance</p></li></Link>)
+                :(usertype === 4) ?
+                (<Link to='/UserAttendance' className="link-color">       <li className='item'><span>📝 </span><p>Today Attendance</p></li></Link>)
+                : null}
+                 {( usertype === 3) ?
+                (<Link to='/OrgAdminFromToAttendance' className="link-color">       <li className='item'><span>📝 </span><p>Date Attendance</p></li></Link>)
+                :(usertype === 4) ?
+                (<Link to='/UserFromToAttendance' className="link-color">       <li className='item'><span>📝 </span><p>Date Attendance</p></li></Link>)
+                : null}
               <Link to='/Mark-in' className="link-color"> <li className='item'><i className="fa-solid fa-circle-half-stroke"></i><p>Mark in</p></li></Link>
               <li className='item' onClick={logoutHandler}><i className="fa-solid fa-right-from-bracket"></i><p>Log out</p></li>
             </ul>
