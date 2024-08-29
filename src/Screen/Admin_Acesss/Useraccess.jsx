@@ -32,6 +32,7 @@ const Useraccess = () => {
 
         try {
             await server.delete(`api/org/access-request/${org_id}/delete/`)
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
@@ -40,6 +41,7 @@ const Useraccess = () => {
 
         try {
             await server.patch(`api/org/access-request/${org_id}/toggle/`)
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
@@ -64,6 +66,7 @@ const Useraccess = () => {
 
         try {
             await server.delete(`api/org/access-request/user-org/${user_id}/delete/`)
+            window.location.reload();
         } catch (error) {
             console.log(error);
         } 
@@ -72,6 +75,7 @@ const Useraccess = () => {
 
         try {
             await server.patch(`api/org/access-request/user-org/${user_id}/toggle/`)
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
