@@ -1,0 +1,62 @@
+.attendance-heading{
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+    padding: 1rem;
+}
+.cover-user-Attendance{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 2rem;
+    
+}
+.input-date-button{
+    margin-top: 2rem;
+}
+
+.fromdate{
+    margin-left: 2rem;
+}
+.todate{
+    margin-right: 2rem;
+}
+.date-input{
+    border: .2em solid #1e87e9;
+	padding: .6em .9em;
+	border-radius:5px;
+	color: #000000;
+}
+.attendance-table{
+    border: 2px solid black;
+}
+.attendance-table-cover{
+    margin-top: 4rem;
+}
+.attendance-thead{
+    background-color: black;
+    color: #ffffff;
+}
+.attendance-thead tr td{
+    padding:0.3rem 1.5rem;
+    border: 2px solid rgb(255, 255, 255);
+    font-size: 1.1rem;
+   
+
+    }
+.attendance-tbody tr td{
+padding:0.3rem 1.5rem;
+border: 2px solid rgb(99, 98, 98);
+
+}
+
+.date-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.date-wise{
+    text-align: center;
+    margin: 1rem 0.2rem;
+}
