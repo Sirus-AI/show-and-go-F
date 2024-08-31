@@ -10,6 +10,10 @@ import Newregis from './Component/Newregis'
 import Attendance from './Screen/Mark_Attendance/Attendance'
 import ActiveUser from './Screen/Admin_Acesss/ActiveUser'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserAttendance from './Screen/Attendance_showData/UserAttendance'
+import UserFromToAttendance from './Screen/Attendance_showData/UserFromToAttendance'
+import OrgAdminAttendance from './Screen/Attendance_showData/OrgAdminAttendance'
+import OrgAdminFromToAttendance from './Screen/Attendance_showData/OrgAdminFromToAttendance'
 const Allroutes = () => {
   return (
     <div>
@@ -26,6 +30,10 @@ const Allroutes = () => {
           <Route path='/useraccess'  element={<Useraccess/>}/>
           <Route path='/ActiveUser' element = {<ActiveUser/>}/>
           <Route path='/Mark-in' element = {<Attendance/>}/>
+          <Route path='/UserAttendance' element = {<UserAttendance/>}/>
+          <Route path='/UserFromToAttendance' element = {<UserFromToAttendance/>}/>
+          <Route path='/OrgAdminAttendance' element = {<OrgAdminAttendance/>}/>
+          <Route path='/OrgAdminFromToAttendance' element = {<OrgAdminFromToAttendance/>}/>
         </Routes>
       </Router>
     </div>
