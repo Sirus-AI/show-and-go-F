@@ -94,7 +94,7 @@
 
 /*========================= Media Queries ===============================*/
 /* ========================= Sidebar and navabar Responsive Code ============================ */
-/* Phone view (max-width: 450px) */
+/* Phone view  */
 @media (max-width: 431px) {
   .side-bar {
     transform: translateX(100%);
@@ -179,19 +179,23 @@
 }
 
 /* Tablet view (min-width: 451px and max-width: 900px) */
-@media (min-width: 431px) and (max-width: 1000px) {
+
+@media (min-width: 430px) and (max-width: 700px) {
   .side-bar {
-    position: absolute;
+    /* position: absolute; */
     width: 60%;
     top: 7%;
+    
   }
 
   .sidebar {
     width: 60px;
   }
-
-  .navbar {
-    left: 60px;
+  .nav-cover {
+    justify-content: flex-start;
+    margin-left: -17vw;
+    z-index: 2;
+    
   }
 
   .side-bar-open {
@@ -202,10 +206,25 @@
   .side-bar-toggle {
     display: none;
   }
-
-  .admin-logo, .logo-admin, .sirus-logo, .item p {
+  .side-bar-cover{
+    background-color:none;
+    margin-top: 8rem;
+    margin-left: -1.5rem;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .list{
+    margin-top:-9rem;
+    transform: translate(ease 0.3s);
+  }
+  .admin-logo ,.logo-admin, .sirus-logo, .logo i{
     display: none;
     visibility: hidden;
+    
+  }
+  .logo{
+    /* display: none; */
+    visibility: none;
   }
 
   .ul-list {
@@ -227,7 +246,14 @@
 }}
 
 /* Desktop view (min-width: 901px) */
-@media (min-width: 1001px) {
+@media (min-width: 700px) and (max-width: 1240px) {
+  .logo .sirus-logo {
+    font-size: 1.4rem;
+  }
+  .shiv .side-off .navigation{
+    /* margin-left: 100rem; */
+    margin-left: 10rem;
+  }
   /* Add your desktop-specific styles here */
 }
 
@@ -691,7 +717,7 @@ form {
 
 .material-symbols-outlined {
   font-size: 2rem;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   color: #1928f5; /* Adjust icon color to match theme */
 }
 
@@ -778,22 +804,29 @@ form {
 }
 
 /* Responsive Styles */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .dashboard-card {
     margin-left: -6rem;
-    flex-direction: column; /* Stack cards vertically */
+    /* flex-direction: column; Stack cards vertically */
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+  }
+  .side-off .nav-bar {
+    width: 100%;
+    margin-left: 20rem;
+    background-color: red;
   }
 
   .content-cover {
-    padding: 20px 20px 20px 5px;
-    width: 70%;
+    /* padding: 20px 20px 20px 5px; */
+    width: 80%;
   }
 
-  /* .content-toggle {
-    width: 100%;
-  } */
+  .content-toggle .dashboard-card {
+    margin-left: -6rem;
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;
+  }
 
   .card {
     padding: 1rem;
@@ -1099,70 +1132,124 @@ form {
 /*  Veiwattendance page css is end here  */
 /* ******************************************************************** */
 /* Profile page  css is start here  */
-.profile-page{
+.profile-page {
   display: flex;
-  align-items:center;
-  justify-content:flex-end;
+  align-items: center;
+  justify-content: flex-end;
   font-size: 20px;
-  font-weight: 10px;
   padding: 0px 5vh;
   height: 80vh;
-  color: wheat;
+  color: rgb(0, 0, 0);
+  /* background: #e7eee7; */
 }
-.profile-page-cover{
+
+.profile-page-cover {
   border-radius: 10px;
   display: flex;
   justify-content: space-evenly;
   padding: 50px 0px;
-  background-color: rgb(26, 115, 232);
+  background:  #eee7e7;
+  transition: transform 0.3s ease;
 }
-.prof{
+
+.profile-page-cover:hover {
+  transform: scale(1.02);
+} 
+
+.prof {
   display: flex;
   width: 100%;
   gap: 5px;
   border-radius: 5px;
   padding: 5px 10px;
-  background-color: #494848;
- 
+  background-color: #eee7e7;
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
-.profile-active{
+.prof:hover {
+  background-color: #dbdad5;
+  
+}
+
+.profile-active {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  background-color: #fff;
+  background-color: #eee7e7;
+  box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
   padding: 50px;
   border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.profile-avtar{
-  border: 2px solid green;
+.profile-active:hover {
+  box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
+  transform: scale(1.02) ;
+}
+
+.profile-avatar {
+  border: 2px solid rgb(218, 218, 218);
   width: 7rem;
   height: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  transition: transform 0.5s ease;
+  background: linear-gradient(135deg, #eee7e7, #ffffff);
 }
-.profile-avtar img,.avtar{
+.profile-avatar:hover{
+  transform: scale(2.3);
+  border-radius: 0;
+}
+
+.profile-avatar img,
+.avtar {
   height: 100%;
   width: 100%;
   font-size: 90px;
 }
-.profile-details{
+
+.profile-details {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #fff;
+  background-color:#eee7e7;
   border-radius: 10px;
   padding: 50px;
-  
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
+
 }
-.title{
+
+.profile-details:hover {
+  transform: scale(1.02);
+}
+
+.title {
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .profile-page {
+    font-size: 16px;
+    padding: 0px 2vh;
+  }
+
+  .profile-page-cover {
+    flex-direction: column;
+    padding: 30px 0px;
+  }
+
+  .profile-details,
+  .profile-active {
+    padding: 30px;
+  }
+}
+
 /* user Acess data */
 .user_req {
   display: flex;
