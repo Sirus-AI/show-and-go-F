@@ -174,17 +174,17 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
           <div className="new-cards">
             <div className="new-card">
               <h3>Pie Chart</h3>
-              <img src="path_to_pie_chart_image" alt="Pie Chart" />
+              <img className="pie-img" src="path_to_pie_chart_image" alt="Pie Chart" />
             </div>
-            <div className="new-card">
+            <div className="new-card camera-card">
               <h3>Camera Controls</h3>
               <div className="camera-controls">
                 <span className="camera-icon">🎥</span>
                 <span className="camera-icon">🚫</span>
               </div>
               <div className="camera-buttons">
-                <button>Camera On</button>
-                <button>Camera Off</button>
+                <button className='on-off' >Camera On</button>
+                <button className='on-off'>Camera Off</button>
               </div>
             </div>
             <div className="new-card">
