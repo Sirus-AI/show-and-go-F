@@ -771,10 +771,52 @@ form {
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
+  
 }
 
 .pie-chart canvas {
   max-width: 100%;
+}
+.pie-img{
+  border: none;
+}
+/*new cards css start */
+.new-cards{
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px; 
+  flex-wrap: wrap ;
+  
+}
+.new-card{
+  width: 100%;
+  max-width: 300px;
+  height: 290px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.095);
+  background-color: white;
+  border: 1px solid #c0d0ec;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  
+}
+.new-card:hover{
+  background-color: #dcdce2; 
+  transform: translateY(-5px);
+}
+.on-off{
+  background-color: blue;
+  color: white;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  border-radius: 7px;
+  
+}
+.camera-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0rem;
 }
 
 /* Responsive Styles */
@@ -832,6 +874,20 @@ form {
   .pie-chart {
     max-width: 100%;
     margin-top: 1rem;
+  }
+  .new-cards{
+    margin-left: -6rem;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+
+  }
+  .new-card{
+    width: 100%;
+    max-width: 300px;
+    margin: 15px;
+    height: 290px;
+    margin-left: 11px;
   }
 }
 
