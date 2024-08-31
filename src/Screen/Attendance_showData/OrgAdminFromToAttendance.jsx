@@ -4,7 +4,6 @@ import './AttendanceData.css'
 import Navbar from '../../Component/Navigation/Navbar';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import {server} from '../../Server';
-
 const OrgAdminFromToAttendance = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [toDate ,SetToDate]=useState()
@@ -13,7 +12,6 @@ const OrgAdminFromToAttendance = () => {
     const [visible, setVisible] = useState(false);
     const [messageColor, setMessageColor] = useState('green');
     const[attendanceData , setAttendanceData]=useState()
-
     const toggleSidebar = () => {
   setIsNavbarOpen(!isNavbarOpen);
 };
@@ -26,7 +24,6 @@ const handleError = (e) => {
   const Handledate = async (e) => {
     e.preventDefault();
     const currentDate = new Date().toISOString().split('T')[0];
-
     if (!toDate || !fromDate) {
         handleError('Both "To Date" and "From Date" are required.');
     } else if (new Date(toDate) > new Date(currentDate) || new Date(fromDate) > new Date(currentDate)) {
@@ -54,7 +51,18 @@ const handleError = (e) => {
         }
     }
 };
-  
+const groupDataByDate = () => {
+    return attendanceData.reduce((acc, item) => {
+        const date = item.date;
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(item);
+        return acc;
+    }, {});
+};
+
+const groupedData = attendanceData ? groupDataByDate() : {};
     return (
         <div>
              <CModal
@@ -103,41 +111,45 @@ const handleError = (e) => {
                             </div>
                             </form>
                             <div className='attendance-table-cover'>
-                                
-                                <table className='attendance-table'>
-                                <thead className='attendance-thead'>
-                                        <tr>
-                                            <td>From Date</td>
-                                            <td>To Date</td>
-                                            <td>Data 1</td>
-                                            <td>Data 2</td>
-                                            <td>Data 3</td>
-                                            <td>Data 4</td>
-                                            <td>Data 5</td>
-                                            <td>Data 7</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody className='attendance-tbody'>
-                                        <tr>
-                                            <td>455</td>
-                                            <td>585</td>
-                                            <td>58</td>
-                                            <td>588</td>
-                                            <td>585</td>
-                                            <td>55</td>
-                                            <td>585</td>
-                                            <td>55</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                {attendanceData && Object.keys(groupedData).map((date, index) => (
+                                    <div key={index} className="attendance-date-group">
+                                        <h2 className='date-wise'>Date: {date}</h2>
+                                        <table className='attendance-table'>
+                                            <thead className='attendance-thead'>
+                                                <tr>
+                                                    <td>User Name</td>
+                                                    <td>In Time</td>
+                                                    <td>Out Time</td>
+                                                    <td>Break Time</td>
+                                                    <td>Working Time</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody className='attendance-tbody'>
+                                                {groupedData[date].map((data, idx) => {
+                                                    const inTime = new Date(data.in_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                                    const outTime = data.out_timestamp ? new Date(data.out_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A';
+                                                    const breakTime = data.break_duration.split('.')[0];
+                                                    return (
+                                                        <tr key={idx}>
+                                                            <td>{data.user_name}</td>
+                                                            <td>{inTime}</td>
+                                                            <td>{outTime}</td>
+                                                            <td>{breakTime}</td>
+                                                            <td>{data.work_duration}</td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
 export default OrgAdminFromToAttendance
