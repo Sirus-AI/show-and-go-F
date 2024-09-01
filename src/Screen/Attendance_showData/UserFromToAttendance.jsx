@@ -152,16 +152,15 @@ const groupedData = attendanceData ? groupDataByDate() : {};
                                             </thead>
                                             <tbody className='attendance-tbody'>
                                                 {groupedData[date].map((data, idx) => {
-                                                    const inTime = new Date(data.in_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                                    const outTime = data.out_timestamp ? new Date(data.out_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                                                    const breakTime = data.break_duration.split('.')[0];
+                                                    const inTime = new Date(data.first_in_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                                    const outTime = data.last_out_timestamp ? new Date(data.last_out_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A';
                                                     return (
                                                         <tr key={idx}>
                                                             <td>{data.user_name}</td>
                                                             <td>{inTime}</td>
                                                             <td>{outTime}</td>
-                                                            <td>{breakTime}</td>
-                                                            <td>{data.work_duration}</td>
+                                                            <td>{data.total_break_duration}</td>
+                                                            <td>{data.total_work_duration}</td>
                                                         </tr>
                                                     );
                                                 })}

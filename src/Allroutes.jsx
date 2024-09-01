@@ -9,7 +9,7 @@ import Login from './Component/Login'
 import Newregis from './Component/Newregis'
 import Attendance from './Screen/Mark_Attendance/Attendance'
 import ActiveUser from './Screen/Admin_Acesss/ActiveUser'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,Navigate } from 'react-router-dom';
 import UserAttendance from './Screen/Attendance_showData/UserAttendance'
 import UserFromToAttendance from './Screen/Attendance_showData/UserFromToAttendance'
 import OrgAdminAttendance from './Screen/Attendance_showData/OrgAdminAttendance'
@@ -34,6 +34,8 @@ const Allroutes = () => {
           <Route path='/UserFromToAttendance' element = {<UserFromToAttendance/>}/>
           <Route path='/OrgAdminAttendance' element = {<OrgAdminAttendance/>}/>
           <Route path='/OrgAdminFromToAttendance' element = {<OrgAdminFromToAttendance/>}/>
+          <Route path="*" element={<Navigate to="/Admindashboard" />} />
+          
         </Routes>
       </Router>
     </div>
