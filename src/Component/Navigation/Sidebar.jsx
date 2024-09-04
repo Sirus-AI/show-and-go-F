@@ -3,11 +3,11 @@ import Logo from '../../static_content/admin_content/Screenshot.png';
 import { Link } from 'react-router-dom';
 import {server} from '../../Server';
 import { useState } from 'react';
-
+import SettingModal from '../Setting/SettingModal';
 const Sidebar = ({ usertype }) => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [settingModalOpen,setSettingModalOpen]=useState(false);
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -83,10 +83,11 @@ const Sidebar = ({ usertype }) => {
             </ul>
           </div>
           <div className='big-logo'>
-            <li className='item'><span>⚙️</span><p>Settings</p></li>
+            <li className='item' onClick={() => setSettingModalOpen(true)} ><span>⚙️</span><p>Settings</p></li>
             <li className='item'><span>❓</span><p>FAQ'S</p></li>
             <li className='item'><span>🔧</span><p>HELP</p></li>
           </div>
+          <SettingModal isOpen={settingModalOpen} onClose={() => setSettingModalOpen(false)} />
         </div>
       </div>
     
