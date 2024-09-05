@@ -10,10 +10,10 @@ import Newregis from './Component/Newregis'
 import Attendance from './Screen/Mark_Attendance/Attendance'
 import ActiveUser from './Screen/Admin_Acesss/ActiveUser'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import UserAttendance from './Screen/Attendance_showData/UserAttendance'
-import UserFromToAttendance from './Screen/Attendance_showData/UserFromToAttendance'
-import OrgAdminAttendance from './Screen/Attendance_showData/OrgAdminAttendance'
-import OrgAdminFromToAttendance from './Screen/Attendance_showData/OrgAdminFromToAttendance'
+import UserAttendance from './Component/Attendance_showData/UserAttendance'
+import UserFromToAttendance from './Component/Attendance_showData/UserFromToAttendance'
+import OrgAdminAttendance from './Component/Attendance_showData/OrgAdminAttendance'
+import OrgAdminFromToAttendance from './Component/Attendance_showData/OrgAdminFromToAttendance'
 const Allroutes = () => {
   return (
     <div>

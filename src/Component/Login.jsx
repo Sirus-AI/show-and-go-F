@@ -64,7 +64,7 @@ const Login = () => {
   };
   useEffect(() => {
    
-    if (localStorage.getItem('userData')) {
+    if (localStorage.getItem('f')) {
       navigate('/Admindashboard', { replace: true });
     }
   }, [navigate]);
