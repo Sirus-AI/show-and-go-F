@@ -2,9 +2,8 @@ import React from 'react'
 import { useState,useEffect} from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
-import ChangeEmail from './ChangeEmail';
-
-const Emailedit = ({ isOpen, onClose }) => {
+import Changepassword from './Changepassword';
+const PasswordEdit = ({ isOpen, onClose }) => {
     const [email,setEmail]=useState();
     const [otp,setOtp]=useState();
     const [message, setMessage] = useState('');
@@ -12,7 +11,7 @@ const Emailedit = ({ isOpen, onClose }) => {
     const [messageColor, setMessageColor] = useState('green');
     const [showOtpInput,setShowOtpInput]=useState(false)
     const [changeEmailModalOpen,setChangeEmailModalOpen]=useState(false)
-   
+    const [changePasswordModalOpen,setChangePasswordModalOpen]=useState(false)
     const handleError = (e) => {
         setMessage(e);
         setMessageColor('red');
@@ -63,7 +62,7 @@ const Emailedit = ({ isOpen, onClose }) => {
                 }
             )
             .then((response) => {
-                setChangeEmailModalOpen(true);
+                setChangePasswordModalOpen(true);
                 onClose();
             })
             .catch((error) => {
@@ -88,7 +87,7 @@ const Emailedit = ({ isOpen, onClose }) => {
                 alignment="center"
             >
                 <CModalHeader onClose={onClose}>
-                    <CModalTitle id="LiveDemoExampleLabel">Change emai</CModalTitle>
+                    <CModalTitle id="LiveDemoExampleLabel">Password Change</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
                     <div className='setting_form'>
@@ -112,7 +111,7 @@ const Emailedit = ({ isOpen, onClose }) => {
                             </form>
                             {showOtpInput?(
                             <form className='' onSubmit={getotp}>
-                            <label htmlFor="otp"> Enter otp</label>
+                            <label htmlFor="otp"> Enter Otp</label>
                                 <div className='setting-input-email'>
                                     <input
                                         type="text"
@@ -136,10 +135,9 @@ const Emailedit = ({ isOpen, onClose }) => {
                     </CButton>
                 </CModalFooter>
             </CModal>
-            <ChangeEmail isOpen={changeEmailModalOpen} onClose={() => setChangeEmailModalOpen(false)}/>
-           
+            <Changepassword isOpen={changePasswordModalOpen} onClose={() => setChangePasswordModalOpen(false)}/>
         </div>
     )
 }
 
-export default Emailedit
+export default PasswordEdit

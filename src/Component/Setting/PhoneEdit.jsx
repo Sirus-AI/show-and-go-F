@@ -2,6 +2,7 @@ import React from 'react'
 import { useState,useEffect} from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
+import ChangePhone from './ChangePhone';
 const PhoneEdit = ({ isOpen, onClose }) => {
     const [phone,setPhone]=useState();
     const [otp,setOtp]=useState();
@@ -9,7 +10,7 @@ const PhoneEdit = ({ isOpen, onClose }) => {
     const [otpmessage, setOtpMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
     const [showOtpInput,setShowOtpInput]=useState(false)
-
+    const [changePhoneModalOpen,setChangePhoneModalOpen]=useState(false)
     const handleError = (e) => {
         setMessage(e);
         setOtpMessage(e)
@@ -76,7 +77,28 @@ const PhoneEdit = ({ isOpen, onClose }) => {
     }, []);
     return (
         <div>
-             <CModal
+              <CModal
+                visible={isOpen}
+                onClose={onClose}
+              backdrop="static"
+                aria-labelledby="LiveDemoExampleLabel"
+                alignment="center"
+            >
+                <CModalHeader onClose={onClose}>
+                    <CModalTitle id="LiveDemoExampleLabel">Change Phone Number</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                    <div className='setting_form'>
+                        <p style={{ color: messageColor ,textAlign:'center'}}> working is in progress</p>
+                    </div>
+                </CModalBody>
+                <CModalFooter>
+                    <CButton color="secondary" onClick={onClose}>
+                        Close
+                    </CButton>
+                </CModalFooter>
+            </CModal>
+             {/* <CModal
                 visible={isOpen}
                 onClose={onClose}
               backdrop="static"
@@ -131,7 +153,8 @@ const PhoneEdit = ({ isOpen, onClose }) => {
                         Close
                     </CButton>
                 </CModalFooter>
-            </CModal>
+            </CModal> */}
+            <ChangePhone isOpen={changePhoneModalOpen} onClose={() => setChangePhoneModalOpen(false)}/>
         </div>
     )
 }

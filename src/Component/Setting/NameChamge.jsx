@@ -2,9 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
-const Changepassword = ({ isOpen, onClose }) => {
-    const [password, setPassword] = useState();
-    const [confirmpassword, setConfirmPassword] = useState();
+const NameChamge = ({ isOpen, onClose }) => {
+    const [fname, setFname] = useState();
+    const [lname, setLname] = useState();
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
     const [successChangeModal, setSuccessChangeModal] = useState(false);
@@ -26,24 +26,22 @@ const Changepassword = ({ isOpen, onClose }) => {
             onClose();
         }, 2000);
     };
-    const getPassword = (e) => {
+    const getName = (e) => {
         e.preventDefault();
-        if (!password || !confirmpassword) {
-            handleError('password are required.');
+        if (!fname || !lname) {
+            handleError('first name and last name are required.');
             return;
         }
-        else if (password != confirmpassword) {
-            handleError('password is not match.');
-            return;
-        }
+        
         else {
             server.post(
-                '/api/users/update-Password/', {
-                password: password,
+                '/api/users/update-Name/', {
+                f_name:fname,
+                l_name:lname,
             }
             )
                 .then((response) => {
-                    handleSuccess('Password successfully updated.');
+                    handleSuccess('name successfully updated.');
                     onClose();
                     window.location.reload();
                 })
@@ -65,35 +63,35 @@ const Changepassword = ({ isOpen, onClose }) => {
                 alignment="center"
             >
                 <CModalHeader onClose={onClose}>
-                    <CModalTitle id="LiveDemoExampleLabel">Setting</CModalTitle>
+                    <CModalTitle id="LiveDemoExampleLabel">Change Name </CModalTitle>
                 </CModalHeader>
                 <CModalBody>
                     <div className='setting_form'>
-                        <form className='' onSubmit={getPassword}>
-                            <label htmlFor="Email">New password</label>
+                        <form className='' onSubmit={getName}>
+                            <label htmlFor="Email">First Name</label>
                             <div className='setting-input-email'>
                                 <input
-                                    type="password"
-                                    name="password"
+                                    type="text"
+                                    name="text"
                                     id="email"
                                     className='setting-email-input'
-                                    onChange={(e) => setPassword(e.target.value.trim())}
+                                    onChange={(e) => setFname(e.target.value.trim())}
                                 />
 
                             </div>
                             <div className='setting-input-email'>
-                                <label htmlFor="Email">Confirm password</label>
+                                <label htmlFor="Email">Last name</label>
                                 <input
-                                    type="password"
-                                    name="password"
+                                    type="text"
+                                    name="text"
                                     id="email"
                                     className='setting-email-input'
-                                    onChange={(e) => setConfirmPassword(e.target.value.trim())}
+                                    onChange={(e) => setLname(e.target.value.trim())}
                                 />
                             </div>
                             <p style={{ color: messageColor }}>{message}</p>
                             <div className='input-email-button'>
-                                <button className='old-email-btn' type="submit">Update password</button>
+                                <button className='old-email-btn' type="submit">Update Name</button>
                             </div>
                         </form>
                     </div>
@@ -125,4 +123,4 @@ const Changepassword = ({ isOpen, onClose }) => {
     )
 }
 
-export default Changepassword
+export default NameChamge

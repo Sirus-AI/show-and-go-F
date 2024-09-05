@@ -5,12 +5,12 @@ import './Setting.css'
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import Emailedit from './Emailedit';
 import PhoneEdit from './PhoneEdit';
+import PasswordEdit from './PasswordEdit';
 const SettingModal = ({ isOpen, onClose }) => {
     const [emailModalOpen,setEmailModalOpen]=useState(false);
     const [passwordModalOpen,setPasswordModalOpen]=useState(false);
     const [phoneModalOpen,setPhoneModalOpen]=useState(false);
     const openEmailModal = () =>{
-        setEmailModalOpen(true);
         setEmailModalOpen(true);
          onClose();
     }
@@ -54,7 +54,7 @@ const SettingModal = ({ isOpen, onClose }) => {
                 </CModalFooter>
             </CModal>
             <Emailedit isOpen={emailModalOpen} onClose={() => setEmailModalOpen(false)}/>
-            <Emailedit isOpen={passwordModalOpen} onClose={() => setPasswordModalOpen(false)}/>
+            <PasswordEdit isOpen={passwordModalOpen} onClose={() => setPasswordModalOpen(false)}/>
             <PhoneEdit isOpen={phoneModalOpen} onClose={() => setPhoneModalOpen(false)}/>
         </div>
     )

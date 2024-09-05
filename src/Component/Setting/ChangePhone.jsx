@@ -2,9 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
-const Changepassword = ({ isOpen, onClose }) => {
-    const [password, setPassword] = useState();
-    const [confirmpassword, setConfirmPassword] = useState();
+const ChangePhone = ({ isOpen, onClose }) => {
+    const [phone, setphone] = useState();
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
     const [successChangeModal, setSuccessChangeModal] = useState(false);
@@ -28,18 +27,15 @@ const Changepassword = ({ isOpen, onClose }) => {
     };
     const getPassword = (e) => {
         e.preventDefault();
-        if (!password || !confirmpassword) {
-            handleError('password are required.');
+        if (!phone) {
+            handleError('phone are required.');
             return;
         }
-        else if (password != confirmpassword) {
-            handleError('password is not match.');
-            return;
-        }
+        
         else {
             server.post(
                 '/api/users/update-Password/', {
-                password: password,
+                    phone: phone,
             }
             )
                 .then((response) => {
@@ -65,7 +61,7 @@ const Changepassword = ({ isOpen, onClose }) => {
                 alignment="center"
             >
                 <CModalHeader onClose={onClose}>
-                    <CModalTitle id="LiveDemoExampleLabel">Setting</CModalTitle>
+                    <CModalTitle id="LiveDemoExampleLabel">Change phone</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
                     <div className='setting_form'>
@@ -77,23 +73,14 @@ const Changepassword = ({ isOpen, onClose }) => {
                                     name="password"
                                     id="email"
                                     className='setting-email-input'
-                                    onChange={(e) => setPassword(e.target.value.trim())}
+                                    onChange={(e) => setphone(e.target.value.trim())}
                                 />
 
                             </div>
-                            <div className='setting-input-email'>
-                                <label htmlFor="Email">Confirm password</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    id="email"
-                                    className='setting-email-input'
-                                    onChange={(e) => setConfirmPassword(e.target.value.trim())}
-                                />
-                            </div>
+                           
                             <p style={{ color: messageColor }}>{message}</p>
                             <div className='input-email-button'>
-                                <button className='old-email-btn' type="submit">Update password</button>
+                                <button className='old-email-btn' type="submit">Update phone</button>
                             </div>
                         </form>
                     </div>
@@ -110,10 +97,10 @@ const Changepassword = ({ isOpen, onClose }) => {
                 backdrop="static"
             >
                 <CModalHeader>
-                    <CModalTitle>Password Updated</CModalTitle>
+                    <CModalTitle>phone number Updated</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
-                    <p>Password has been successfully updated.</p>
+                    <p>phone number has been successfully updated.</p>
                 </CModalBody>
                 <CModalFooter>
                     <CButton color="primary" onClick={() => setSuccessChangeModal(false)}>
@@ -125,4 +112,4 @@ const Changepassword = ({ isOpen, onClose }) => {
     )
 }
 
-export default Changepassword
+export default ChangePhone

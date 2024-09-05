@@ -7,13 +7,23 @@ const ChangeEmail = ({ isOpen, onClose }) => {
     const [otp,setOtp]=useState();
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
-    const [showOtpInput,setShowOtpInput]=useState(false)
+    const [successChangeModal, setSuccessChangeModal] = useState(false);
     const handleError = (e) => {
         setMessage(e);
         setMessageColor('red');
         setTimeout(() => {
             setMessage('');
         }, 2000); 
+    };
+    const handleSuccess = (e) => {
+        setMessage(e);
+        setMessageColor('green');
+        setSuccessChangeModal(true);
+        setTimeout(() => {
+            setMessage('');
+            setSuccessChangeModal(false);
+            onClose();
+        }, 2000);
     };
     const getEmail= (e)=>{
         e.preventDefault();
@@ -22,12 +32,14 @@ const ChangeEmail = ({ isOpen, onClose }) => {
             return;
         }else{
             server.post(
-                'generate-otp/',{
+                '/api/users/update-email/',{
                     email:email
                 }
             )
             .then((response) => {
-                
+                handleSuccess('Password successfully updated.');
+                onClose()
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error);
@@ -52,7 +64,7 @@ const ChangeEmail = ({ isOpen, onClose }) => {
        <CModalBody>
            <div className='setting_form'>
            <form className=''  onSubmit={getEmail}>
-           <label htmlFor="Email">Enter old Email</label>
+           <label htmlFor="Email">new Email</label>
                        <div className='setting-input-email'>
                            <input
                                type="email"
@@ -65,7 +77,7 @@ const ChangeEmail = ({ isOpen, onClose }) => {
                            </div>
 
                        <div className='input-email-button'>
-                           <button className='old-email-btn' type="submit">get-otp</button>
+                           <button className='old-email-btn' type="submit">Update email</button>
                        </div>
                    </form>
                   
@@ -77,7 +89,23 @@ const ChangeEmail = ({ isOpen, onClose }) => {
            </CButton>
        </CModalFooter>
    </CModal>
-   
+   <CModal
+                visible={successChangeModal}
+                onClose={() => setSuccessChangeModal(false)}
+                backdrop="static"
+            >
+                <CModalHeader>
+                    <CModalTitle>Email Updated</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                    <p>Email has been successfully updated.</p>
+                </CModalBody>
+                <CModalFooter>
+                    <CButton color="primary" onClick={() => setSuccessChangeModal(false)}>
+                        OK
+                    </CButton>
+                </CModalFooter>
+            </CModal>
 </div>
 
   )
