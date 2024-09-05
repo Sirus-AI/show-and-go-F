@@ -1042,34 +1042,69 @@ form {
   border-radius: 10px;
   transition: box-shadow 0.3s ease;
   transition: transform 0.3s ease;
+  position: relative;
 }
 
-.profile-active:hover {
+/* .profile-active:hover {
   box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
   transform: scale(1.02) ;
-}
+} */
 
 .profile-avatar {
   border: 2px solid rgb(218, 218, 218);
-  width: 7rem;
-  height: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  transition: transform 0.5s ease;
-  background: linear-gradient(135deg, #eee7e7, #ffffff);
-}
-.profile-avatar:hover{
-  transform: scale(2.3);
-  border-radius: 0;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
 }
 
-.profile-avatar img,
-.avtar {
+.edit-propfile-pic{
+  position: absolute;
+  top:0%;
+  left: 0%;
+  font-size: 3.2rem;
+  color: #908c8c;
+  padding: 3rem;
+  border-radius: 50%;
+  background-color: #a49f9f64; 
+  opacity: 0; 
+  transition: opacity 1s ease; 
+}
+.profile-avtar:hover .edit-propfile-pic {
+   opacity: 1;
+  }
+  .profilr-image {
+    width: 140px; 
+    height: 140px; 
+    border-radius: 50%; 
+    position: relative; 
+  }
+  
+  .profilr-image img {
+    width: 140px; 
+    height: 140px;
+    border-radius: 50%; 
+    object-fit:fill;
+  }
+  .profilr-image .avtar{
   height: 100%;
   width: 100%;
+  border: 1px solid black;
   font-size: 90px;
+  padding: 1rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prof-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-details {
@@ -1176,4 +1211,60 @@ box-shadow: 2px 2px 5px 2px rgb(82, 81, 81);
 
 .inactive {
   border: 2px solid red;
+}
+.edit-name{
+  color: black;
+  background-color: #989898;
+  padding: 0.3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.delete-photo-button {
+  padding: 0.8rem 1.3rem;
+  background-color: #db0f0f;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+.delete-photo-button:hover {
+  background-color: #db0f0f;
+  transform: scale(1.05); 
+  box-shadow: 0 4px 8px rgba(10, 10, 10, 0.2); 
+}
+.photo-upload{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-dropdown-menu{
+  padding: 0.5rem ;
+   background-color: #ababab;
+   width: 9rem;
+   border-radius: 5px;
+   position: absolute;
+   top:-10%;
+   left:33%;
+}
+
+.profile-dropdown-btn{
+  padding: 0.3rem ;
+  margin-top: 0.3rem;
+   background-color: #ababab;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  border-bottom: 1px solid black;
+  font-size: 0.9rem;
+  width:100%;
+  cursor: pointer;
+}
+.profile-dropdown-btn:hover{
+  background-color: #888585;
 }

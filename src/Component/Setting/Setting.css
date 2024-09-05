@@ -1,0 +1,47 @@
+.emailChange-btn{
+    padding: 0.8rem 1.3rem;
+    background-color: #0f5ddb;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    border-radius: 10px;
+    width: 100%;
+}
+.emailChange-btn:hover{
+    background-color: #1a73e8; 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.2); 
+}
+.emailChange{
+    margin: 1rem;
+}
+
+.setting-email-input{
+    border: .2em solid #1e87e9;
+	padding: .4em .7em;
+	border-radius:5px;
+	color: #000000;
+    width: 100%;
+}
+.input-email-button{
+    margin-top: 0.2rem;
+}
+.old-email-btn{
+padding: 0.5rem 1rem;
+  background-color: #0f5ddb;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+.input-email-button{
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+}
