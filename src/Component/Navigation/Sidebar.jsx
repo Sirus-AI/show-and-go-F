@@ -56,7 +56,7 @@ const Sidebar = ({ usertype }) => {
           </div>
           <div className='list'>
             <ul className='ul-list'>
-              <Link to='/' className="link-color"> <li className='item'><span>🏠 </span><p>Dashboard</p></li></Link>
+              <Link to='/Admindashboard' className="link-color"> <li className='item'><span>🏠 </span><p>Dashboard</p></li></Link>
               <Link to='/Profile' className="link-color"> <li className='item'><span>📄 </span><p>Profile</p></li></Link>
               <Link to='/register_newuser' className="link-color"> <li className='item'><span>📝</span><p>Register new user</p></li></Link>
               <Link to='/Capture_face' className="link-color"><li className='item'><span>📸 </span><p>Capture face</p></li></Link>
