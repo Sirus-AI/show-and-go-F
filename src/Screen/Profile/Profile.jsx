@@ -100,7 +100,7 @@ const Profile = () => {
                 </div>
                 <div className='prof prof-name'>
                   <p className='title'>Name:</p>
-                  <p>{profile ? `${profile.f_name} ${profile.m_name} ${profile.l_name}` : 'Your Name'}</p>
+                  <p>{profile ? `${profile.f_name} ${profile.l_name}` : 'Your Name'}</p>
                 </div>
               </div>
               <div className='profile-details'>
