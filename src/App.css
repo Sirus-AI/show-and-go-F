@@ -51,6 +51,9 @@
   color: #0f5ddb;
   font-style: normal;
 }
+.bar {
+  z-index: 1;
+}
 
 .bar span {
   font-size: 2rem;
@@ -92,6 +95,7 @@
 }
 
 
+
 /*========================= Media Queries ===============================*/
 /* ========================= Sidebar and navabar Responsive Code ============================ */
 /* Phone view  */
@@ -109,76 +113,120 @@
   }
 
   .side-bar-toggle {
-    display: block;
+    display: none;
   }
 
-  .admin-logo{
+  .admin-logo {
     visibility: hidden;
   }
-  .logo i, .sirus-logo, .item p{
+
+  .logo i, .sirus-logo, .item p {
     display: none;
   }
 
   .side-bar-cover {
+    position:relative;
     margin-right: 5em;
-    /* position: absolute; */
     margin-top: -4rem;
     transition: transform 0.3s ease, width 0.3s ease;
     box-shadow: none;
     
   }
-  .ul-list{
+
+  .ul-list {
     background-color: #eee7e7;
-    border-radius: .7rem;
-    position:fixed;
+    border-radius: 0.7rem;
+    position: fixed;
   }
 
-  .big-logo{
+  .big-logo {
     background-color: #eee7e7;
     display: none;
     visibility: hidden;
   }
-  
 
   .item {
-    display: none;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1rem;
+    position: relative;
     box-shadow: none;
+    background-color: #eee7e7;
+    transition: background-color 0.3s ease;
+  }
+
+  .item:hover {
+    background-color: #dbdad5; 
+  }
+
+  .item p {
+    display: inline-block;
+    opacity: 0;
+    white-space: nowrap;
+    transform: translateX(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: absolute;
+    right: 100%;
+    margin-right: 1rem;
+    background-color: #eee7e7; 
+    padding: 0.3rem 0.5rem;
+    border-radius: .7rem;
+  }
+
+  .item:hover p {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .start-btn {
     padding: 0.4rem 1rem;
   }
+
   .nav-bar {
     margin-left: -1rem;
   }
-  .name{
-    margin-left: -.3rem;
+
+  .name {
+    margin-left: 1rem;
   }
-  .shiv b{
+
+  .admin {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .shiv b {
     display: none;
   }
-  .show-go-btn{
-    /* display: none; */
+
+  .show-go-btn {
     margin-right: -2rem; 
     margin-top: -2rem;
   }
- 
-  .content-toggle.dashboard-card{
+
+  .content-toggle.dashboard-card {
     margin-left: -6rem;
   }
-  .content-cover p.overview{
+
+  .content-cover p.overview {
     margin-left: -4rem;
-    
   }
-  .content-toggle p.overview{
+
+  .content-toggle p.overview {
     margin-left: -3rem;
     margin-top: 1.3rem;
   }
-  
-  
 }
 
-/* Tablet view (min-width: 451px and max-width: 900px) */
+@media (min-width: 431px) and (max-width: 550px){
+  .name{font-size: small;
+  margin-left: .5rem;}
+
+  .bar{margin-left: -2rem;}
+
+  .show-go-btn{margin-right: -3rem;}
+}
+
 
 @media (min-width: 430px) and (max-width: 700px) {
   .side-bar {
@@ -194,10 +242,16 @@
   .nav-cover {
     justify-content: flex-start;
     margin-left: -17vw;
-    z-index: 2;
+    /* z-index: 1; */
     
   }
+  /* .side-bar-nav{
+    z-index: -1;
+  } */
 
+  .bar{
+    z-index: 1;
+  }
   .side-bar-open {
     width: 100%;
     display: block;
@@ -205,14 +259,22 @@
 
   .side-bar-toggle {
     display: none;
+    
   }
-  .side-bar-cover{
-    background-color:none;
+  .side-bar-cover {
+    position: relative;
+    background-color: none;
     margin-top: 8rem;
     margin-left: -1.5rem;
-    z-index: 1;
     overflow: hidden;
-  }
+}
+
+
+
+ .dashboard-content {
+    z-index: -2; /* lower than the sidebar */
+}
+
   .list{
     margin-top:-9rem;
     transform: translate(ease 0.3s);
@@ -228,14 +290,13 @@
   }
 
   .ul-list {
+    
     padding: 2rem;
     margin-right: 1rem;
     margin-top: -4rem;
+  
   }
 
-  .side-bar-cover {
-    box-shadow: none;
-  }
   .content-toggle{
     width: 75%;
   }
@@ -243,7 +304,9 @@
  .side-off.nav-cover{
     margin-left: -10rem;
   
-}}
+}
+
+}
 
 /* Desktop view (min-width: 901px) */
 @media (min-width: 700px) and (max-width: 1240px) {
@@ -1195,7 +1258,6 @@ form {
   padding: 0px 5vh;
   height: 80vh;
   color: rgb(0, 0, 0);
-  /* background: #e7eee7; */
 }
 
 .profile-page-cover {
@@ -1203,7 +1265,8 @@ form {
   display: flex;
   justify-content: space-evenly;
   padding: 50px 0px;
-  background:  #eee7e7;
+  background: #eee7e7;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
   transition: transform 0.3s ease;
 }
 
@@ -1219,12 +1282,13 @@ form {
   padding: 5px 10px;
   background-color: #eee7e7;
   align-items: center;
-  transition: background-color 0.3s ease;
+  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .prof:hover {
   background-color: #dbdad5;
-  
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
 }
 
 .profile-active {
@@ -1233,16 +1297,15 @@ form {
   gap: 20px;
   align-items: center;
   background-color: #eee7e7;
-  box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
   padding: 50px;
   border-radius: 10px;
-  transition: box-shadow 0.3s ease;
-  transition: transform 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .profile-active:hover {
-  box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
-  transform: scale(1.02) ;
+  box-shadow: 12px 12px 24px #bebebe, -12px -12px 24px #ffffff;
+  transform: scale(1.02);
 }
 
 .profile-avatar {
@@ -1253,12 +1316,15 @@ form {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  transition: transform 0.5s ease;
   background: linear-gradient(135deg, #eee7e7, #ffffff);
+  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
-.profile-avatar:hover{
+
+.profile-avatar:hover {
   transform: scale(2.3);
   border-radius: 0;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
 }
 
 .profile-avatar img,
@@ -1272,21 +1338,22 @@ form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color:#eee7e7;
+  background-color: #eee7e7;
   border-radius: 10px;
   padding: 50px;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 10px rgba(1, 20, 27, 0.1);
-
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-details:hover {
   transform: scale(1.02);
+  box-shadow: 12px 12px 24px #bebebe, -12px -12px 24px #ffffff;
 }
 
 .title {
   font-weight: bold;
 }
+
 
 @media (max-width: 768px) {
   .profile-page {
