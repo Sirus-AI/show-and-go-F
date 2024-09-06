@@ -68,7 +68,7 @@ const Sidebar = ({ usertype }) => {
              {(usertype === 1 || usertype === 2 || usertype === 3) ?
                 (<Link to='/ActiveUser' className="link-color">       <li className='item'><i class="fa-solid fa-clipboard-user"></i><p>Active User</p></li></Link>)
                 : null}
-              {(usertype === 2)?(<Link to='/Mark-in' className="link-color"> <li className='item'><i className="fa-solid fa-circle-half-stroke"></i><p>Mark in</p></li></Link>):null}
+              {(usertype === 3)?(<Link to='/Mark-in' className="link-color"> <li className='item'><i className="fa-solid fa-circle-half-stroke"></i><p>Mark in</p></li></Link>):null}
               
             </ul>
           </div>
