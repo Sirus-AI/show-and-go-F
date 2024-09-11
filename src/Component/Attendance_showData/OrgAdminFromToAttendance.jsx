@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import './AttendanceData.css'
-import Navbar from '../../Component/Navigation/Navbar';
+import Navbar from '../Navigation/Navbar';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import {server} from '../../Server';
 const OrgAdminFromToAttendance = () => {
@@ -52,16 +52,20 @@ const handleError = (e) => {
     }
 };
 const groupDataByDate = () => {
-    return attendanceData.reduce((acc, item) => {
-        const date = item.date;
-        if (!acc[date]) {
-            acc[date] = [];
-        }
-        acc[date].push(item);
-        return acc;
-    }, {});
-};
-
+        const grouped = {};
+        attendanceData.forEach((user) => {
+            user.attendance.forEach((record) => {
+                if (!grouped[record.date]) {
+                    grouped[record.date] = [];
+                }
+                grouped[record.date].push({
+                    user: user.user,
+                    ...record,
+                });
+            });
+        });
+        return grouped;
+    };
 const groupedData = attendanceData ? groupDataByDate() : {};
     return (
         <div>
@@ -82,11 +86,11 @@ const groupedData = attendanceData ? groupDataByDate() : {};
           </CButton>
         </CModalFooter>
       </CModal>
-            <Navbar toggleSidebar={toggleSidebar} />
+            {/* <Navbar toggleSidebar={toggleSidebar} />
             <div className='dashboard-content'>
-                <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
+                <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}> */}
                 <div className='user-AttendanceData'>
-                <div className='attendance-heading'>Date Attendence</div>
+                <div className='attendance-heading'>Custom Date Report</div>
                         <div className='cover-user-Attendance'>
                             
                             <form className='date-form' onSubmit={Handledate}>
@@ -111,45 +115,40 @@ const groupedData = attendanceData ? groupDataByDate() : {};
                             </div>
                             </form>
                             <div className='attendance-table-cover'>
-                                {attendanceData && Object.keys(groupedData).map((date, index) => (
-                                    <div key={index} className="attendance-date-group">
-                                        <h2 className='date-wise'>Date: {date}</h2>
-                                        <table className='attendance-table'>
-                                            <thead className='attendance-thead'>
-                                                <tr>
-                                                    <td>User Name</td>
-                                                    <td>In Time</td>
-                                                    <td>Out Time</td>
-                                                    <td>Break Time</td>
-                                                    <td>Working Time</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody className='attendance-tbody'>
-                                                {groupedData[date].map((data, idx) => {
-                                                    const inTime = new Date(data.in_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                                    const outTime = data.out_timestamp ? new Date(data.out_timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A';
-                                                    const breakTime = data.break_duration.split('.')[0];
-                                                    return (
-                                                        <tr key={idx}>
-                                                            <td>{data.user_name}</td>
-                                                            <td>{inTime}</td>
-                                                            <td>{outTime}</td>
-                                                            <td>{breakTime}</td>
-                                                            <td>{data.work_duration}</td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                ))}
+                            {attendanceData && Object.keys(groupedData).map((date, index) => (
+                            <div key={index} className="attendance-date-group">
+                                <h2 className="date-wise">Date: {date}</h2>
+                                <table className="attendance-table">
+                                    <thead className="attendance-thead">
+                                        <tr>
+                                            <td>User Name</td>
+                                            <td>First In</td>
+                                            <td>Last Out</td>
+                                            <td>Total Working Duration</td>
+                                            <td>Total Break Duration</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="attendance-tbody">
+                                        {groupedData[date].map((data, idx) => (
+                                            <tr key={idx}>
+                                                <td>{data.user}</td>
+                                                <td>{data.first_in}</td>
+                                                <td>{data.last_out}</td>
+                                                <td>{data.total_work_duration}</td>
+                                                <td>{data.total_break_duration}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ))}
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </div>
-        </div>
+        //     </div>
+        // </div>
     )
 }
 export default OrgAdminFromToAttendance
