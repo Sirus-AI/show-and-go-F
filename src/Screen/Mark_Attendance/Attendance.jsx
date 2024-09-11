@@ -63,59 +63,58 @@ const Attendance = () => {
             if (inIntervalRef.current) clearInterval(inIntervalRef.current);
             if (outIntervalRef.current) clearInterval(outIntervalRef.current);
         };
-    }, [selectedInCamera, selectedOutCamera, wsIn, wsOut]);
+    }, [selectedInCamera, selectedOutCamera]);
 
     const startWebSocket = (type) => {
         const wsUrl = `${WEBSOCKET_URL}ws/attendance_${type}/1/`;
-        let ws;
         const statusUpdater = type === 'in' ? setInStatus : setOutStatus;
         const frameUpdater = type === 'in' ? inFrameRef : outFrameRef;
         const intervalRef = type === 'in' ? inIntervalRef : outIntervalRef;
         const videoRef = type === 'in' ? inVideoRef : outVideoRef;
 
-        const connect = () => {
-            ws = new WebSocket(wsUrl);
+        const ws = new WebSocket(wsUrl);
 
-            ws.onopen = () => {
-                console.log(`WebSocket ${type} opened`);
-                statusUpdater(`WebSocket ${type} connection established.`);
-                intervalRef.current = startSendingFrames(ws, videoRef, type);
-            };
-
-            ws.onmessage = (event) => {
-                const img = new Image();
-                img.src = 'data:image/jpeg;base64,' + event.data;
-                if (frameUpdater.current) {
-                    frameUpdater.current.src = img.src;
-                }
-                statusUpdater(`Attendance ${type.charAt(0).toUpperCase() + type.slice(1)} Successful!`);
-            };
-
-            ws.onclose = () => {
-                console.log(`WebSocket ${type} closed, retrying...`);
-                statusUpdater(`WebSocket ${type} connection closed, retrying...`);
-                if (intervalRef.current) {
-                    clearInterval(intervalRef.current);
-                }
-                setTimeout(connect, 1000);
-            };
-
-            ws.onerror = (error) => {
-                console.error(`WebSocket ${type} error:`, error);
-                statusUpdater(`WebSocket ${type} encountered an error.`);
-            };
-
-            type === 'in' ? setWsIn(ws) : setWsOut(ws);
+        ws.onopen = () => {
+            console.log(`[${type}] WebSocket opened at ${new Date().toISOString()}`);
+            statusUpdater(`[${type}] WebSocket connection established at ${new Date().toISOString()}`);
+            intervalRef.current = startSendingFrames(ws, videoRef);
         };
 
-        connect();
+        ws.onmessage = (event) => {
+            console.log(`[${type}] WebSocket received message at ${new Date().toISOString()}`);
+            const img = new Image();
+            img.src = 'data:image/jpeg;base64,' + event.data;
+            if (frameUpdater.current) {
+                frameUpdater.current.src = img.src;
+            }
+            statusUpdater(`Attendance ${type.charAt(0).toUpperCase() + type.slice(1)} Successful!`);
+        };
+
+        ws.onclose = () => {
+            console.log(`[${type}] WebSocket closed at ${new Date().toISOString()}`);
+            statusUpdater(`[${type}] WebSocket connection closed.`);
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error(`[${type}] WebSocket error at ${new Date().toISOString()}:`, error);
+            statusUpdater(`[${type}] WebSocket encountered an error.`);
+        };
+
+        if (type === 'in') {
+            setWsIn(ws);
+        } else {
+            setWsOut(ws);
+        }
     };
 
-    const startSendingFrames = (ws, videoRef, type) => {
+    const startSendingFrames = (ws, videoRef) => {
         const canvas = document.createElement('canvas');
 
         const sendFrame = () => {
-            if (ws.readyState === WebSocket.OPEN && videoRef.current.readyState === 4) {
+            if (ws.readyState === WebSocket.OPEN && videoRef.current && videoRef.current.readyState === 4) {
                 canvas.width = videoRef.current.videoWidth;
                 canvas.height = videoRef.current.videoHeight;
                 const context = canvas.getContext('2d');
@@ -142,6 +141,20 @@ const Attendance = () => {
         setSelectedOutCamera(selectedCamera);
         if (selectedCamera === selectedInCamera) {
             setSelectedInCamera('');
+        }
+    };
+
+    const closeWebSocketConnectionsIn = () => {
+        if (wsIn) {
+            wsIn.close();
+            setInStatus('Attendance In WebSocket connection closed.');
+        }
+    };
+    const closeWebSocketConnectionsOut = () => {
+     
+        if (wsOut) {
+            wsOut.close();
+            setOutStatus('Attendance Out WebSocket connection closed.');
         }
     };
 
@@ -182,15 +195,17 @@ const Attendance = () => {
                         if (wsOut) wsOut.close();
                         startWebSocket('out');
                     }}>Start Attendance Out</button>
+                    <button onClick={closeWebSocketConnectionsIn}>Stop Attendance In</button>
+                    <button onClick={closeWebSocketConnectionsOut}>Stop Attendance Out</button>
                 </div>
 
                 <div>
-                    <img ref={inFrameRef} alt="Attendance In Recognition Result" data-type="in" />
+                    <img ref={inFrameRef} alt="Attendance In Recognition Result" />
                     <p>{inStatus}</p>
                 </div>
 
                 <div>
-                    <img ref={outFrameRef} alt="Attendance Out Recognition Result" data-type="out" />
+                    <img ref={outFrameRef} alt="Attendance Out Recognition Result" />
                     <p>{outStatus}</p>
                 </div>
             </div>
