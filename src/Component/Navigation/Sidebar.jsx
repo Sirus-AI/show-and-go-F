@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {server} from '../../Server';
 import { useState } from 'react';
 import SettingModal from '../Setting/SettingModal';
-const Sidebar = ({ usertype }) => {
+const Sidebar = ({ usertype ,profile }) => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [settingModalOpen,setSettingModalOpen]=useState(false);
@@ -48,10 +48,19 @@ const Sidebar = ({ usertype }) => {
             <div className='sirus-logo'>SHOW AND GO</div>
           </div>
           <div className='admin-logo'>
-            <img src={Logo} alt="" />
+            {profile && profile.profile_photo != null ? (
+                                            <img src={profile.profile_photo} />) : (<span class="material-symbols-outlined avtar">
+                                                person
+                                            </span>)}
             <div className='logo-admin'>
-              <p>Admin</p>
-              <p>Designation</p>
+              {profile&& profile.f_name != null?(
+                 <div className="name"> <p>{profile.f_name.charAt(0).toUpperCase() + profile.f_name.slice(1).toLowerCase()}</p>
+                 <p>{profile.l_name.charAt(0).toUpperCase() + profile.l_name.slice(1).toLowerCase()}</p>
+                  </div>
+              ) :
+              (
+                <p>Name</p>
+              )}
             </div>
           </div>
           <div className='list'>

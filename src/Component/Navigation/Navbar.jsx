@@ -6,6 +6,7 @@ import Sidebar from './Sidebar'
 const Navbar = ({ toggleSidebar }) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [username , setUsername] = (useState(''))
+    const [profile ,setProfile] = (useState());
 
     const handleToggleSidebar = () => {
         setShowSidebar(!showSidebar);
@@ -21,6 +22,7 @@ const Navbar = ({ toggleSidebar }) => {
                 },
             })
             .then((response) => {
+                setProfile(response.data);
                  setUsername(response.data.f_name +" "+response.data.l_name)
                 setUsertype(response.data.user_type)
                 localStorage.setItem('user_type', JSON.stringify(response.data.user_type));
@@ -37,7 +39,7 @@ const Navbar = ({ toggleSidebar }) => {
     return (
         <div className='shiv'> 
             <div className={showSidebar ? 'side-off' : 'side-bar-nav '}>
-                <Sidebar  usertype={usertype} />
+                <Sidebar  usertype={usertype} profile={profile}/>
             </div>
             <div className='nav-bar'>
 
