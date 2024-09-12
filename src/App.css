@@ -10,9 +10,10 @@
 /* navbar css is start here  */
 .nav-bar {
   padding: 1rem;
-  /* display: flex; */
-  /* justify-content: space-around; */
-  margin-left: 17vw;
+  display: flex; 
+   justify-content: flex-end;
+   align-items: center;
+  
 }
 
 .nav-cover {
@@ -27,15 +28,17 @@
 
 .navigation {
   box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-  
+  width: 80%;
 }
-
+.navigation-toggle {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
 .heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .name {
   margin-left: 2rem;
   color: rgb(23, 0, 128);
@@ -53,6 +56,7 @@
 }
 .bar {
   z-index: 1;
+  cursor: pointer;
 }
 
 .bar span {
@@ -61,7 +65,6 @@
   color:#3d2b35;
 
 }
-
 .show-go-btn {
   padding: 0.8rem 1.3rem;
   background-color: #0f5ddb;
@@ -96,15 +99,15 @@
 
 
 
+
 /*========================= Media Queries ===============================*/
 /* ========================= Sidebar and navabar Responsive Code ============================ */
 /* Phone view  */
 @media (max-width: 431px) {
   .side-bar {
     transform: translateX(100%);
-    position: absolute;
-    width: 70%;
-    top: 7%;
+    position: relative;
+    width: 25%;
   }
 
   .side-bar-open {
@@ -125,18 +128,20 @@
   }
 
   .side-bar-cover {
-    position:relative;
-    margin-right: 5em;
-    margin-top: -4rem;
+    width: 0;
+    position: absolute;
+    overflow: hidden; 
+    top: -2rem;
+    right: 0; 
     transition: transform 0.3s ease, width 0.3s ease;
     box-shadow: none;
-    
-  }
+}
 
   .ul-list {
     background-color: #eee7e7;
     border-radius: 0.7rem;
     position: fixed;
+    
   }
 
   .big-logo {
@@ -183,8 +188,17 @@
   }
 
   .nav-bar {
-    margin-left: -1rem;
-  }
+    padding: 1rem;
+   
+}
+.navigation {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
+.navigation-toggle {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
 
   .name {
     margin-left: 1rem;
@@ -225,6 +239,7 @@
   .bar{margin-left: -2rem;}
 
   .show-go-btn{margin-right: -3rem;}
+  
 }
 
 
@@ -241,9 +256,7 @@
   }
   .nav-cover {
     justify-content: flex-start;
-    margin-left: -17vw;
     /* z-index: 1; */
-    
   }
   /* .side-bar-nav{
     z-index: -1;
@@ -261,14 +274,7 @@
     display: none;
     
   }
-  .side-bar-cover {
-    position: relative;
-    background-color: none;
-    margin-top: 8rem;
-    margin-left: -1.5rem;
-    overflow: hidden;
-}
-
+  
 
 
  .dashboard-content {
@@ -304,6 +310,18 @@
  .side-off.nav-cover{
     margin-left: -10rem;
   
+} 
+.side-bar-cover{
+    margin-top: 8.5rem;
+    max-height: 130vh; 
+  }
+.navigation {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
+.navigation-toggle {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
 }
 
 }
@@ -313,9 +331,20 @@
   .logo .sirus-logo {
     font-size: 1.4rem;
   }
-  .shiv .side-off .navigation{
-    /* margin-left: 100rem; */
-    margin-left: 10rem;
+  .side-bar-nav {
+    position: absolute;
+    width: 27%;
+    /* top: 120%; */
+    /* margin-top: -; */
+  
+  }
+  .navigation {
+    box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+    width: 75%;
+  }
+  .navigation-toggle {
+    box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+    width: 100%;
   }
   /* Add your desktop-specific styles here */
 }
@@ -324,20 +353,37 @@
 /* navbar css is end here  */
 /* ******************************************************************** */
 /* sidebar css is end here  */
+.side-bar-cover {
+  max-height: 130vh; 
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  scrollbar-width: thin; 
+  scrollbar-color: #aaa #fff; 
+}
 
+
+.side-bar-cover::-webkit-scrollbar {
+  width: 4px; 
+}
+
+.side-bar-cover::-webkit-scrollbar-thumb {
+  background-color: #9e8c8c; 
+  border-radius: 4px; 
+}
+
+.side-bar-cover::-webkit-scrollbar-track {
+  background: #fff; 
+}
 .side-bar {
   width: fit-content;
   border-radius: 5px;
   height: 100%;
   z-index: 1;
-  background-color: #eee7e7;
+  background: #eee7e7;
+  transition: transform 0.3s ease, width 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
-.side-bar-cover {
-  /* box-shadow: 3px 0px 5px 2px rgba(173, 56, 56, 0.095); */
-  padding: .5rem 1rem ;
-  border-radius: 10px;
-  z-index: 1;
-}
+
 
 .admin-logo {
   padding: 0.3rem 1.5rem;
@@ -368,6 +414,8 @@
 
 .ul-list {
   padding: 0.5rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .link-color {
@@ -871,7 +919,7 @@ form {
 /*new cards css start */
 .new-cards{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-radius: 15px; 
   flex-wrap: wrap ;
   

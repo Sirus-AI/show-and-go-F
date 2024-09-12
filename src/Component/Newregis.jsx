@@ -17,7 +17,8 @@ const Newregis = () => {
   const [messageColor, setMessageColor] = useState('green');
  const [userType,setUserType]=useState()
  const navigate = useNavigate();
-
+ const userData = JSON.parse(localStorage.getItem("userData"))
+ console.log(userData)
   const togglePassword = () => {
     if (passwordType === 'password') {
         setPasswordType('text');
@@ -218,9 +219,13 @@ const Newregis = () => {
               </div>
             </div>
             <button className='regis' type="submit">Register</button>
+           {userData?( <div className='account'>
+            <p>Go to DashBoard ? <Link to="/Admindashboard">DashBoard</Link></p>
+           
+            </div>):(
             <div className='account'>
-              <p>Already have an account ? <Link to="/">Login</Link></p>
-            </div>
+                 <p>Already have an account ? <Link to="/">Login</Link></p>
+            </div>)}
           </form>
         </div>
       </div>
