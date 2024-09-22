@@ -33,7 +33,7 @@ const PasswordEdit = ({ isOpen, onClose }) => {
             return;
         }else{
             server.post(
-                'generate-otp/',{
+                'notification/generate-otp/',{
                     email:email
                 }
             )
@@ -55,7 +55,7 @@ const PasswordEdit = ({ isOpen, onClose }) => {
             
         }else{
             server.post(
-                'verify-otp/',{
+                'notification/verify-otp/',{
                     otp_code:otp,
                     email:email,
                     

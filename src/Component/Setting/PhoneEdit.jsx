@@ -34,7 +34,7 @@ const PhoneEdit = ({ isOpen, onClose }) => {
         }
     else{
         server.post(
-            'generate-otp/',{
+            'notification/generate-otp/',{
                 phone_number:phone
             }
         )
@@ -56,7 +56,7 @@ const PhoneEdit = ({ isOpen, onClose }) => {
             
         }else{
             server.post(
-                'verify-otp/',{
+                'notification/verify-otp/',{
                     otp_code:otp
                 }
             )
