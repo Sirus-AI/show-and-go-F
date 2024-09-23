@@ -2,11 +2,11 @@ import axios from 'axios';
 
 const server = axios.create({
   baseURL: 'http://127.0.0.1:8000/',
-  // baseURL: 'http://139.59.48.40:80',
+  baseURL: 'http://159.89.167.117/',
 });
 
 // const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://139.59.48.40:8000/';
-const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.01:8000/';
+const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://159.89.167.117/';
 
 const getCookie = (name) => {
   const cookies = document.cookie.split(';');
