@@ -340,30 +340,27 @@
 }
 
 .admin-logo {
-  padding: 0.3rem 1.5rem;
+  padding: 0.3rem 1rem;
   box-shadow: 3px 0px 5px 2px rgba(248, 232, 232, 0.095);
-  margin: 0.8rem 0.2rem;
   display: flex;
   align-items: center;
   border-radius: 5px;
   background:#d0d0d6;
 }
 
-.logo-admin {
-  margin-left: 1rem;
-}
+
 
 .admin-logo p {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-style: normal;
   font-size: 1.1rem;
 }
 
 .admin-logo img {
-  width: 25%;
-  height: 25%;
-  border-radius: 50%;
+  width: 30%;
+  height: 30%;
+  border-radius: 25%;
+  border: none;
 }
 
 .ul-list {
