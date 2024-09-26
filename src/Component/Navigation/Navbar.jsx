@@ -43,7 +43,7 @@ const Navbar = ({ toggleSidebar }) => {
             </div>
             <div className='nav-bar'>
 
-                <div className='navigation'>
+                <div className={showSidebar ? 'navigation-toggle ' : 'navigation '}>
 
                     <div className='nav-cover'>
                         <div className='heading'>
