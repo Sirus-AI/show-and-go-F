@@ -28,7 +28,7 @@ jobs:
 
       # Step 4: Add SSH key to access the EC2 instance
       - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.8.1
+        uses: webfactory/ssh-agent@v0.5.4  # Use the latest stable version
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}  # Your private SSH key stored in GitHub Secrets
 
@@ -39,4 +39,3 @@ jobs:
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             # Commands to restart web server, e.g., Apache or Nginx, or any other necessary steps
             sudo systemctl restart nginx
-
