@@ -1,61 +1,43 @@
-name: Deploy React App to EC2
+name: Auto Deploy React App
 
 on:
   push:
     branches:
-      - main  # Trigger the action when pushing to the main branch
+      - main  # Trigger this action only on push to main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout Code
+      # Step 1: Checkout the latest code from the repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Install Node.js (required to build the React app)
-      - name: Set up Node.js
+      # Step 2: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18.19.1'  # Adjust the node version as needed
 
-      # Step 3: Install dependencies and audit
-      - name: Install Dependencies and Audit
-        run: |
-          npm install
-          npm audit fix || echo "No vulnerabilities fixed automatically"
-          # Optionally force audit fix, but with caution
-          npm audit fix --force || echo "Force fix applied. Check for breaking changes"
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-      # Step 4: Run ESLint auto-fix
-      - name: Run ESLint Fix
-        run: |
-          npx eslint --fix src/
+      # Step 4: Build the React application
+      - name: Build React App
+        run: npm run build
 
-      # Step 5: Build the React App
-      - name: Build the React App
-        run: |
-          CI=false npm run build
-
-      # Step 6: Add SSH key to access the EC2 instance
-      - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.5.4  # Latest stable version
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}  # Your private SSH key stored in GitHub Secrets
-
-      # Step 7: Pull latest code on EC2 (optional)
-      - name: Pull latest code on EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/ubuntu/show-and-go-F  # Change to your app's directory
-            git pull origin main  # Pull the latest code from the main branch
-          EOF
-
-      # Step 8: Deploy to EC2 and copy build files
+      # Step 5: Deploy to EC2
       - name: Deploy to EC2
-        run: |
-          scp -r -o StrictHostKeyChecking=no build/* ec2-user@${{ secrets.EC2_HOST }}:/var/www/html  # Adjust path as necessary
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
-            sudo systemctl restart nginx
-          EOF
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.EC2_HOST }}   # Set this in the GitHub repository secrets
+          username: ${{ secrets.EC2_USER }} # Set this in the GitHub repository secrets
+          key: ${{ secrets.EC2_SSH_KEY }}      # Set your EC2 private key in the GitHub secrets
+          script: |
+            cd /home/ubuntu/show-and-go-F           # Navigate to the app directory on the server
+            git pull origin main           # Pull latest changes
+            npm install                    # Install dependencies
+            npm run build                  # Build the React app
+            sudo systemctl restart nginx   # Restart Nginx to serve the latest version
