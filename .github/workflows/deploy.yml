@@ -1,0 +1,50 @@
+name: Deploy React App to EC2
+
+on:
+  push:
+    branches:
+      - main  # Trigger the action when pushing to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Install Node.js (required to build the React app)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Install dependencies and build the React app
+      - name: Install Dependencies and Build
+        run: |
+          npm install
+          npm run build
+
+      # Step 4: Add SSH key to access the EC2 instance
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.5.4  # Latest stable version
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}  # Your private SSH key stored in GitHub Secrets
+
+      # Step 5: Pull the latest code on the EC2 instance (optional if you want to update the code on EC2 too)
+      - name: Pull latest code on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/show-and-go-F  # Change to your app's directory
+            git pull origin main  # Pull the latest code from the main branch
+
+
+      # Step 6: Deploy to EC2 via SSH and copy build files
+      - name: Deploy to EC2
+        run: |
+          scp -r -o StrictHostKeyChecking=no build/* ec2-user@${{ secrets.EC2_HOST }}:/var/www/html  # Adjust path as necessary
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
+            # Commands to restart web server, e.g., Apache or Nginx
+            sudo systemctl restart nginx
+
