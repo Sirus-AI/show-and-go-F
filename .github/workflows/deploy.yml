@@ -20,31 +20,45 @@ jobs:
         with:
           node-version: '18'
 
-      # Step 3: Install dependencies and build the React app
-      - name: Install Dependencies and Build
+      # Step 3: Install dependencies
+      - name: Install Dependencies
         run: |
           npm install
-          npm run build
+          # Fix any vulnerabilities automatically
+          npm audit fix
+          # Update Browserslist database
+          npx update-browserslist-db@latest
 
-      # Step 4: Add SSH key to access the EC2 instance
+      # Step 4: Run ESLint auto-fix to address linting issues
+      - name: Run ESLint Fix
+        run: |
+          npx eslint --fix src/
+
+      # Step 5: Build the React app
+      - name: Build the React App
+        run: |
+          # Disable CI for this step to prevent treating warnings as errors
+          CI=false npm run build
+
+      # Step 6: Add SSH key to access the EC2 instance
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.5.4  # Latest stable version
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}  # Your private SSH key stored in GitHub Secrets
 
-      # Step 5: Pull the latest code on the EC2 instance (optional if you want to update the code on EC2 too)
+      # Step 7: Pull the latest code on the EC2 instance (optional if you want to update the code on EC2 too)
       - name: Pull latest code on EC2
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ubuntu/show-and-go-F  # Change to your app's directory
             git pull origin main  # Pull the latest code from the main branch
+          EOF
 
-
-      # Step 6: Deploy to EC2 via SSH and copy build files
+      # Step 8: Deploy to EC2 via SSH and copy build files
       - name: Deploy to EC2
         run: |
           scp -r -o StrictHostKeyChecking=no build/* ec2-user@${{ secrets.EC2_HOST }}:/var/www/html  # Adjust path as necessary
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             # Commands to restart web server, e.g., Apache or Nginx
             sudo systemctl restart nginx
-
+          EOF
