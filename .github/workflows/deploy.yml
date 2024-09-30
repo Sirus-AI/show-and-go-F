@@ -39,4 +39,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             # Commands to restart web server, e.g., Apache or Nginx, or any other necessary steps
             sudo systemctl restart nginx
-EOF
+
