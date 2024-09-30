@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../static_content/admin_content/Screenshot.png';
 import { Link } from 'react-router-dom';
 import {server} from '../../Server';
 import { useState } from 'react';
@@ -8,9 +7,7 @@ const Sidebar = ({ usertype ,profile }) => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [settingModalOpen,setSettingModalOpen]=useState(false);
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  
 
   const logoutHandler = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -40,7 +37,7 @@ const Sidebar = ({ usertype ,profile }) => {
   };
 
   return (
-    <div>
+  
       <div className={`side-bar ${sidebarOpen ? 'side-bar-open' : ''}`}>
         <div className='side-bar-cover'>
           <div className='logo'>
@@ -91,7 +88,7 @@ const Sidebar = ({ usertype ,profile }) => {
         </div>
       </div>
     
-    </div>
+  
   );
 }
 

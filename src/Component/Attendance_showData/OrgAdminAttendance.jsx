@@ -1,12 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './AttendanceData.css';
-import Navbar from '../Navigation/Navbar';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
 
 const OrgAdminAttendance = () => {
-    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [date, setDate] = useState();
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
@@ -14,9 +12,7 @@ const OrgAdminAttendance = () => {
     const [attendanceData, setAttendanceData] = useState([]);
     const [org_id, setOrgId] = useState([]);
 
-    const toggleSidebar = () => {
-        setIsNavbarOpen(!isNavbarOpen);
-    };
+  
 
     const handleError = (e) => {
         setVisible(true);

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './AttendanceData.css';
-import Navbar from '../Navigation/Navbar';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
 
 const UserAttendance = () => {
-    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [date, SetDate] = useState();
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
@@ -18,9 +16,7 @@ const UserAttendance = () => {
     const [userType, setUserType] = useState('');
     const [userId, setUserId] = useState('');
 
-    const toggleSidebar = () => {
-        setIsNavbarOpen(!isNavbarOpen);
-    };
+  
 
     const handleError = (e, color = 'red') => {
         setVisible(true);

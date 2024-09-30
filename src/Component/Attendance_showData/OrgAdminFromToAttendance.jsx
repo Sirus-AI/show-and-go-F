@@ -1,20 +1,16 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import './AttendanceData.css'
-import Navbar from '../Navigation/Navbar';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import {server} from '../../Server';
 const OrgAdminFromToAttendance = () => {
-    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [toDate ,SetToDate]=useState()
     const [fromDate ,SetfromDate]=useState()
     const [message, setMessage] = useState('');
     const [visible, setVisible] = useState(false);
     const [messageColor, setMessageColor] = useState('green');
     const[attendanceData , setAttendanceData]=useState()
-    const toggleSidebar = () => {
-  setIsNavbarOpen(!isNavbarOpen);
-};
+  
 const handleError = (e) => {
     setVisible(true);
     setMessage(e);

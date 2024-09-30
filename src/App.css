@@ -43,10 +43,12 @@
   margin-left: 2rem;
   color: rgb(23, 0, 128);
 }
-.shiv span{
+.username{
   color: rgb(241, 0, 20);
 }
-
+.shiv-report{
+  color: #000;
+}
 .admin {
   font-size: 1.5rem;
   font-family: "Roboto", sans-serif;
@@ -87,293 +89,27 @@
   width: 0%;
   top: 12%;
   display: none;
+  transition: width 0.5s ease;
 }
 
 .side-bar-nav {
   position: absolute;
   width: 19%;
+  transition: width 0.5s ease;
   /* top: 120%; */
   /* margin-top: -; */
-
 }
-
-
-
-
-/*========================= Media Queries ===============================*/
-/* ========================= Sidebar and navabar Responsive Code ============================ */
-/* Phone view  */
-@media (max-width: 431px) {
-  .side-bar {
-    transform: translateX(100%);
-    position: relative;
-    width: 25%;
-  }
-
-  .side-bar-open {
-    transform: translateX(0);
-    width: 100%;
-  }
-
-  .side-bar-toggle {
-    display: none;
-  }
-
-  .admin-logo {
-    visibility: hidden;
-  }
-
-  .logo i, .sirus-logo, .item p {
-    display: none;
-  }
-
-  .side-bar-cover {
-    width: 0;
-    position: absolute;
-    overflow: hidden; 
-    top: -2rem;
-    right: 0; 
-    transition: transform 0.3s ease, width 0.3s ease;
-    box-shadow: none;
-}
-
-  .ul-list {
-    background-color: #eee7e7;
-    border-radius: 0.7rem;
-    position: fixed;
-    
-  }
-
-  .big-logo {
-    background-color: #eee7e7;
-    display: none;
-    visibility: hidden;
-  }
-
-  .item {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 1rem;
-    position: relative;
-    box-shadow: none;
-    background-color: #eee7e7;
-    transition: background-color 0.3s ease;
-  }
-
-  .item:hover {
-    background-color: #dbdad5; 
-  }
-
-  .item p {
-    display: inline-block;
-    opacity: 0;
-    white-space: nowrap;
-    transform: translateX(100%);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    position: absolute;
-    right: 100%;
-    margin-right: 1rem;
-    background-color: #eee7e7; 
-    padding: 0.3rem 0.5rem;
-    border-radius: .7rem;
-  }
-
-  .item:hover p {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .start-btn {
-    padding: 0.4rem 1rem;
-  }
-
-  .nav-bar {
-    padding: 1rem;
-   
-}
-.navigation {
-  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-  width: 100%;
-}
-.navigation-toggle {
-  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-  width: 100%;
-}
-
-  .name {
-    margin-left: 1rem;
-  }
-
-  .admin {
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  .shiv b {
-    display: none;
-  }
-
-  .show-go-btn {
-    margin-right: -2rem; 
-    margin-top: -2rem;
-  }
-
-  .content-toggle.dashboard-card {
-    margin-left: -6rem;
-  }
-
-  .content-cover p.overview {
-    margin-left: -4rem;
-  }
-
-  .content-toggle p.overview {
-    margin-left: -3rem;
-    margin-top: 1.3rem;
-  }
-}
-
-@media (min-width: 431px) and (max-width: 550px){
-  .name{font-size: small;
-  margin-left: .5rem;}
-
-  .bar{margin-left: -2rem;}
-
-  .show-go-btn{margin-right: -3rem;}
-  
-}
-
-
-@media (min-width: 430px) and (max-width: 700px) {
-  .side-bar {
-    /* position: absolute; */
-    width: 60%;
-    top: 7%;
-    
-  }
-
-  .sidebar {
-    width: 60px;
-  }
-  .nav-cover {
-    justify-content: flex-start;
-    /* z-index: 1; */
-  }
-  /* .side-bar-nav{
-    z-index: -1;
-  } */
-
-  .bar{
-    z-index: 1;
-  }
-  .side-bar-open {
-    width: 100%;
-    display: block;
-  }
-
-  .side-bar-toggle {
-    display: none;
-    
-  }
-  
-
-
- .dashboard-content {
-    z-index: -2; /* lower than the sidebar */
-}
-
-  .list{
-    margin-top:-9rem;
-    transform: translate(ease 0.3s);
-  }
-  .admin-logo ,.logo-admin, .sirus-logo, .logo i{
-    display: none;
-    visibility: hidden;
-    
-  }
-  .logo{
-    /* display: none; */
-    visibility: none;
-  }
-
-  .ul-list {
-    
-    padding: 2rem;
-    margin-right: 1rem;
-    margin-top: -4rem;
-  
-  }
-
-  .content-toggle{
-    width: 75%;
-  }
-
- .side-off.nav-cover{
-    margin-left: -10rem;
-  
-} 
-.side-bar-cover{
-    margin-top: 8.5rem;
-    max-height: 130vh; 
-  }
-.navigation {
-  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-  width: 100%;
-}
-.navigation-toggle {
-  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-  width: 100%;
-}
-
-}
-
-/* Desktop view (min-width: 901px) */
-@media (min-width: 700px) and (max-width: 1240px) {
-  .logo .sirus-logo {
-    font-size: 1.4rem;
-  }
-  .side-bar-nav {
-    position: absolute;
-    width: 27%;
-    /* top: 120%; */
-    /* margin-top: -; */
-  
-  }
-  .navigation {
-    box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-    width: 75%;
-  }
-  .navigation-toggle {
-    box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
-    width: 100%;
-  }
-  /* Add your desktop-specific styles here */
-}
-
-
 /* navbar css is end here  */
 /* ******************************************************************** */
 /* sidebar css is end here  */
 .side-bar-cover {
-  max-height: 130vh; 
+  max-height: 100vh; 
   overflow-y: auto; 
   overflow-x: hidden; 
-  scrollbar-width: thin; 
+  scrollbar-width: none; 
   scrollbar-color: #aaa #fff; 
 }
 
-
-.side-bar-cover::-webkit-scrollbar {
-  width: 4px; 
-}
-
-.side-bar-cover::-webkit-scrollbar-thumb {
-  background-color: #9e8c8c; 
-  border-radius: 4px; 
-}
-
-.side-bar-cover::-webkit-scrollbar-track {
-  background: #fff; 
-}
 .side-bar {
   width: fit-content;
   border-radius: 5px;
@@ -381,7 +117,8 @@
   z-index: 1;
   background: #eee7e7;
   transition: transform 0.3s ease, width 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
 }
 
 
@@ -400,6 +137,7 @@
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
+  margin-bottom: 0.2rem;
 }
 
 .admin-logo img {
@@ -423,7 +161,7 @@
 .item {
   /* background: ; */
   padding: .8rem;
-  margin: 1.5rem;
+  margin:1.2rem 1.5rem;
   margin-left: 2px;
   border-radius: 5px;
   display: flex;
@@ -452,6 +190,7 @@
 
 .logo {
   padding: 0.7rem ;
+  margin: 1.2rem 0.2rem 0.2rem 0.2rem ;
   display: flex;
   align-items: center;
   /* justify-content: space-evenly; */
@@ -463,12 +202,13 @@
 }
 
 .sirus-logo {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-family: "Roboto", sans-serif;
   font-weight: 800;
   font-style: normal;
   color: #0f5ddb;
   margin-left: 13px;
+  
 }
 
 .item span {
@@ -489,7 +229,7 @@
   /* padding: -10rem; */
   /* background: #d0d0d6; */
   border-radius: 8px;
-  margin-top: 5vw;
+  margin-top: 4vw;
 
 }
 
@@ -688,34 +428,6 @@ form {
   color: #000;
   text-decoration: none;
 }
-
-@media screen and (max-width: 768px) {
-  .container {
-    width: 70%;
-    /* Adjusted width for mobile view */
-  }
-
-  form {
-    width: 80%;
-  }
-
-  .register-container {
-    margin-top: 1.2rem;
-    width: 70%;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1000px) {
-  .container {
-    width: 55%;
-    height: 50vh;
-  }
-
-  .register-container {
-    width: 55%;
-  }
-}
-
 /* login and register page  css is end here  */
 /* ******************************************************************** */
 /* AdminDash board  css is start here  */
@@ -951,87 +663,6 @@ form {
   align-items: center;
   padding: 2rem 0rem;
 }
-
-/* Responsive Styles */
-@media (max-width: 1000px) {
-  .dashboard-card {
-    margin-left: -6rem;
-    /* flex-direction: column; Stack cards vertically */
-    align-items: center;
-    justify-content: space-around;
-  }
-  .side-off .nav-bar {
-    width: 100%;
-    margin-left: 20rem;
-    background-color: red;
-  }
-
-  .content-cover {
-    /* padding: 20px 20px 20px 5px; */
-    width: 80%;
-  }
-
-  .content-toggle .dashboard-card {
-    margin-left: -6rem;
-    flex-direction: column; /* Stack cards vertically */
-    align-items: center;
-  }
-
-  .card {
-    padding: 1rem;
-    margin-top: 1.2rem;
-  }
-
-  .user-info img {
-    width: 100%;
-    height: 25vh;
-    border-radius: 10px;
-  }
-
-  .user {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .user-info {
-    padding: 1rem;
-    box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.095);
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    border-radius: 10px;
-    flex-direction: column;
-    width: 40%;
-    margin-top: 3.5rem;
-  }
-
-  .camera-box {
-    margin-top: 2rem;
-    padding: 0.5rem;
-  }
-
-  .pie-chart {
-    max-width: 100%;
-    margin-top: 1rem;
-  }
-  .new-cards{
-    margin-left: -6rem;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-
-  }
-  .new-card{
-    width: 100%;
-    max-width: 300px;
-    margin: 15px;
-    height: 290px;
-    margin-left: 11px;
-  }
-}
-
-
 /* AdminDash board  page  css is end here  */
 /* ******************************************************************** */
 /* Capture page  css is start here  */
@@ -1234,25 +865,6 @@ form {
 .title {
   font-weight: bold;
 }
-
-
-@media (max-width: 768px) {
-  .profile-page {
-    font-size: 16px;
-    padding: 0px 2vh;
-  }
-
-  .profile-page-cover {
-    flex-direction: column;
-    padding: 30px 0px;
-  }
-
-  .profile-details,
-  .profile-active {
-    padding: 30px;
-  }
-}
-
 /* user Acess data */
 .user_req {
   display: flex;
@@ -1377,3 +989,334 @@ box-shadow: 2px 2px 5px 2px rgb(82, 81, 81);
 .profile-dropdown-btn:hover{
   background-color: #888585;
 }
+/*========================= Media Queries ===============================*/
+/* ========================= Sidebar and navabar Responsive Code ============================ */
+/* Phone view  */
+@media (max-width: 431px) {
+  .side-bar {
+    /* position: absolute; */
+    width: 100%;
+    top:0%;
+    
+  }
+  .shiv-report{
+    display: none;
+  }
+   .side-bar-toggle {
+    display: none;
+  }
+
+  .admin-logo {
+    display: none;
+  }
+  
+  .content-cover {
+    width: 75%;
+  }
+   .content-toggle {
+    width: 75%;
+  }
+  .side-off {
+    display: flex;
+    position: absolute;
+    width: 70%;
+  }
+  
+  .side-bar-nav {
+     position: absolute;
+    width: 0%;
+    top: 12%;
+    display: none;
+  
+    
+  }
+  .sidebar {
+    width: 60px;
+  }
+ 
+  .start-btn {
+    padding: 0.4rem 1rem;
+  }
+
+  .nav-bar {
+    padding: 1rem;
+   
+}
+.big-logo {
+  padding:2rem;
+  margin: 0rem;
+}
+.navigation {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
+.navigation-toggle {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
+.logo {
+  display: none;
+}
+}
+
+@media (min-width: 431px) and (max-width: 550px){
+  .name{font-size: small;
+  margin-left: .5rem;}
+
+  .bar{margin-left: -2rem;}
+
+  .show-go-btn{margin-right: -3rem;}
+  
+}
+
+
+@media (min-width: 430px) and (max-width: 700px) {
+  .side-bar {
+    /* position: absolute; */
+    width: 100%;
+    top:0%;
+    margin-top: -1.7rem;
+  }
+  .content-cover {
+    width: 100%;
+  }
+   .content-toggle {
+    width: 100%;
+  }
+  .side-off {
+    display: flex;
+    position: absolute;
+    width: 50%;
+  }
+  
+  .side-bar-nav {
+     position: absolute;
+    width: 0%;
+    top: 12%;
+    display: none;
+  
+    
+  }
+  .sidebar {
+    width: 60px;
+  }
+  .nav-cover {
+    justify-content: flex-start;
+    /* z-index: 1; */
+  }
+  /* .side-bar-nav{
+    z-index: -1;
+  } */
+
+  .bar{
+    z-index: 1;
+  }
+  .side-bar-open {
+    width: 100%;
+    display: block;
+  }
+
+  .side-bar-toggle {
+    display: none;
+    
+  }
+  
+
+
+ .dashboard-content {
+    z-index: -2; /* lower than the sidebar */
+}
+
+  .admin-logo ,.logo-admin, .sirus-logo, .logo i{
+    display: none;    
+  }
+  .logo{
+    display: none;
+    /* visibility: none; */
+  }
+
+  .ul-list {
+    padding:2rem;
+    margin-right: 1rem;
+    margin-top: -2rem;
+  
+  }
+  .big-logo {
+    padding:2rem;
+    margin: 0rem;
+  }
+ .side-off.nav-cover{
+    margin-left: -10rem;
+  
+} 
+.side-bar-cover{
+  margin: 0;
+    max-height: 130vh; 
+  }
+.navigation {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
+.navigation-toggle {
+  box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+  width: 100%;
+}
+
+}
+
+/* Desktop view (min-width: 901px) */
+@media (min-width: 700px) and (max-width: 1240px) {
+  .logo .sirus-logo {
+    font-size: 1.4rem;
+  }
+  .side-bar-nav {
+    position: absolute;
+    width: 27%;
+    /* top: 120%; */
+    /* margin-top: -; */
+  
+  }
+  .navigation {
+    box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+    width: 75%;
+  }
+  .navigation-toggle {
+    box-shadow: 0.5px 0.5px 2px 0.5px #e7eee7;
+    width: 100%;
+  }
+  /* Add your desktop-specific styles here */
+}
+/* Responsive Styles 700px */
+@media (max-width: 768px) {
+  .profile-page {
+    font-size: 16px;
+    padding: 0px 2vh;
+  }
+
+  .profile-page-cover {
+    flex-direction: column;
+    padding: 30px 0px;
+  }
+
+  .profile-details,
+  .profile-active {
+    padding: 30px;
+  }
+  .side-bar-cover {
+    max-height: 120vh; 
+
+  }
+  
+  
+  
+ 
+}
+@media screen and (max-width: 768px) {
+  .container {
+    width: 70%;
+    /* Adjusted width for mobile view */
+  }
+
+  form {
+    width: 80%;
+  }
+
+  .register-container {
+    margin-top: 1.2rem;
+    width: 70%;
+  }
+}
+
+/* Responsive Styles 700px to 1000px*/
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+  .container {
+    width: 55%;
+    height: 50vh;
+  }
+
+  .register-container {
+    width: 55%;
+  }
+  .content-cover {
+    /* padding: 20px 20px 20px 5px; */
+    width: 80%;
+   
+  }
+.admin-logo,.logo{
+   margin-top: 2rem;
+}
+}
+
+/* Responsive Styles 1000px */
+@media (max-width: 1000px) {
+  .dashboard-card {
+    margin-left: -6rem;
+    /* flex-direction: column; Stack cards vertically */
+    align-items: center;
+    justify-content: space-around;
+  }
+  .side-off .nav-bar {
+    width: 100%;
+    margin-left: 20rem;
+    background-color: red;
+  }
+ .content-toggle .dashboard-card {
+    margin-left: -6rem;
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;
+  }
+
+  .card {
+    padding: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .user-info img {
+    width: 100%;
+    height: 25vh;
+    border-radius: 10px;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-info {
+    padding: 1rem;
+    box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.095);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 3.5rem;
+  }
+
+  .camera-box {
+    margin-top: 2rem;
+    padding: 0.5rem;
+  }
+
+  .pie-chart {
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+  .new-cards{
+    margin-left: -6rem;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+
+  }
+  .new-card{
+    width: 100%;
+    max-width: 300px;
+    margin: 15px;
+    height: 290px;
+    margin-left: 11px;
+  }
+}
+

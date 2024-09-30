@@ -62,7 +62,7 @@ const Navbar = ({ toggleSidebar }) => {
                                 ) : usertype === 4 ? (
                                     <span className='admin'>User Dashboard</span>
                                 ) : (<span className='admin'>Loading....</span>)}
-                                <p className='shiv'><b>Overall Report of institution, welcome back !!..<span>{username}</span></b></p>
+                                <p className='shiv'><b><span className='shiv-report'>Overall Report of institution, welcome back !!..</span ><span className='username'>{username}</span></b></p>
                             </div>
 
                         </div>

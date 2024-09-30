@@ -1,10 +1,9 @@
 import React from 'react'
-import { useState,useEffect} from 'react';
+import { useState} from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
 const ChangeEmail = ({ isOpen, onClose }) => {
     const [email,setEmail]=useState();
-    const [otp,setOtp]=useState();
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
     const [successChangeModal, setSuccessChangeModal] = useState(false);

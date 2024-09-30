@@ -9,8 +9,7 @@ const PasswordEdit = ({ isOpen, onClose }) => {
     const [message, setMessage] = useState('');
     const [otpmessage, setOtpMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
-    const [showOtpInput,setShowOtpInput]=useState(false)
-    const [changeEmailModalOpen,setChangeEmailModalOpen]=useState(false)
+    const [showOtpInput,setShowOtpInput]=useState(false);
     const [changePasswordModalOpen,setChangePasswordModalOpen]=useState(false)
     const handleError = (e) => {
         setMessage(e);

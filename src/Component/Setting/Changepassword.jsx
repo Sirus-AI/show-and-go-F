@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
 const Changepassword = ({ isOpen, onClose }) => {
@@ -32,7 +32,7 @@ const Changepassword = ({ isOpen, onClose }) => {
             handleError('password are required.');
             return;
         }
-        else if (password != confirmpassword) {
+        else if (password !== confirmpassword) {
             handleError('password is not match.');
             return;
         }

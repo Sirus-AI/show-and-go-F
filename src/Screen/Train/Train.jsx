@@ -4,7 +4,6 @@ import Navbar from '../../Component/Navigation/Navbar'
 import { useState ,useEffect} from 'react'
 const Train = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [userorganization,setUserorganization]=useState([]);
   const [org_id,setOrg_id] =useState('');
 
 
@@ -21,7 +20,7 @@ const Train = () => {
     })
     .then((response) => {
         
-        setUserorganization(response.data)
+       
         setOrg_id(response.data.org_id);
     })
     .catch((error) => {

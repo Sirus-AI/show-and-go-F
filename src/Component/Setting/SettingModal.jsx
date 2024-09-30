@@ -1,6 +1,5 @@
 import React from 'react'
-import { useState, useCallback, useEffect } from 'react';
-import Navbar from '../Navigation/Navbar';
+import { useState} from 'react';
 import './Setting.css'
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import Emailedit from './Emailedit';
