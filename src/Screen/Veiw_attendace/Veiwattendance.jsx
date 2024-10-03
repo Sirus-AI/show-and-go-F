@@ -44,13 +44,13 @@ const Veiwattendance = () => {
       <div className='dashboard-content'>
         <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
           <div className='attendance'>
-            <h1>Attendance Report</h1>
+            <h1 className='title-name'>ATTENDANCE REPORT</h1>
 
             {/* Conditionally render select element based on userType */}
             {userType !== 'orgusers' && (
-              <div className="select-attendance-type">
-                <label htmlFor="Get Report by">Get Report for</label>
-                <select 
+              <div className="select-attendance-type attend-update">
+                <label htmlFor="Get Report by" className='attend-get '>Get Report for</label>
+                <select className='attend-op'
                   name="attendance-type" 
                   id="attendance-type" 
                   value={attendanceType} 
@@ -61,14 +61,14 @@ const Veiwattendance = () => {
               </div>
             )}
 
-            <div className="date-type">
-              <label htmlFor="date-type">View Dates</label>
-              <select 
+            <div className="date-type attend-update">
+              <label htmlFor="date-type" className='attend-get'>View Dates</label>
+              <select className='attend-op'
                 name="date-type" 
                 id="date-type" 
                 value={datetype} 
                 onChange={handelDateTypeChange}>
-                <option value="single-day-report">Single Day</option>
+                <option  value="single-day-report">Single Day</option>
                 <option value="custom-dates-reports">Custom Dates</option>
               </select>
             </div>
@@ -76,7 +76,7 @@ const Veiwattendance = () => {
             {/* Conditional Rendering based on selected options */}
             {attendanceType === 'all-users' && datetype === 'single-day-report' && <OrgAdminAttendance />}
             {attendanceType === 'all-users' && datetype === 'custom-dates-reports' && <OrgAdminFromToAttendance />}
-            {attendanceType === 'single-user' && datetype === 'single-day-report' && <UserAttendance />}
+            {attendanceType === 'single-user'&& datetype === 'single-day-report' && <UserAttendance />}
             {attendanceType === 'single-user' && datetype === 'custom-dates-reports' && <UserFromToAttendance />}
             
           </div>

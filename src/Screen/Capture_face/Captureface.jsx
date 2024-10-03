@@ -102,14 +102,14 @@ const Captureface = () => {
     <div className='capture-nav'>
       <Navbar toggleSidebar={toggleSidebar} />
       <div className='capture'>
-        <input 
+        <input className='inp-face'
           type="email" 
           value={email} 
           onChange={(e) => setEmail(e.target.value)} 
           placeholder="Enter your email" 
-        />
-        <button onClick={connectWebSocket}>Connect</button>
-        <button onClick={startCapture}>Start Capture</button>
+        /><br/>
+        <button onClick={connectWebSocket} className='cap-face'>Connect</button>
+        <button onClick={startCapture} className='cap-face'>Start Capture</button>
         <div id="status">{status}</div>
         <img 
           id="processedImage" 

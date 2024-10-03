@@ -64,10 +64,10 @@ const Sidebar = ({ usertype ,profile }) => {
             <ul className='ul-list'>
               <Link to='/Admindashboard' className="link-color"> <li className='item'><span>🏠 </span><p>Dashboard</p></li></Link>
               <Link to='/Profile' className="link-color"> <li className='item'><span>📄 </span><p>Profile</p></li></Link>
-              <Link to='/register_newuser' className="link-color"> <li className='item'><span>📝</span><p>Register new user</p></li></Link>
-              <Link to='/Capture_face' className="link-color"><li className='item'><span>📸 </span><p>Capture face</p></li></Link>
-              {(usertype==3)?(<Link to='/Train' className="link-color"><li className='item'><span>📚 </span><p>Train</p></li></Link>):null}
-              <Link to='/Veiw_attendance_report' className="link-color"> <li className='item'><span>📝 </span><p>View attendance report</p></li></Link>
+              {(usertype===4|| usertype===1)?null:<Link to='/register_newuser' className="link-color"> <li className='item'><span>📝</span><p>Register new user</p></li></Link>}
+              {(usertype===4|| usertype===1)?null:<Link to='/Capture_face' className="link-color"><li className='item'><span>📸 </span><p>Capture face</p></li></Link>}
+              {(usertype===3)?(<Link to='/Train' className="link-color"><li className='item'><span>📚 </span><p>Train</p></li></Link>):null}
+              {(usertype===1)? null:<Link to='/Veiw_attendance_report' className="link-color"> <li className='item'><span>📝 </span><p>View attendance report</p></li></Link>}
               {(usertype === 1 || usertype === 2 || usertype === 3) ?
                 (<Link to='/useraccess' className="link-color"> <li className='item'><span>❓ </span><p>User Request</p></li></Link>)
                  : null}
@@ -79,7 +79,7 @@ const Sidebar = ({ usertype ,profile }) => {
             </ul>
           </div>
           <div className='big-logo'>
-            <li className='item' onClick={() => setSettingModalOpen(true)} ><span>⚙️</span><p>Settings</p></li>
+            <li className='item' onClick={() => setSettingModalOpen(true)} ><span>⚙</span><p>Settings</p></li>
             <li className='item'><span>❓</span><p>FAQ'S</p></li>
             <li className='item'><span>🔧</span><p>HELP</p></li>
             <li className='item' onClick={logoutHandler}><i className="fa-solid fa-right-from-bracket"></i><p>Log out</p></li>
