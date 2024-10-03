@@ -119,13 +119,13 @@ const Attendance = () => {
                 canvas.height = videoRef.current.videoHeight;
                 const context = canvas.getContext('2d');
                 context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-                const dataUrl = canvas.toDataURL('image/jpeg');
+                const dataUrl = canvas.toDataURL('image/jpeg',0.7);
                 const frameData = dataUrl.replace('data:image/jpeg;base64,', '');
                 ws.send(frameData);
             }
         };
 
-        return setInterval(sendFrame, 100);
+        return setInterval(sendFrame, 1000);
     };
 
     const handleInCameraChange = (e) => {
