@@ -123,12 +123,12 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
                                     </div>
                                     <select
                                         id="organizationName"
-                                        value={listorganization}
+                                        value={org_id}
                                         onChange={(e) => setOrg_id(e.target.value)}
                                         className='select-org'
-                                        placeholder='Select Location'
+                                        placeholder='Select Organization'
                                     >
-                                        <option value="">Select Location</option>
+                                        <option value="">Select Organization</option>
                                         {listorganization.map(organization => (
                                             <option key={organization.org_id} value={organization.org_id}>
                                                 {organization.name}

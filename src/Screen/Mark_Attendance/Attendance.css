@@ -6,7 +6,7 @@
     margin: 20px;
 }
 
-video, img {
+img {
     border: 2px solid #000;
     margin: 10px;
     width: 400px;
@@ -28,12 +28,64 @@ button {
     cursor: pointer;
     margin: 0 10px;
 }
-
+.attendance-content{
+    display: flex;
+    justify-content: flex-end;
+    transition: margin-left 0.3s ease;
+    margin-left: 0;
+}
 .camera-selection {
     margin: 20px;
-}
+ }
 
 #cameraSelect {
     margin-left: 10px;
     padding: 5px;
+}
+.inCameraSelect{
+    height: 2rem;
+    border-radius: 10px;
+    border-color: rgba(161, 159, 157, 0.432);
+}
+.Attendance-video video{
+    width: 400px;
+    height: 300px;
+}
+.Stop-Attendance-In,.Start-Attendance-in{
+    padding: 0.8rem 1.3rem;
+    background-color: #0f5ddb;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+.Stop-Attendance-out,.Start-Attendance-out{
+    padding: 0.8rem 1.3rem;
+    background-color: #0f5ddb;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+@media screen and (max-width: 450px){
+    .Attendance-video video{
+        width: 200px;
+        height: 150px;
+        margin-top: 1rem;
+    }
+    .attendance-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: margin-left 0.3s ease;
+        margin-left: 0;
+    }
 }

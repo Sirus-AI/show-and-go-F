@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useCallback, useEffect ,useRef} from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import Navbar from '../../Component/Navigation/Navbar'
 import { server } from '../../Server'
 import NameChamge from '../../Component/Setting/NameChamge'
@@ -13,12 +13,13 @@ const Profile = () => {
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('green');
     const [userTypeDisplay, setUserTypeDisplay] = useState();
-    const [userorganization, setUserorganization] = useState([]);
     const [profileNameChange, setProfileNameChange] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
+    let userData = JSON.parse(localStorage.getItem('userData'))
+    const userorganization = userData.user_type;
     const handleError = (e) => {
         setVisible(true);
         setMessage(e);
@@ -48,29 +49,14 @@ const Profile = () => {
                 else {
                     setUserTypeDisplay('Organization User')
                 }
-                fecthUserOrganisation();
+
             })
             .catch((error) => {
                 console.log(error);
             });
     })
 
-    const fecthUserOrganisation = async () => {
-        server
-            .get('api/org/user-organisation/', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}',
-                },
-            })
-            .then((response) => {
 
-                setUserorganization(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
     const deleteProfileImage = async () => {
         try {
             await server.post(`/api/users/delete-photo/`)
@@ -96,14 +82,14 @@ const Profile = () => {
     };
 
     const UpdateProfilePic = () => {
-            const fileInput = document.getElementById("fileUpdate-input");
-            if (fileInput) {
-                fileInput.click();
-            }
-            
-            //  setIsDropdownOpen(false);
+        const fileInput = document.getElementById("fileUpdate-input");
+        if (fileInput) {
+            fileInput.click();
+        }
+
+        //  setIsDropdownOpen(false);
     }
-   
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -124,21 +110,21 @@ const Profile = () => {
     };
     useEffect(() => {
         fetchInfo();
-        
+
 
     }, []);
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setIsDropdownOpen(false);
         }
-      };
-    
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
-      }, []);
+    }, []);
     return (
         <div>
 
@@ -178,7 +164,7 @@ const Profile = () => {
                                             </span>)}
                                     </div>
                                     {isDropdownOpen ? (
-                                        <div className="profile-dropdown-menu"  ref={dropdownRef}>
+                                        <div className="profile-dropdown-menu" ref={dropdownRef}>
                                             <div className='profile-dropdown-btn' onClick={deleteProfileImage}>Remove Photo</div>
                                             <div className='profile-dropdown-btn' onClick={UpdateProfilePic}>Update Photo</div>
                                             <input
@@ -196,7 +182,7 @@ const Profile = () => {
                                                 onChange={handleFileChange}
                                                 style={{ display: "none" }}
                                             />
-                                           
+
                                         </div>
                                     )}
                                 </div>
