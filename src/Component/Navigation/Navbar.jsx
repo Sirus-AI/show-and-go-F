@@ -7,12 +7,13 @@ const Navbar = ({ toggleSidebar }) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [username , setUsername] = (useState(''))
     const [profile ,setProfile] = (useState());
-
+    const [userorganization, setUserorganization] = useState([]);
     const handleToggleSidebar = () => {
         setShowSidebar(!showSidebar);
         toggleSidebar();
     };
     const [usertype, setUsertype] = useState()
+    let userData = JSON.parse(localStorage.getItem('userData'))
     const fetchUser = useCallback(async () => {
         server
             .get(`api/users/user/profile/`, {
@@ -25,15 +26,33 @@ const Navbar = ({ toggleSidebar }) => {
                 setProfile(response.data);
                  setUsername(response.data.f_name +" "+response.data.l_name)
                 setUsertype(response.data.user_type)
-                localStorage.setItem('user_type', JSON.stringify(response.data.user_type));
+                userData.user_type = response.data.user_type;
+                localStorage.setItem('userData', JSON.stringify(userData));
             })
             .catch((error) => {
                 console.log(error);
             });
     })
+    const fecthUserOrganisation = async () => {
+        server
+            .get('api/org/user-organisation/', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then((response) => {
+                setUserorganization(response.data)
+                userData.org_id = response.data.org_id;
+                localStorage.setItem('userData', JSON.stringify(userData));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
     useEffect(() => {
         fetchUser()
-
+        fecthUserOrganisation();
 
     }, []);
     return (

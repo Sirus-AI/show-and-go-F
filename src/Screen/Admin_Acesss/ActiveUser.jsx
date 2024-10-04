@@ -13,8 +13,9 @@ const ActiveUser = () => {
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
-    const userTypeDisplay = JSON.parse(localStorage.getItem("user_type"))
-    
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    const user_type=userData.user_type
+    const organisation_id=userData.org_id
     const fecthUserList = () => {
 
         server.get(`api/org/list-organisations/`, {
@@ -31,9 +32,9 @@ const ActiveUser = () => {
                 console.log(error);
             });
     }
-    const fecthOrganzationList = () => {
+    const fecthOrganzationList = (organisation_id) => {
 
-        server.get(`api/org/alluser-list/`, {
+        server.get(`api/org/access-request/user-org/${organisation_id}/`, {
             header: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}',
@@ -41,7 +42,6 @@ const ActiveUser = () => {
         })
             .then((response) => {
                 setUserReq(response.data)
-
             })
             .catch((error) => {
                 console.log(error);
@@ -49,9 +49,8 @@ const ActiveUser = () => {
     }
     useEffect(() => {
         fecthUserList()
-        fecthOrganzationList()
+        fecthOrganzationList(organisation_id)
     }, [])
-    console.log(userReq)
     const getorgid = (orgId) => {
         setSelectOrgnization(orgId)
         setVisible(true)
@@ -60,7 +59,7 @@ const ActiveUser = () => {
         setSelectUser(User)
         setVisible(true)
     }
-    if (userTypeDisplay === 3) {
+    if (user_type === 3) {
         return (
             <div>
                 <CModal
@@ -77,13 +76,13 @@ const ActiveUser = () => {
                             {selectUser ? (
                                 <div className='profile-details'>
                                     <div className='org-name'>
-                                        <p>Name: {selectUser.f_name} {selectUser.l_name}</p>
+                                        <p>Name: {selectUser.user.f_name} {selectUser.user.l_name}</p>
                                     </div>
                                     <div className='org-namee mob'>
-                                        <p>Email: {selectUser.email}</p>
+                                        <p>Email: {selectUser.user.email}</p>
                                     </div>
-                                    <div className='org-name username'>
-                                        <p>Phone: {selectUser.phone}</p>
+                                    <div className='org-name userPhone'>
+                                        <p>Phone: {selectUser.user.phone}</p>
                                     </div>
                                     {/* <div className='org-name username'>
                                         <p>Status: {selectUser.users.is_active === true ? (<span> Active</span>) : (<span> Active</span>)}</p>
@@ -106,10 +105,10 @@ const ActiveUser = () => {
                         <div className='dashboard-content'>
                             <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
                                 <p className='overview'>Active User</p>
-                                {userReq && userReq.map(org => (
+                                {userReq && userReq.active_users.map(org => (
                                     <div className='Active-user' onClick={() => getUser(org)}>
                                         <div className="active-user-cover">
-                                            <h6>  {org.f_name} {org.l_name}</h6>
+                                            <h6>  {org.user.f_name} {org.user.l_name}</h6>
                                         </div>
                                     </div>
                                 ))}
@@ -120,7 +119,7 @@ const ActiveUser = () => {
             </div>
         )
     }
-    else {
+    else if (user_type === 1 || user_type === 2) {
         return (
             <div>
                 <CModal
