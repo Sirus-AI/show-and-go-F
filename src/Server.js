@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const server = axios.create({
-  // baseURL: 'http://127.0.0.1:8000/',
-  baseURL: 'https://159.89.166.72/',
+  baseURL: 'http://127.0.0.1:8000/',
+  // baseURL: 'https://159.89.166.72/',
 });
 
-// const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.0.1:8000/';
-const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://159.89.166.72:8000/';
+const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.0.1:8000/';
+// const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://159.89.166.72:8000/';
 
 const getCookie = (name) => {
   const cookies = document.cookie.split(';');
