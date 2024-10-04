@@ -1,8 +1,9 @@
 .attendance-heading{
     font-size: 2rem;
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
     padding: 1rem;
+    color: rgb(7, 104, 216);
 }
 .cover-user-Attendance{
     display: flex;
@@ -24,7 +25,7 @@
 }
 .date-input{
     border: .2em solid #1e87e9;
-	padding: .6em .9em;
+	padding: .7em .9em;
 	border-radius:5px;
 	color: #000000;
 }
@@ -59,4 +60,42 @@ border: 2px solid rgb(99, 98, 98);
 .date-wise{
     text-align: center;
     margin: 1rem 0.2rem;
+}
+.attend-update{
+    margin: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+    
+   
+}
+.attend-op{
+    border: 2px solid rgb(236, 239, 245);
+    height: 50px;
+    width: 150px;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(190, 201, 199);
+    color: rgb(26, 25, 25);
+    padding: 12px;
+    border-radius: 5px;
+   
+}
+.attend-get{
+    background-color: rgb(7, 104, 216);
+    border: 2px solid rgb(236, 239, 245);
+    height: 50px;
+    width: 150px;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+.title-name{
+    height: 80px;
+    color:  rgb(13, 86, 155);
+    padding: 5px;
+    text-decoration: underline;
+    
 }

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { Link } from 'react-router-dom';
-import {server} from '../Server';
+import { server } from '../Server';
 import { useNavigate } from 'react-router-dom';
+
 const Newregis = () => {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
@@ -15,17 +16,20 @@ const Newregis = () => {
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
   const [messageColor, setMessageColor] = useState('green');
- const [userType,setUserType]=useState()
- const navigate = useNavigate();
- const userData = JSON.parse(localStorage.getItem("userData"))
- console.log(userData)
+  const [userType, setUserType] = useState();
+  const [fieldErrors, setFieldErrors] = useState({}); 
+
+  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userData"));
+
   const togglePassword = () => {
     if (passwordType === 'password') {
-        setPasswordType('text');
-        return;
+      setPasswordType('text');
+      return;
     }
     setPasswordType('password');
-};
+  };
+
   const handleError = (e) => {
     setVisible(true);
     setMessage(e);
@@ -44,8 +48,9 @@ const Newregis = () => {
         handleError('Phone number must be 10 digits.');
         return false;
       }
-      if (password.length < 6) {
-        handleError('Password must be at least 6 characters long.');
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      if (!passwordPattern.test(password)) {
+        handleError('Password must be at least 6 characters long and include at least one uppercase letter, one number, and one special character.');
         return false;
       }
       if (password !== cpassword) {
@@ -56,36 +61,47 @@ const Newregis = () => {
     };
 
     if (validate()) {
-     server.post(
-      'api/users/register/',{
-      f_name: fname,
-      l_name: lname,
-      password: password,
-      email: email.trim(),
-      phone: phone,
-      password2: cpassword,
-      user_type:userType
-    } 
-  )
-  .then((response) => {
-    if (response.status === 201) {
-        setMessageColor('green');
-        setMessage(response.data.msg);
-        setVisible(true);
-        setTimeout(() => {
-          navigate('/')
-        }, 2000); 
-    }else {
-      setMessageColor('red');
-      setMessage(response.data.message);
-      setVisible(true);
-    }
-  })
-  .catch((error) => {
-    setMessageColor('red');
-    setMessage('something went wrong please try again');
-    setVisible(true);
-  });
+      server.post(
+        'api/users/register/', {
+          f_name: fname,
+          l_name: lname,
+          password: password,
+          email: email.trim(),
+          phone: phone,
+          password2: cpassword,
+          user_type: userType
+        }
+      )
+      .then((response) => {
+        if (response.status === 201) {
+          setMessageColor('green');
+          setMessage(response.data.msg);
+          setVisible(true);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+        } else {
+          setMessageColor('red');
+          setMessage(response.data.message || 'An error occurred.');
+          setVisible(true);
+        }
+      })
+      .catch((error) => {
+        const responseError = error.response && error.response.data;
+        if (responseError) {
+          if (responseError.email) {
+            // Handling field-specific error for email
+            setFieldErrors({ email: responseError.email[0] });
+          } else if (responseError.phone) {
+            // Example: Handle field-specific error for phone
+            setFieldErrors({ phone: responseError.phone[0] });
+          } else {
+            handleError(responseError.error || 'Registration failed. Please try again.');
+          }
+        } else {
+          handleError('Something went wrong. Please try again.');
+        }
+      });
     }
   };
 
@@ -160,6 +176,7 @@ const Newregis = () => {
                 className='email'
                 onChange={(e) => setEmail(e.target.value.trim())}
               />
+              {fieldErrors.email && <p style={{ color: 'red' }}>{fieldErrors.email}</p>}  {/* Email Error */}
             </div>
             <div className='credential'>
               <div className='flex'>
@@ -172,6 +189,7 @@ const Newregis = () => {
                 className='email'
                 onChange={(e) => setPhone(e.target.value.trim())}
               />
+              {fieldErrors.phone && <p style={{ color: 'red' }}>{fieldErrors.phone}</p>}  {/* Phone Error */}
             </div>
             <div className='credential'>
               <div className='flex'>
@@ -210,22 +228,22 @@ const Newregis = () => {
             <div className='radio'>
               Create account as :
               <div className='user-input'>
-                <input type="radio" name='userType' value="3"    onChange={(e) => setUserType(e.target.value)} 
-                 />Admin
+                <input type="radio" name='userType' value="3" onChange={(e) => setUserType(e.target.value)} /> Admin
               </div>
               <div className='user-input'>
-                <input type="radio" name='userType' value="4"   onChange={(e) => setUserType(e.target.value)} 
-                 />User
+                <input type="radio" name='userType' value="4" onChange={(e) => setUserType(e.target.value)} /> User
               </div>
             </div>
             <button className='regis' type="submit">Register</button>
-           {userData?( <div className='account'>
-            <p>Go to DashBoard ? <Link to="/Admindashboard">DashBoard</Link></p>
-           
-            </div>):(
-            <div className='account'>
-                 <p>Already have an account ? <Link to="/">Login</Link></p>
-            </div>)}
+            {userData ? (
+              <div className='account'>
+                <p>Go to DashBoard ? <Link to="/Admindashboard">DashBoard</Link></p>
+              </div>
+            ) : (
+              <div className='account'>
+                <p>Already have an account ? <Link to="/">Login</Link></p>
+              </div>
+            )}
           </form>
         </div>
       </div>

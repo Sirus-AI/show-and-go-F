@@ -6,15 +6,15 @@ const Useraccess = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
     const [userReq, setUserReq] = useState()
     const [organizationReq, setOrganizationReq] = useState()
-    
-    const toggleSidebar = () => {
+      const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
     };
-    const userTypeDisplay = JSON.parse(localStorage.getItem("user_type"))
-    
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    const user_type=userData.user_type
+    const organisation_id=userData.org_id
     const fetchOrgniztionReq = useCallback(async () => {
         server.get(
-            `api/org/access-request/`, {
+            `api/org/alluser-list/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}',
@@ -22,7 +22,6 @@ const Useraccess = () => {
         })
             .then((response) => {
                 setOrganizationReq(response.data)
-                
             })
             .catch((error) => {
                 console.log(error);
@@ -37,6 +36,7 @@ const Useraccess = () => {
             console.log(error);
         }
     }
+
     const AcessOrgniztionReq = async (org_id) => {
 
         try {
@@ -46,9 +46,9 @@ const Useraccess = () => {
             console.log(error);
         }
     }
-    const fetchUserReq = useCallback(async () => {
+    const fetchUserReq = async (organisation_id) => {
         server.get(
-            `api/org/access-request/user-org/`, {
+            `api/org/access-request/user-org/${organisation_id}/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}',
@@ -56,12 +56,11 @@ const Useraccess = () => {
         })
             .then((response) => {
                 setUserReq(response.data)
-               
             })
             .catch((error) => {
                 console.log(error);
             });
-    })
+    }
     const deleteUserReq = async (user_id) => {
 
         try {
@@ -80,14 +79,14 @@ const Useraccess = () => {
             console.log(error);
         }
     }
+    
     useEffect(() => {
         fetchOrgniztionReq()
-        fetchUserReq()
+        fetchUserReq(organisation_id);
         
-    }, []);
+    }, [organisation_id]);
      
-  
-    if (userTypeDisplay === 3) {
+    if (user_type === 3) {
         return (
             <div>
                 <div className='home-page'>
@@ -98,9 +97,8 @@ const Useraccess = () => {
                             <div className='user_req'>
                                 {userReq && userReq.inactive_users.map(org => (
                                     <div className="userAcesscard" key={org.id}>
-                                        <h5>  {org.user.f_name} {org.user.l_name}</h5>
+                                        <h5> <strong>User Name:</strong> {org.user.f_name} {org.user.l_name}</h5>
                                         <div className="userAcess-details">
-                                            <p><strong>User Name:</strong> {userTypeDisplay}</p>
                                             <p><strong>Email:</strong> {org.user.email}</p>
                                             <p><strong>Phone:</strong> {org.user.phone}</p>
                                             <p><strong>Status :</strong> inactive</p>
@@ -137,7 +135,7 @@ const Useraccess = () => {
                                             <div className="userAcess-details">
                                             <p><strong>About:</strong> {org.about}</p>
                                             <p><strong>Location:</strong> {org.location}</p>
-                                            <p><strong>User Name:</strong> {userTypeDisplay}</p>
+                                            <p><strong>User Name:</strong> {user_type}</p>
                                             <p><strong>Email:</strong> {org.users.email}</p>
                                             <p><strong>Phone:</strong> {org.users.phone}</p>
                                             <p><strong>Status :</strong> inactive</p>

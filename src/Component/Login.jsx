@@ -58,7 +58,21 @@ const Login = () => {
         console.error('Login failed:', error);
         setVisible(true);
         setMessageColor('red');
-        setMessage('An error occurred during login.'); // Set a generic error message
+  
+        if (error.response && error.response.data && error.response.data.errors) {
+          const errors = error.response.data.errors;
+          if (errors.email) {
+            setMessage(errors.email[0]);  
+          } else if (errors.password) {
+            setMessage(errors.password[0]);  
+          } else if (errors.non_field_errors) {
+            setMessage(errors.non_field_errors[0]);  
+          } else {
+            setMessage('An error occurred during login.');  
+          }
+        } else {
+          setMessage('An error occurred during login.');
+        }
       });
     }
   };
