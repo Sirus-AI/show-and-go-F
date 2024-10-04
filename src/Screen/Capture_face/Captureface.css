@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
   }
@@ -11,10 +12,58 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60vh;
+    flex-direction: column;
+    height: 100%;
     width: 100%;
   }
-  
+  .capture-page{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 20px;
+    padding: 0px 5vh;
+    color: rgb(0, 0, 0);
+  }
+  .capture-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .capture-video video{
+    width: 350px;
+    height: 200px;
+  }
+  .capture-input{
+    width: 100%;
+  }
+  .capture-input input{
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 8px;
+    border-radius: 10px;
+    border-color: rgba(161, 159, 157, 0.432);
+  }
+  .capture-btn{
+  margin-top: 1rem;
+  }
+  .status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(250, 109, 109);
+  }
+  .connectWebSocket{
+    padding: 0.8rem 1.3rem;
+    background-color: #0f5ddb;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
   .login-dispplay{
     height: 100vh;
     width: 100%;
@@ -98,12 +147,12 @@
   .webcam-container {
     position: relative;
     width: 100%;
-    padding-top: 75%; /* 4:3 Aspect Ratio */
-    display: none; /* Hide the webcam container by default */
+    padding-top: 75%; 
+    display: none; 
   }
   
   .webcam-container.active {
-    display: block; /* Show the webcam container when active */
+    display: block; 
   }
   
   .webcam {
@@ -121,13 +170,90 @@
     width: 100%;
     height: 100%;
   }
-  .cap-face{
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 5px;
+  .percentage-progress{
+    max-width: 52rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
   }
-  .inp-face{
-    font-size: 20px;
+  .percentage-progress .small-percentage{
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #878787;
+  }
+  .percentage-progress .percentage-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 0 0 1rem 0;
+  }
+  .percentage-progress .completion{
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    align-items: center;
+  }
+  .percentage-progress .completion .percentage-complete{
+    font-size: 70%;
+    font-weight: 400;
+  }
+  .percentage-progress .percentage-bar {
+    position: relative;
+    width: 100%;
+    height: 15px; 
+    background-color: #f2f4fb;
+    border-radius: 7px;
+    overflow: hidden; 
   }
   
+  .percentage-progress .percentage-bar span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; 
+    background-color: #0f5ddb; 
+    border-radius: 7px;
+    width: 0%; 
+    transition: width 0.3s ease; 
+  }
+  .percentage-progress-success{
+    color: green;
+    font-size: 2rem;
+  }
+  .percentage-progress-color{
+    color: #0f5ddb; 
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 450px){
+      .capture-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    padding: 0px 1vh;
+    color: rgb(0, 0, 0);
+  }
+  .capture-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .capture-video video{
+    width: 250px;
+    height: 200px;
+  }
+  .percentage-progress {
+  width: 100%;
+    width: 100%;
+    margin: 1rem ;
+    padding: 0rem;
+}
+.capture-btn{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  }
