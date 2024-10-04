@@ -151,7 +151,7 @@ const Attendance = () => {
         }
     };
     const closeWebSocketConnectionsOut = () => {
-     
+
         if (wsOut) {
             wsOut.close();
             setOutStatus('Attendance Out WebSocket connection closed.');
@@ -161,52 +161,56 @@ const Attendance = () => {
     return (
         <div>
             <Navbar toggleSidebar={toggleSidebar} />
-            <div className="attendance-container">
-                <div className="camera-selection">
-                    <label htmlFor="inCameraSelect">Select Camera for Attendance In:</label>
-                    <select id="inCameraSelect" value={selectedInCamera} onChange={handleInCameraChange}>
-                        {cameras.map(camera => (
-                            <option key={camera.deviceId} value={camera.deviceId} disabled={camera.deviceId === selectedOutCamera}>
-                                {camera.label || `Camera ${camera.deviceId}`}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <video ref={inVideoRef} autoPlay></video>
+            <div className='attendance-content'>
+                <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
+                    <div className="attendance-container">
+                        <div className="camera-selection">
+                            <label htmlFor="inCameraSelect">Select Camera for Attendance In:</label>
+                            <select className="inCameraSelect"id="inCameraSelect" value={selectedInCamera} onChange={handleInCameraChange}>
+                                {cameras.map(camera => (
+                                    <option key={camera.deviceId} value={camera.deviceId} disabled={camera.deviceId === selectedOutCamera}>
+                                        {camera.label || `Camera ${camera.deviceId}`}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="Attendance-video"> <video ref={inVideoRef} autoPlay></video></div>
 
-                <div className="camera-selection">
-                    <label htmlFor="outCameraSelect">Select Camera for Attendance Out:</label>
-                    <select id="outCameraSelect" value={selectedOutCamera} onChange={handleOutCameraChange}>
-                        {cameras.map(camera => (
-                            <option key={camera.deviceId} value={camera.deviceId} disabled={camera.deviceId === selectedInCamera}>
-                                {camera.label || `Camera ${camera.deviceId}`}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <video ref={outVideoRef} autoPlay></video>
+                        <div className="camera-selection">
+                            <label htmlFor="outCameraSelect">Select Camera for Attendance Out:</label>
+                            <select id="outCameraSelect" className="inCameraSelect" value={selectedOutCamera} onChange={handleOutCameraChange}>
+                                {cameras.map(camera => (
+                                    <option key={camera.deviceId} value={camera.deviceId} disabled={camera.deviceId === selectedInCamera}>
+                                        {camera.label || `Camera ${camera.deviceId}`}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="Attendance-video">  <video ref={outVideoRef} autoPlay></video></div>
 
-                <div id="buttons">
-                    <button onClick={() => {
-                        if (wsIn) wsIn.close();
-                        startWebSocket('in');
-                    }}>Start Attendance In</button>
-                    <button onClick={() => {
-                        if (wsOut) wsOut.close();
-                        startWebSocket('out');
-                    }}>Start Attendance Out</button>
-                    <button onClick={closeWebSocketConnectionsIn}>Stop Attendance In</button>
-                    <button onClick={closeWebSocketConnectionsOut}>Stop Attendance Out</button>
-                </div>
+                        <div id="buttons">
+                            <button className="Start-Attendance-in" onClick={() => {
+                                if (wsIn) wsIn.close();
+                                startWebSocket('in');
+                            }}>Start Attendance In</button>
+                            <button className="Start-Attendance-out" onClick={() => {
+                                if (wsOut) wsOut.close();
+                                startWebSocket('out');
+                            }}>Start Attendance Out</button>
+                            <button className="Stop-Attendance-In" onClick={closeWebSocketConnectionsIn}>Stop Attendance In</button>
+                            <button className="Stop-Attendance-out" onClick={closeWebSocketConnectionsOut}>Stop Attendance Out</button>
+                        </div>
 
-                <div>
-                    <img ref={inFrameRef} alt="Attendance In Recognition Result" />
-                    <p>{inStatus}</p>
-                </div>
+                        <div>
+                            <img ref={inFrameRef} alt="Attendance In Recognition Result" />
+                            <p>{inStatus}</p>
+                        </div>
 
-                <div>
-                    <img ref={outFrameRef} alt="Attendance Out Recognition Result" />
-                    <p>{outStatus}</p>
+                        <div>
+                            <img ref={outFrameRef} alt="Attendance Out Recognition Result" />
+                            <p>{outStatus}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
