@@ -2,7 +2,7 @@ import React, { useState, useEffect,useCallback } from 'react';
 import './AttendanceData.css';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
-import Loader from '../Loader';
+import Loader from '../Loader/Loader';
 
 const UserFromToAttendance = () => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
