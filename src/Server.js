@@ -6,7 +6,7 @@ const server = axios.create({
 });
 
 // const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://127.0.0.1:8000/';
-const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'ws://159.89.166.72:8000/';
+const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'wss://159.89.166.72/';
 
 const getCookie = (name) => {
   const cookies = document.cookie.split(';');
