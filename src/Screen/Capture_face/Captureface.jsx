@@ -6,7 +6,7 @@ import { WEBSOCKET_URL } from '../../Server';
 const Captureface = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(''); // User-friendly status messages
   const [processedImageSrc, setProcessedImageSrc] = useState('');
   const [progressPercentage, setProgressPercentage] = useState(0); 
   const socketRef = useRef(null);
@@ -20,7 +20,7 @@ const Captureface = () => {
 
   const connectWebSocket = () => {
     if (!email) {
-      alert('Please enter an email.');
+      alert('Please enter your email address.');
       return;
     }
 
@@ -28,7 +28,7 @@ const Captureface = () => {
 
     socketRef.current.onopen = () => {
       console.log('WebSocket connection opened.');
-      setStatus('Connected to WebSocket');
+      setStatus('Connected to the server. Starting the process.');
       socketRef.current.send(JSON.stringify({ email }));
     };
 
@@ -37,19 +37,20 @@ const Captureface = () => {
         const data = JSON.parse(event.data);
         console.log(data.percentage);
 
-        // Update status and percentage
         if (data.status) {
-          setStatus(data.status);
+          setStatus(data.status === 'collection_complete' 
+            ? 'Face data collection completed successfully!' 
+            : 'Processing, please wait...');
           if (data.status === 'collection_complete') {
-            alert('Face data collection complete.');
+            alert('We have captured  face data!');
             stopCapture();
           }
         } else if (data.error) {
-          setStatus(data.error);
+          setStatus('Sorry, there was an error. Please try again.');
         }
 
         if (data.percentage) {
-          setProgressPercentage(data.percentage+2); 
+          setProgressPercentage(data.percentage + 2); 
         }
         if (data.bytes) {
           setProcessedImageSrc('data:image/jpeg;base64,' + data.bytes);
@@ -61,21 +62,21 @@ const Captureface = () => {
 
     socketRef.current.onclose = (event) => {
       console.log('WebSocket connection closed:', event);
-      setStatus('WebSocket connection closed');
+      setStatus('Connection closed. Please try again later.');
       if (event.code !== 1000) {
-        alert(`WebSocket closed unexpectedly: ${event.code} - ${event.reason}`);
+        alert(`Connection closed unexpectedly: ${event.code} - ${event.reason}`);
       }
     };
 
     socketRef.current.onerror = (error) => {
       console.log('WebSocket error:', error);
-      setStatus('WebSocket error');
+      setStatus('There was a problem connecting. Please try again.');
     };
   };
 
   const startCapture = async () => {
     if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
-      alert('Please connect first.');
+      alert('Please connect to the server first.');
       return;
     }
 
@@ -97,7 +98,7 @@ const Captureface = () => {
           };
           reader.readAsArrayBuffer(blob);
         } else {
-          console.error('Failed to capture image blob from canvas.');
+          console.error('Failed to capture image.');
         }
       }, 'image/jpeg');
 
@@ -119,7 +120,7 @@ const Captureface = () => {
       tracks.forEach(track => track.stop());
       videoStreamRef.current = null;
     }
-    setStatus('Camera stopped');
+    setStatus('Camera has been stopped.');
   };
 
   return (
@@ -137,7 +138,7 @@ const Captureface = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder="Enter your email address"
                 />
               </div>
               <div className="status" id="status">{status}</div>
@@ -149,7 +150,7 @@ const Captureface = () => {
                 id="processedImage"
                 src={processedImageSrc}
                 style={{ display: processedImageSrc ? 'block' : 'none' }}
-                alt="Processed"
+                alt="Processed Image"
               />
               <canvas ref={canvasRef} style={{ display: 'none' }} />
             </div>
@@ -157,7 +158,7 @@ const Captureface = () => {
           <div className='percentage-progress'>
             <div className='percentage-top'>
               <div className='small-percentage'>
-                Progress Percentage
+                Progress
               </div>
               <div className='percentage-info'>
                 <p className='completion'>

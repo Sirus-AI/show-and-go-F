@@ -40,7 +40,7 @@ const Newregis = () => {
     e.preventDefault();
 
     const validate = () => {
-      if (!fname || !lname || !email || !phone || !password || !cpassword) {
+      if (!fname || !lname || !email || !phone || !password || !cpassword || !userType) {
         handleError('All fields are required');
         return false;
       }
