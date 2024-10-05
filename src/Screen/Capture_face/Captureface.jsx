@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Captureface.css';
 import Navbar from '../../Component/Navigation/Navbar';
 import { WEBSOCKET_URL } from '../../Server';
@@ -6,9 +6,11 @@ import { WEBSOCKET_URL } from '../../Server';
 const Captureface = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState(''); // User-friendly status messages
+  const [status, setStatus] = useState('');
   const [processedImageSrc, setProcessedImageSrc] = useState('');
-  const [progressPercentage, setProgressPercentage] = useState(0); 
+  const [progressPercentage, setProgressPercentage] = useState(0);
+  const [videoDevices, setVideoDevices] = useState([]); // State to hold video devices
+  const [selectedDeviceId, setSelectedDeviceId] = useState(''); // State for selected camera
   const socketRef = useRef(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -18,9 +20,23 @@ const Captureface = () => {
     setIsNavbarOpen(!isNavbarOpen);
   };
 
+  useEffect(() => {
+    // Fetch available video input devices
+    const getVideoDevices = async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoInputs = devices.filter(device => device.kind === 'videoinput');
+      setVideoDevices(videoInputs);
+      if (videoInputs.length > 0) {
+        setSelectedDeviceId(videoInputs[0].deviceId); // Set default to the first device
+      }
+    };
+
+    getVideoDevices();
+  }, []);
+
   const connectWebSocket = () => {
     if (!email) {
-      alert('Please enter your email address.');
+      alert('Please enter your email to connect.');
       return;
     }
 
@@ -28,7 +44,7 @@ const Captureface = () => {
 
     socketRef.current.onopen = () => {
       console.log('WebSocket connection opened.');
-      setStatus('Connected to the server. Starting the process.');
+      setStatus('Successfully connected to the server!');
       socketRef.current.send(JSON.stringify({ email }));
     };
 
@@ -37,20 +53,19 @@ const Captureface = () => {
         const data = JSON.parse(event.data);
         console.log(data.percentage);
 
+        // Update status and percentage
         if (data.status) {
-          setStatus(data.status === 'collection_complete' 
-            ? 'Face data collection completed successfully!' 
-            : 'Processing, please wait...');
+          setStatus(data.status);
           if (data.status === 'collection_complete') {
-            alert('We have captured  face data!');
+            alert('Face data collection complete!');
             stopCapture();
           }
         } else if (data.error) {
-          setStatus('Sorry, there was an error. Please try again.');
+          setStatus(data.error);
         }
 
         if (data.percentage) {
-          setProgressPercentage(data.percentage + 2); 
+          setProgressPercentage(data.percentage + 2);
         }
         if (data.bytes) {
           setProcessedImageSrc('data:image/jpeg;base64,' + data.bytes);
@@ -62,56 +77,67 @@ const Captureface = () => {
 
     socketRef.current.onclose = (event) => {
       console.log('WebSocket connection closed:', event);
-      setStatus('Connection closed. Please try again later.');
+      setStatus('Connection to the server has been closed.');
       if (event.code !== 1000) {
-        alert(`Connection closed unexpectedly: ${event.code} - ${event.reason}`);
+        alert(`WebSocket closed unexpectedly: ${event.code} - ${event.reason}`);
       }
     };
 
     socketRef.current.onerror = (error) => {
       console.log('WebSocket error:', error);
-      setStatus('There was a problem connecting. Please try again.');
+      setStatus('An error occurred with the connection.');
     };
   };
 
   const startCapture = async () => {
     if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
-      alert('Please connect to the server first.');
+      alert('Please connect to the server before starting the camera.');
       return;
     }
 
-    const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
-    videoRef.current.srcObject = videoStream;
-    videoStreamRef.current = videoStream;
-    videoRef.current.play();
-
-    const captureFrame = () => {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext('2d');
-      context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const arrayBuffer = reader.result;
-            socketRef.current.send(arrayBuffer);
-          };
-          reader.readAsArrayBuffer(blob);
-        } else {
-          console.error('Failed to capture image.');
-        }
-      }, 'image/jpeg');
-
-      if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-        requestAnimationFrame(captureFrame);
-      }
+    const constraints = {
+      video: {
+        deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined,
+      },
     };
 
-    videoRef.current.addEventListener('loadedmetadata', () => {
-      canvasRef.current.width = videoRef.current.videoWidth;
-      canvasRef.current.height = videoRef.current.videoHeight;
-      captureFrame();
-    });
+    try {
+      const videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+      videoRef.current.srcObject = videoStream;
+      videoStreamRef.current = videoStream;
+      videoRef.current.play();
+
+      const captureFrame = () => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const arrayBuffer = reader.result;
+              socketRef.current.send(arrayBuffer);
+            };
+            reader.readAsArrayBuffer(blob);
+          } else {
+            console.error('Failed to capture image blob from canvas.');
+          }
+        }, 'image/jpeg');
+
+        if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+          requestAnimationFrame(captureFrame);
+        }
+      };
+
+      videoRef.current.addEventListener('loadedmetadata', () => {
+        canvasRef.current.width = videoRef.current.videoWidth;
+        canvasRef.current.height = videoRef.current.videoHeight;
+        captureFrame();
+      });
+    } catch (error) {
+      console.error('Error accessing media devices.', error);
+      setStatus('Error accessing camera. Please check your device settings.');
+    }
   };
 
   const stopCapture = () => {
@@ -127,7 +153,7 @@ const Captureface = () => {
     <div className='capture-nav'>
       <Navbar toggleSidebar={toggleSidebar} />
       <div className='capture-page'>
-        <div className={` ${isNavbarOpen ? 'content-cover' : 'content-toggle'}`}>
+        <div className={`${isNavbarOpen ? 'content-cover' : 'content-toggle'}`}>
           <div className='capture'>
             <div className="capture-video">
               <video ref={videoRef} />
@@ -138,10 +164,24 @@ const Captureface = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
+                  placeholder="Enter your email"
                 />
               </div>
               <div className="status" id="status">{status}</div>
+              <div className="camera-selection">
+                <label htmlFor="cameraSelect">Select Camera:</label>
+                <select
+                  id="cameraSelect"
+                  value={selectedDeviceId}
+                  onChange={(e) => setSelectedDeviceId(e.target.value)}
+                >
+                  {videoDevices.map(device => (
+                    <option key={device.deviceId} value={device.deviceId}>
+                      {device.label || `Camera ${videoDevices.indexOf(device) + 1}`}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="capture-btn">
                 <button className="connectWebSocket" onClick={connectWebSocket}>Connect</button>
                 <button className="connectWebSocket" onClick={startCapture}>Start Capture</button>
@@ -150,7 +190,7 @@ const Captureface = () => {
                 id="processedImage"
                 src={processedImageSrc}
                 style={{ display: processedImageSrc ? 'block' : 'none' }}
-                alt="Processed Image"
+                alt="Processed"
               />
               <canvas ref={canvasRef} style={{ display: 'none' }} />
             </div>
@@ -158,11 +198,11 @@ const Captureface = () => {
           <div className='percentage-progress'>
             <div className='percentage-top'>
               <div className='small-percentage'>
-                Progress
+                Progress Percentage
               </div>
               <div className='percentage-info'>
                 <p className='completion'>
-                  <span className='digits'>{progressPercentage}%</span> 
+                  <span className='digits'>{progressPercentage}%</span>
                   <span className='percentage-complete'>Complete</span>
                   <span className={`material-symbols-outlined ${progressPercentage === 100 ? 'percentage-progress-success' : 'percentage-progress-color'}`}>
                     check_circle
@@ -173,7 +213,7 @@ const Captureface = () => {
             <div className='percentage-bar'>
               <span
                 className='percentage-loader'
-                style={{ width: `${progressPercentage}%` }} 
+                style={{ width: `${progressPercentage}%` }}
               ></span>
             </div>
           </div>
