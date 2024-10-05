@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { server } from '../../Server';
 import Navbar from '../../Component/Navigation/Navbar';
-import './Train.css'; 
+import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react'; 
+import './Train.css';
 
 const Train = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [org_id, setOrg_id] = useState('');
-  const [isTraining, setIsTraining] = useState(false); // To manage loading animation
-  const [message, setMessage] = useState(''); // To manage response messages
+  const [isTraining, setIsTraining] = useState(false); 
+  const [message, setMessage] = useState(''); 
+  const [showModal, setShowModal] = useState(false); 
+  const [isSuccess, setIsSuccess] = useState(false); 
 
   const toggleSidebar = () => {
     setIsNavbarOpen(!isNavbarOpen);
@@ -34,28 +37,35 @@ const Train = () => {
   }, []);
 
   const startTraining = () => {
-    setIsTraining(true); // Set training to true to show animation
-    setMessage(''); // Reset message
+    setIsTraining(true); 
+    setMessage(''); 
 
-    server.post(`api/face_capture/train/${org_id}/`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': '{{ csrf_token }}',
-      },
-    })
+    server
+      .post(`api/face_capture/train/${org_id}/`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+      })
       .then((response) => {
-        setIsTraining(false); // Stop the loader
-        setMessage(response.data.message); // Set the success message
+        setIsTraining(false); 
+        setMessage('Training completed successfully!'); 
+        setIsSuccess(true);
+        setShowModal(true); 
       })
       .catch((error) => {
-        setIsTraining(false); // Stop the loader
+        setIsTraining(false); 
+        setIsSuccess(false);
         if (error.response && error.response.data.error) {
-          setMessage(error.response.data.error); // Set the error message
+          setMessage("Oops! There was an issue with the training. Please try again."); 
         } else {
-          setMessage("Something went wrong. Please try again."); // Generic error message
+          setMessage("Something went wrong. Please try again."); 
         }
+        setShowModal(true);
       });
   };
+
+  const handleClose = () => setShowModal(false); 
 
   return (
     <div className='train-nav'>
@@ -66,18 +76,30 @@ const Train = () => {
             {isTraining ? 'Training...' : 'Start Train'}
           </button>
         </div>
+
         {isTraining && (
           <div className="loader">
-            {/* Loader animation */}
             <div className="spinner"></div>
             <p>Training is in progress. Please wait...</p>
           </div>
         )}
-        {message && (
-          <div className={`message ${message.includes('error') ? 'error' : 'success'}`}>
-            {message}
-          </div>
-        )}
+
+        {/* CoreUI Modal */}
+        <CModal visible={showModal} onClose={handleClose}>
+          <CModalHeader>
+            <CModalTitle>Training Status</CModalTitle>
+          </CModalHeader>
+          <CModalBody>
+            <p style={{ color: isSuccess ? 'green' : 'red' }}>
+              {message}
+            </p>
+          </CModalBody>
+          <CModalFooter>
+            <CButton color="secondary" onClick={handleClose}>
+              Close
+            </CButton>
+          </CModalFooter>
+        </CModal>
       </div>
     </div>
   );
