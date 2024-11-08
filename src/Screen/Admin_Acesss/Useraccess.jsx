@@ -14,7 +14,7 @@ const Useraccess = () => {
     const organisation_id=userData.org_id
     const fetchOrgniztionReq = useCallback(async () => {
         server.get(
-            `api/org/alluser-list/`, {
+            `api/org/access-request/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}',
