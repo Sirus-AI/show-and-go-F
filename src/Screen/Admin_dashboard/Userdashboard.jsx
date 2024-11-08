@@ -12,6 +12,18 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
     const [org_id, setOrg_id] = useState('');
     const [listorganization, setListorganization] = useState([]);
 
+    const [attendanceSummary, setAttendanceSummary] = useState({
+        monthly_summary: {
+            total_present_days: 0,
+            total_absent_days: 0,
+            total_working_days: 0,
+        },
+        yearly_summary: {
+            total_present_days: 0,
+            total_absent_days: 0,
+            total_working_days: 0,
+        }
+    });
 
 
     const toggleSidebar = () => {
@@ -42,7 +54,18 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
                 console.log(error);
             });
     }
-    console.log(org_id)
+    const fetchAttendanceSummary = async () => {
+        try {
+            const response = await server.get('api/org/userattendance-summary/', {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setAttendanceSummary(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     const handleRegisteruser = async (e) => {
         e.preventDefault();
         if (!org_id) {
@@ -65,6 +88,7 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
                     },
                 })
                 setFormVisible(false)
+                fetchAttendanceSummary(); 
             } catch (error) {
                 console.log(error);
             }
@@ -74,6 +98,7 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
     useEffect(() => {
         btnModal()
         fecthListOrganisation();
+        fetchAttendanceSummary();
 
     }, []);
 
@@ -147,53 +172,72 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
                     </CButton>
                 </CModalFooter>
             </CModal>
-            <div className='home-page'>
+            <div className="home-page">
                 <Navbar toggleSidebar={toggleSidebar} />
-                <div className='dashboard-content'>
+                <div className="dashboard-content">
                     <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
-                        <p className='overview'>Overview</p>
-                        <div className='dashboard-card'>
-
-                            <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    person
+                        <p className="overview">Overview</p>
+                        <div className="dashboard-card">
+                        <div className="card">
+                                <span className="material-symbols-outlined card-span">
+                                    calendar_today
                                 </span>
-                                <div className='present'>
-                                    <p>Total</p>
-
+                                <div className="present">
+                                    <p>Monthly Working Days</p>
+                                    <p>{attendanceSummary.monthly_summary.total_working_days} days</p>
                                 </div>
                             </div>
-                            <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    diversity_3
+                            <div className="card">
+                                <span className="material-symbols-outlined card-span">
+                                    calendar_today
                                 </span>
-                                <div className='present'>
-                                    <p>Present</p>
-                                    <p>375 <span>65%</span></p>
+                                <div className="present">
+                                    <p>Monthly Present</p>
+                                    <p>{attendanceSummary.monthly_summary.total_present_days} days</p>
                                 </div>
                             </div>
-                            <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    person_remove
+                            <div className="card">
+                                <span className="material-symbols-outlined card-span">
+                                    calendar_today
                                 </span>
-                                <div className='present'>
-                                    <p>Absent</p>
-                                    <p>375 <span>65%</span></p>
+                                <div className="present">
+                                    <p>Monthly Absent</p>
+                                    <p>{attendanceSummary.monthly_summary.total_absent_days} days</p>
                                 </div>
                             </div>
-                            <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    person_add
+                            <div className="card">
+                                <span className="material-symbols-outlined card-span">
+                                    calendar_today
                                 </span>
-                                <div className='present'>
-                                    <p>Total</p>
-                                    <p>375 <span>65%</span></p>
+                                <div className="present">
+                                    <p>Yearly Working Days</p>
+                                    <p>{attendanceSummary.yearly_summary.total_working_days} days</p>
+                                </div>
+                            </div>
+                            <div className="card">
+                                <span className="material-symbols-outlined card-span">
+                                    calendar_today
+                                </span>
+                                <div className="present">
+                                    <p>Yearly Present</p>
+                                    <p>{attendanceSummary.yearly_summary.total_present_days} days</p>
+                                </div>
+                            </div>
+                            <div className="card">
+                                <span className="material-symbols-outlined card-span">
+                                    calendar_today
+                                </span>
+                                <div className="present">
+                                    <p>Yearly Absent</p>
+                                    <p>{attendanceSummary.yearly_summary.total_absent_days} days</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div></div></div>
-    )
-}
+                </div>
+            </div>
+        </div>
+    );
+};
 
-export default Userdashboard
+export default Userdashboard;
