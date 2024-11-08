@@ -650,6 +650,7 @@ form {
   border: none;
   font-family: "Roboto", sans-serif;
   border-radius: 7px;
+  width:7rem;
   
 }
 .camera-card{
@@ -658,6 +659,14 @@ form {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0rem;
+
+}
+.camera-buttons{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  
 }
 /* AdminDash board  page  css is end here  */
 /* ******************************************************************** */
