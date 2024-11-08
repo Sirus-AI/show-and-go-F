@@ -7,13 +7,10 @@ const Navbar = ({ toggleSidebar }) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [username , setUsername] = (useState(''))
     const [profile ,setProfile] = (useState());
-    const [userorganization, setUserorganization] = useState([]);
     const handleToggleSidebar = () => {
         setShowSidebar(!showSidebar);
         toggleSidebar();
     };
-    const [usertype, setUsertype] = useState()
-    let userData = JSON.parse(localStorage.getItem('userData'))
     const fetchUser = useCallback(async () => {
         server
             .get(`api/users/user/profile/`, {
@@ -24,15 +21,17 @@ const Navbar = ({ toggleSidebar }) => {
             })
             .then((response) => {
                 setProfile(response.data);
-                 setUsername(response.data.f_name +" "+response.data.l_name)
-                setUsertype(response.data.user_type)
+                setUsername(response.data.f_name +" "+response.data.l_name)
                 userData.user_type = response.data.user_type;
+                userData.org_id = response.data.organisation_status.organization_id;
                 localStorage.setItem('userData', JSON.stringify(userData));
             })
             .catch((error) => {
                 console.log(error);
             });
     })
+    let userData = JSON.parse(localStorage.getItem('userData'))
+    const user_type=userData.user_type
     const fecthUserOrganisation = async () => {
         server
             .get('api/org/user-organisation/', {
@@ -42,7 +41,6 @@ const Navbar = ({ toggleSidebar }) => {
                 },
             })
             .then((response) => {
-                setUserorganization(response.data)
                 userData.org_id = response.data.org_id;
                 localStorage.setItem('userData', JSON.stringify(userData));
             })
@@ -52,13 +50,14 @@ const Navbar = ({ toggleSidebar }) => {
     }
     useEffect(() => {
         fetchUser()
+        if(!user_type===1 || !user_type===2){
         fecthUserOrganisation();
-
+        }
     }, []);
     return (
         <div className='shiv'> 
             <div className={showSidebar ? 'side-off' : 'side-bar-nav '}>
-                <Sidebar  usertype={usertype} profile={profile}/>
+                <Sidebar  usertype={user_type} profile={profile}/>
             </div>
             <div className='nav-bar'>
 
@@ -72,13 +71,13 @@ const Navbar = ({ toggleSidebar }) => {
                                 </span>
                             </span>
                             <div className='name'>
-                                {usertype === 1 ? (
+                                {user_type === 1 ? (
                                     <span className='admin'>Super Admin Dashboard</span>
-                                ) : usertype === 2 ? (
+                                ) : user_type === 2 ? (
                                     <span className='admin'>Admin Dashboard</span>
-                                ) : usertype === 3 ? (
+                                ) : user_type === 3 ? (
                                     <span className='admin'>Organization Admin Dashboard</span>
-                                ) : usertype === 4 ? (
+                                ) : user_type === 4 ? (
                                     <span className='admin'>User Dashboard</span>
                                 ) : (<span className='admin'>Loading....</span>)}
                                 <p className='shiv'><b><span className='shiv-report'>Overall Report of institution, welcome back !!..</span ><span className='username'>{username}</span></b></p>
@@ -93,7 +92,7 @@ const Navbar = ({ toggleSidebar }) => {
                 </div>
 
                 {/* <div className={showSidebar ? 'side-off' : 'side-bar-nav '}>
-                <Sidebar  usertype={usertype} />
+                <Sidebar  user_type={usertype} />
             </div> */}
 
             </div>

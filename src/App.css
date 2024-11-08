@@ -989,6 +989,9 @@ box-shadow: 2px 2px 5px 2px rgb(82, 81, 81);
 .profile-dropdown-btn:hover{
   background-color: #888585;
 }
+.org-para{
+  color: #000;
+}
 /*========================= Media Queries ===============================*/
 /* ========================= Sidebar and navabar Responsive Code ============================ */
 /* Phone view  */

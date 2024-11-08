@@ -24,7 +24,8 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
             total_working_days: 0,
         }
     });
-
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    const user_type=userData.user_type
 
     const toggleSidebar = () => {
         setIsNavbarOpen(!isNavbarOpen);
@@ -97,7 +98,10 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
 
     useEffect(() => {
         btnModal()
-        fecthListOrganisation();
+        if(user_type===1 || user_type===2){
+          fecthListOrganisation();  
+        }
+        
         fetchAttendanceSummary();
 
     }, []);

@@ -25,7 +25,8 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
   const toggleSidebar = () => {
     setIsNavbarOpen(!isNavbarOpen);
   };
-
+  const userData = JSON.parse(localStorage.getItem("userData"))
+  const user_type=userData.user_type
   const btnModal = () => {
     setVisible(true);
     setFormVisible(false);
@@ -73,7 +74,9 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
 
   useEffect(() => {
     btnModal();
+    if(!user_type===1 || !user_type===2){
     fetchAttendanceSummary();
+    }
   }, []);
 
    // Calculate percentages
