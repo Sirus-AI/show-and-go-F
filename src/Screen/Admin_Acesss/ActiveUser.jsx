@@ -48,9 +48,13 @@ const ActiveUser = () => {
             });
     }
     useEffect(() => {
-        fecthUserList()
+        if(user_type===1 || user_type===2){
+            fecthUserList()
+        }
+        if(user_type===3){
         fecthOrganzationList(organisation_id)
-    }, [])
+        }
+    }, [organisation_id])
     const getorgid = (orgId) => {
         setSelectOrgnization(orgId)
         setVisible(true)
@@ -76,13 +80,13 @@ const ActiveUser = () => {
                             {selectUser ? (
                                 <div className='profile-details'>
                                     <div className='org-name'>
-                                        <p>Name: {selectUser.user.f_name} {selectUser.user.l_name}</p>
+                                        <p className='org-para'>Name: {selectUser.user.f_name} {selectUser.user.l_name}</p>
                                     </div>
                                     <div className='org-namee mob'>
-                                        <p>Email: {selectUser.user.email}</p>
+                                        <p className='org-para'>Email: {selectUser.user.email}</p>
                                     </div>
                                     <div className='org-name userPhone'>
-                                        <p>Phone: {selectUser.user.phone}</p>
+                                        <p className='org-para'>Phone: {selectUser.user.phone}</p>
                                     </div>
                                     {/* <div className='org-name username'>
                                         <p>Status: {selectUser.users.is_active === true ? (<span> Active</span>) : (<span> Active</span>)}</p>
@@ -119,7 +123,7 @@ const ActiveUser = () => {
             </div>
         )
     }
-    else if (user_type === 1 || user_type === 2) {
+    else{
         return (
             <div>
                 <CModal
@@ -136,22 +140,22 @@ const ActiveUser = () => {
                             {selectOrgnization ? (
                                 <div className='profile-details'>
                                     <div className='org-name'>
-                                        <p>Name: {selectOrgnization.users.f_name} {selectOrgnization.users.l_name}</p>
+                                        <p className='org-para'>Name: {selectOrgnization.users.f_name} {selectOrgnization.users.l_name}</p>
                                     </div>
                                     <div className='org-namee mob'>
-                                        <p>Email: {selectOrgnization.users.email}</p>
+                                        <p className='org-para'>Email: {selectOrgnization.users.email}</p>
                                     </div>
                                     <div className='org-name username'>
-                                        <p>Phone: {selectOrgnization.users.phone}</p>
+                                        <p className='org-para'>Phone: {selectOrgnization.users.phone}</p>
                                     </div>
                                     <div className='org-name username'>
-                                        <p>About: {selectOrgnization.about}</p>
+                                        <p className='org-para'>About: {selectOrgnization.about}</p>
                                     </div>
                                     <div className='org-name username'>
-                                        <p>Location: {selectOrgnization.location}</p>
+                                        <p className='org-para'>Location: {selectOrgnization.location}</p>
                                     </div>
                                     <div className='org-name username'>
-                                        <p>Status: {selectOrgnization.users.is_active === true ? (<span> Active</span>) : (<span> Active</span>)}</p>
+                                        <p className='org-para'>Status: {selectOrgnization.users.is_active === true ? (<span> Active</span>) : (<span> Active</span>)}</p>
                                     </div>
                                 </div>
                             ) : (

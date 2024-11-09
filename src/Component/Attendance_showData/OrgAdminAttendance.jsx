@@ -11,7 +11,8 @@ const OrgAdminAttendance = () => {
     const [messageColor, setMessageColor] = useState('green');
     const [attendanceData, setAttendanceData] = useState([]);
     const [org_id, setOrgId] = useState([]);
-
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    const user_type=userData.user_type
   
 
     const handleError = (e) => {
@@ -59,7 +60,9 @@ const OrgAdminAttendance = () => {
     };
 
     useEffect(() => {
+        if(!user_type===1 || !user_type===2){
         fetchUserOrganisation();
+    }
     }, []);
 
     return (

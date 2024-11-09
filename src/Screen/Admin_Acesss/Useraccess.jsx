@@ -81,9 +81,12 @@ const Useraccess = () => {
     }
     
     useEffect(() => {
+        if(user_type===1 || user_type===2){
         fetchOrgniztionReq()
+        }
+        if (user_type === 3){
         fetchUserReq(organisation_id);
-        
+        }
     }, [organisation_id]);
      
     if (user_type === 3) {
