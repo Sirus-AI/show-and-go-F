@@ -3,6 +3,9 @@ import { useState,  useEffect } from 'react'
 import Navbar from '../../Component/Navigation/Navbar'
 import {server} from '../../Server'
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Admindashboard = ({ registerUser, usertype, users }) => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -12,11 +15,18 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
   const [location, setLocation] = useState('');
+  const [attendanceSummary, setAttendanceSummary] = useState({
+    total_active_users: 0,
+    total_inactive_users: 0,
+    total_present_users: 0,
+    total_absent_users: 0,
+  });
 
   const toggleSidebar = () => {
     setIsNavbarOpen(!isNavbarOpen);
   };
-
+  const userData = JSON.parse(localStorage.getItem("userData"))
+  const user_type=userData.user_type
   const btnModal = () => {
     setVisible(true);
     setFormVisible(false);
@@ -26,7 +36,19 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
     setFormVisible(true);
     setVisible(false);
   };
-
+  const fetchAttendanceSummary = async () => {
+    try {
+      const response = await server.get('/api/org/attendance-summary/', {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+      });
+      setAttendanceSummary(response.data);
+    } catch (error) {
+      console.error("Error fetching attendance summary:", error);
+    }
+  };
   const handleRegisteruser = async (e) => {
     e.preventDefault();
     if (!name || !about || !location) {
@@ -52,7 +74,29 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
 
   useEffect(() => {
     btnModal();
+    if(!user_type===1 || !user_type===2){
+    fetchAttendanceSummary();
+    }
   }, []);
+
+   // Calculate percentages
+   const totalUsers = attendanceSummary.total_active_users;
+   const presentPercentage = totalUsers > 0 ? (attendanceSummary.total_present_users / totalUsers) * 100 : 0;
+   const absentPercentage = totalUsers > 0 ? (attendanceSummary.total_absent_users / totalUsers) * 100 : 0;
+ 
+   // Pie chart data
+   const data = {
+     labels: ['Present', 'Absent'],
+     datasets: [
+       {
+         label: 'Attendance Summary',
+         data: [attendanceSummary.total_present_users, attendanceSummary.total_absent_users],
+         backgroundColor: ['#36A2EB', '#FF6384'],
+         hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+       },
+     ],
+   };
+
 
   return (
     <div className="home-page">
@@ -144,53 +188,55 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
               <span className="material-symbols-outlined card-span">person</span>
               <div className="present">
                 <p>Total</p>
-                <p>375 <span>65%</span></p>
+                <p>{attendanceSummary.total_active_users}</p>
               </div>
             </div>
             <div className="card">
               <span className="material-symbols-outlined card-span">diversity_3</span>
               <div className="present">
                 <p>Present</p>
-                <p>375 <span>65%</span></p>
+                <p>{attendanceSummary.total_present_users} <span>{presentPercentage.toFixed(2)}%</span></p>
               </div>
             </div>
             <div className="card">
               <span className="material-symbols-outlined card-span">person_remove</span>
               <div className="present">
                 <p>Absent</p>
-                <p>375 <span>65%</span></p>
+                <p>{attendanceSummary.total_absent_users} <span>{absentPercentage.toFixed(2)}%</span></p>
               </div>
             </div>
             <div className="card">
               <span className="material-symbols-outlined card-span">person_add</span>
               <div className="present">
                 <p>New User</p>
-                <p>375 <span>65%</span></p>
+                <p>{attendanceSummary.total_inactive_users}</p>
               </div>
             </div>
           </div>
 
           {/* New Cards */}
           <div className="new-cards">
-            <div className="new-card">
-              <h3>Pie Chart</h3>
-              <img className="pie-img" src="path_to_pie_chart_image" alt="Pie Chart" />
+          <div className="new-card" style={{padding:'5px'}}>
+              <Pie data={data} />
             </div>
             <div className="new-card camera-card">
-              <h3>Camera Controls</h3>
+              <h3>Attendance Controls</h3>
               <div className="camera-controls">
-                <span className="camera-icon">🎥</span>
-                <span className="camera-icon">🚫</span>
+              <span class="material-symbols-outlined">
+                video_call
+              </span>
+              <span class="material-symbols-outlined">
+                tune
+              </span>
               </div>
               <div className="camera-buttons">
-                <button className='on-off' >Camera On</button>
-                <button className='on-off'>Camera Off</button>
+                <button className='on-off' >Start in</button>
+                <button className='on-off'>stop in</button>
+                <button className='on-off' >Start out</button>
+                <button className='on-off'>stop out</button>
               </div>
             </div>
-            <div className="new-card">
-              <h3>Additional Card 2</h3>
-              <p>More content...</p>
-            </div>
+            
           </div>
         </div>
       </div>

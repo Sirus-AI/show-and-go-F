@@ -216,7 +216,7 @@ const Profile = () => {
                                 {(userTypeDisplay === 'Organization Admin' || userTypeDisplay === 'Organization User') ? (<div className='prof organisation'>
                                     <p className='title'>organisation-name :</p>
                                     {userorganization ? (
-                                        <p className='value'>{userorganization.name}</p>
+                                        <p className='value'>{profile.organisation_status.organisation_name}</p>
                                     ) : (
                                         <p className='value'>xyz-name</p>
                                     )}

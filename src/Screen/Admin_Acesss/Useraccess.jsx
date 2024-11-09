@@ -14,7 +14,7 @@ const Useraccess = () => {
     const organisation_id=userData.org_id
     const fetchOrgniztionReq = useCallback(async () => {
         server.get(
-            `api/org/alluser-list/`, {
+            `api/org/access-request/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}',
@@ -81,9 +81,12 @@ const Useraccess = () => {
     }
     
     useEffect(() => {
+        if(user_type===1 || user_type===2){
         fetchOrgniztionReq()
+        }
+        if (user_type === 3){
         fetchUserReq(organisation_id);
-        
+        }
     }, [organisation_id]);
      
     if (user_type === 3) {
