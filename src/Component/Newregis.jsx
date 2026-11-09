@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { Link } from 'react-router-dom';
-import { CircleUserRound } from 'lucide-react';
 import { server } from '../Server';
 import { useNavigate } from 'react-router-dom';
 
@@ -128,10 +127,11 @@ const Newregis = () => {
       </CModal>
       <div className="register-display">
         <div className='register-container'>
-          <div className='profile'>
-            <span className="profile-logo"><CircleUserRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
+          <div className='login-brand'>
+            <img src='/assets/logo-mark-ink.png' alt='' width='36' height='36' />
+            <span className='login-brand-name'>SirusAI <span className='sirus-ams'>AMS</span></span>
           </div>
-          <h1 className='h1'>REGISTRATION</h1>
+          <h1 className='h1 login-headline'>Create your <em>account</em></h1>
           <form className='form' onSubmit={handleSubmit}>
             <div className='credential'>
               <div className='user-name'>

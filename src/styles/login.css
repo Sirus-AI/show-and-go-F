@@ -1,0 +1,135 @@
+/* Login: cream form column on the left, ink "camera feed" on the right (CSS only). */
+.login-dispplay {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  background: var(--cream);
+}
+.login-container {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.login-container form, .register-container form { margin-top: 24px; width: 100%; }
+
+.login-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+.login-brand img { display: block; width: 36px; height: 36px; object-fit: contain; }
+.login-brand-name { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.login-brand .sirus-ams { color: var(--text-muted); }
+.register-container .login-brand { margin-bottom: 24px; }
+
+.login-headline { margin: 0; text-align: left; font-size: 56px; line-height: 1; }
+.login-headline em { font-style: italic; color: var(--accent); }
+.register-container .login-headline { font-size: 44px; }
+.login-sub { margin: 16px 0 0; color: var(--text-muted); font-size: 15px; }
+
+/* ---------- Camera feed panel ---------- */
+.login-visual { padding: 16px 16px 16px 0; min-height: 100vh; display: flex; }
+.feed {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: var(--ink);
+  border-radius: var(--radius-frame);
+  container-type: inline-size;
+}
+.feed::before { /* faint static scanlines */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(243,238,227,.045) 0 1px, transparent 1px 4px);
+}
+.feed::after { /* slow scan sweep */
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 18%;
+  z-index: 3;
+  pointer-events: none;
+  background: rgba(243,238,227,.035);
+  border-bottom: 1px solid rgba(243,238,227,.09);
+  animation: scan 7s linear infinite;
+}
+@keyframes scan { from { transform: translateY(-100%); } to { transform: translateY(560%); } }
+
+.feed-label {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  z-index: 4;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--text-muted-dark);
+}
+
+/* Abstract people: a head and shoulders silhouette each */
+.face { position: absolute; width: var(--w); aspect-ratio: 1 / 1.25; }
+.face::before, .face::after { content: ''; position: absolute; background: rgba(243,238,227,.13); }
+.face::before { left: 24%; top: 6%; width: 52%; aspect-ratio: 1; border-radius: 50%; }
+.face::after { left: 0; right: 0; bottom: 0; height: 42%; border-radius: 50% 50% 0 0 / 80% 80% 0 0; }
+.f1 { --w: 22%; left: 8%;  top: 18%; }
+.f2 { --w: 18%; left: 38%; top: 12%; }
+.f3 { --w: 24%; left: 66%; top: 20%; }
+.f4 { --w: 17%; left: 20%; top: 52%; }
+.f5 { --w: 21%; left: 48%; top: 50%; }
+.f6 { --w: 16%; left: 78%; top: 58%; }
+
+/* Detection box over each head; pops in one by one, then the cycle repeats */
+.box {
+  position: absolute;
+  z-index: 2;
+  left: 18%;
+  top: 2%;
+  width: 64%;
+  height: 56%;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-box);
+  animation: box-cycle 10s ease-out infinite backwards;
+}
+.box i {
+  position: absolute;
+  left: -2px;
+  bottom: 100%;
+  padding: 3px 6px;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+/* Uncertain face: cream box tagged "review" */
+.box-review { border-color: var(--cream); }
+.box-review i { background: var(--cream); color: var(--ink); }
+.f1 .box { animation-delay: .4s; } .f2 .box { animation-delay: 1.1s; } .f3 .box { animation-delay: 1.8s; }
+.f4 .box { animation-delay: 2.5s; } .f5 .box { animation-delay: 3.2s; } .f6 .box { animation-delay: 3.9s; }
+@keyframes box-cycle {
+  0%   { opacity: 0; transform: scale(1.4); }
+  3%   { opacity: 1; transform: scale(1); }
+  88%  { opacity: 1; transform: scale(1); }
+  96%, 100% { opacity: 0; transform: scale(1); }
+}
+
+@media (max-width: 900px) {
+  .login-dispplay { grid-template-columns: minmax(0, 1fr); }
+  .login-visual { display: none; }
+  .login-container { padding: 32px 20px; max-width: 520px; }
+  .login-headline { font-size: 44px; }
+}

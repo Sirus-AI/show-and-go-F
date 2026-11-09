@@ -1,41 +1,15 @@
 @import './styles/shell.css';
 @import './styles/components.css';
+@import './styles/login.css';
 
 /* Screen-level layout. Colours, type and shape come from styles/tokens.css only. */
 
-/* ---------- Login / register containers (restyled in the Login commit) ---------- */
-.login-dispplay {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px 16px;
-}
-.register-display {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0;
-}
+/* ---------- Login / register (see styles/login.css) ---------- */
+.register-display { width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 24px 16px; }
 .modal-form { display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; }
 .modal-form h5 { font-family: var(--font-display); font-weight: 400; font-size: 28px; letter-spacing: -0.02em; margin-bottom: 8px; }
-.login-container, .register-container {
-  width: 100%;
-  max-width: 520px;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  box-shadow: none;
-}
-.profile { text-align: center; color: var(--text); padding: 0; }
-.profile-logo { display: inline-grid; place-items: center; color: var(--text); }
+.register-container { width: 100%; max-width: 520px; padding: 32px; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); }
+
 h1 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1; color: var(--text); }
 form { margin-top: 20px; display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .user-name { display: flex; gap: 16px; }
