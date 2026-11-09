@@ -155,7 +155,7 @@ html .card { display: flex; flex-direction: column; align-items: flex-start; gap
 .attendance-tbody tr:last-child td { border-bottom: 0; }
 /* Times, dates and durations in mono; first column (names) stays in Manrope */
 .attendance-tbody td:not(:first-child) { font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
-.attendance-tbody tr:hover td { background: rgba(233, 226, 210, .5); }
+.attendance-tbody tr:hover td { background: var(--hover-sand); }
 
 /* ---------- Status badges ---------- */
 html .badge {

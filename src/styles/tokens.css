@@ -22,6 +22,12 @@
   --line-dark: rgba(243,238,227,.16);
   --scrim: rgba(17,17,17,.5);
   --active-on-dark: rgba(243,238,227,.12);
+  --hover-on-dark: rgba(243,238,227,.06);
+  --hover-sand: rgba(233,226,210,.5);
+  --scanline: rgba(243,238,227,.045);
+  --scan-sweep: rgba(243,238,227,.035);
+  --scan-sweep-line: rgba(243,238,227,.09);
+  --silhouette: rgba(243,238,227,.13);
 
   /* Status (attendance) */
   --present: #D9541E;

@@ -26,7 +26,7 @@
     overflow: hidden;
     background: var(--ink);
     border-radius: var(--radius-frame);
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     width: 100%;
 }
 .Attendance-video::after, .recognition-frame::after {
@@ -34,7 +34,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(to bottom, rgba(243,238,227,.045) 0 1px, transparent 1px 4px);
+    background: repeating-linear-gradient(to bottom, var(--scanline) 0 1px, transparent 1px 4px);
 }
 .Attendance-video video, .recognition-frame img {
     display: block;

@@ -49,7 +49,7 @@
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  background: repeating-linear-gradient(to bottom, rgba(243,238,227,.045) 0 1px, transparent 1px 4px);
+  background: repeating-linear-gradient(to bottom, var(--scanline) 0 1px, transparent 1px 4px);
 }
 .feed::after { /* slow scan sweep */
   content: '';
@@ -60,8 +60,8 @@
   height: 18%;
   z-index: 3;
   pointer-events: none;
-  background: rgba(243,238,227,.035);
-  border-bottom: 1px solid rgba(243,238,227,.09);
+  background: var(--scan-sweep);
+  border-bottom: 1px solid var(--scan-sweep-line);
   animation: scan 7s linear infinite;
 }
 @keyframes scan { from { transform: translateY(-100%); } to { transform: translateY(560%); } }
@@ -79,7 +79,7 @@
 
 /* Abstract people: a head and shoulders silhouette each */
 .face { position: absolute; width: var(--w); aspect-ratio: 1 / 1.25; }
-.face::before, .face::after { content: ''; position: absolute; background: rgba(243,238,227,.13); }
+.face::before, .face::after { content: ''; position: absolute; background: var(--silhouette); }
 .face::before { left: 24%; top: 6%; width: 52%; aspect-ratio: 1; border-radius: 50%; }
 .face::after { left: 0; right: 0; bottom: 0; height: 42%; border-radius: 50% 50% 0 0 / 80% 80% 0 0; }
 .f1 { --w: 22%; left: 8%;  top: 18%; }

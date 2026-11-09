@@ -118,7 +118,7 @@
   height: 20px;
   flex: none;
 }
-.item:hover { background: rgba(243, 238, 227, .06); color: var(--text-on-dark); }
+.item:hover { background: var(--hover-on-dark); color: var(--text-on-dark); }
 
 /* Active route: soft cream wash + small orange marker */
 .link-color.active .item { background: var(--active-on-dark); color: var(--text-on-dark); }
@@ -149,7 +149,7 @@
   font-family: inherit;
   text-align: left;
 }
-.big-logo button.item:hover { background: rgba(243, 238, 227, .06); }
+.big-logo button.item:hover { background: var(--hover-on-dark); }
 .side-bar :focus-visible { outline-offset: -2px; }
 
 /* ---------- Top bar ---------- */
