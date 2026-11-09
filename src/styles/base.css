@@ -1,0 +1,48 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { color-scheme: light; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, kbd, samp { font-family: var(--font-mono); }
+
+h1, h2, h3, h4, h5, h6 { margin: 0; }
+a { color: inherit; }
+
+/* Visible focus ring on every interactive element */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+/* On ink surfaces the ring stays orange; it has >3:1 contrast against ink */
+
+/* Display type: page titles and big numbers only */
+.display, .serif {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.display em, .serif em { font-style: italic; color: var(--accent); }
+.mono, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Page content fades up on route change */
+@keyframes page-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.page-in { animation: page-in .4s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
