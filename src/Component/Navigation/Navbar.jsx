@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useCallback, useEffect } from 'react'
 import {server} from '../../Server'
 import Sidebar from './Sidebar'
+import { Menu } from 'lucide-react'
 
 const Navbar = ({ toggleSidebar }) => {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -66,22 +67,20 @@ const Navbar = ({ toggleSidebar }) => {
 
                     <div className='nav-cover'>
                         <div className='heading'>
-                            <span className='bar' onClick={handleToggleSidebar}>
-                                <span class="material-symbols-outlined">
-                                    menu
-                                </span>
-                            </span>
+                            <button type='button' className='bar' onClick={handleToggleSidebar} aria-label='Toggle menu'>
+                                <Menu size={20} strokeWidth={1.75} aria-hidden="true" />
+                            </button>
                             <div className='name'>
                                 {usertype === 1 ? (
-                                    <span className='admin'>Super Admin Dashboard</span>
+                                    <div className='admin'>Super Admin <em>Dashboard</em></div>
                                 ) : usertype === 2 ? (
-                                    <span className='admin'>Admin Dashboard</span>
+                                    <div className='admin'>Admin <em>Dashboard</em></div>
                                 ) : usertype === 3 ? (
-                                    <span className='admin'>Organization Admin Dashboard</span>
+                                    <div className='admin'>Organization Admin <em>Dashboard</em></div>
                                 ) : usertype === 4 ? (
-                                    <span className='admin'>User Dashboard</span>
-                                ) : (<span className='admin'>Loading....</span>)}
-                                <p className='shiv'><b><span className='shiv-report'>Overall Report of institution, welcome back !!..</span ><span className='username'>{username}</span></b></p>
+                                    <div className='admin'>User <em>Dashboard</em></div>
+                                ) : (<div className='admin'>Loading....</div>)}
+                                <p className='shiv'><span className='shiv-report'>Overall Report of institution, welcome back !!..</span> <span className='username'>{username}</span></p>
                             </div>
 
                         </div>

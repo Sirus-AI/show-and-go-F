@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { Link } from 'react-router-dom';
+import { CircleUserRound } from 'lucide-react';
 import { server } from '../Server';
 import { useNavigate } from 'react-router-dom';
 
@@ -128,9 +129,7 @@ const Newregis = () => {
       <div className="register-display">
         <div className='register-container'>
           <div className='profile'>
-            <span className="material-symbols-outlined profile-logo">
-              account_circle
-            </span>
+            <span className="profile-logo"><CircleUserRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
           </div>
           <h1 className='h1'>REGISTRATION</h1>
           <form className='form' onSubmit={handleSubmit}>
@@ -176,7 +175,7 @@ const Newregis = () => {
                 className='email'
                 onChange={(e) => setEmail(e.target.value.trim())}
               />
-              {fieldErrors.email && <p style={{ color: 'red' }}>{fieldErrors.email}</p>}  {/* Email Error */}
+              {fieldErrors.email && <p className='field-error'>{fieldErrors.email}</p>}  {/* Email Error */}
             </div>
             <div className='credential'>
               <div className='flex'>
@@ -189,7 +188,7 @@ const Newregis = () => {
                 className='email'
                 onChange={(e) => setPhone(e.target.value.trim())}
               />
-              {fieldErrors.phone && <p style={{ color: 'red' }}>{fieldErrors.phone}</p>}  {/* Phone Error */}
+              {fieldErrors.phone && <p className='field-error'>{fieldErrors.phone}</p>}  {/* Phone Error */}
             </div>
             <div className='credential'>
               <div className='flex'>

@@ -96,12 +96,14 @@ const groupedData = attendanceData ? groupDataByDate() : {};
                                     name="date"
                                     id="date"
                                     className='date-input todate'
+                                    aria-label='From date'
                                     onChange={(e) => SetfromDate(e.target.value.trim())}
                                 /> <input
                                     type="date"
                                     name="date"
                                     id="date"
                                     className='date-input fromdate'
+                                    aria-label='To date'
                                     onChange={(e) => SetToDate(e.target.value.trim())}
                                 />
                            </div>

@@ -1,47 +1,8 @@
-.emailChange-btn{
-    padding: 0.8rem 1.3rem;
-    background-color: #0f5ddb;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #ffffff;
-    border: none;
-    font-size: 1rem;
-    border-radius: 10px;
-    width: 100%;
-}
-.emailChange-btn:hover{
-    background-color: #1a73e8; 
-    transform: scale(1.05); 
-    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.2); 
-}
-.emailChange{
-    margin: 1rem;
-}
-
-.setting-email-input{
-    border: .2em solid #1e87e9;
-	padding: .4em .7em;
-	border-radius:5px;
-	color: #000000;
-    width: 100%;
-}
-.input-email-button{
-    margin-top: 0.2rem;
-}
-.old-email-btn{
-padding: 0.5rem 1rem;
-  background-color: #0f5ddb;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  color: #ffffff;
-  border: none;
-  font-size: 1rem;
-  border-radius: 10px;
-}
-.input-email-button{
-    display: flex;
-    align-items: end;
-    justify-content: flex-end;
-}
+.emailChange { margin: 12px 0; }
+.setting_btn { display: flex; flex-direction: column; }
+.setting_form { display: flex; flex-direction: column; gap: 16px; }
+.setting_form form { margin-top: 0; }
+.setting-email-input { width: 100%; }
+.setting-input-email { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.setting-input-email p { margin: 0; font-size: 13px; font-weight: 600; }
+.input-email-button { display: flex; align-items: flex-end; justify-content: flex-end; margin-top: 8px; }

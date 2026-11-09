@@ -44,7 +44,7 @@ const Veiwattendance = () => {
       <div className='dashboard-content'>
         <div className={isNavbarOpen ? 'content-cover' : 'content-toggle'}>
           <div className='attendance'>
-            <h1 className='title-name'>ATTENDANCE REPORT</h1>
+            <h1 className='title-name'>Attendance <em>report</em></h1>
 
             {/* Conditionally render select element based on userType */}
             {userType !== 'orgusers' && (

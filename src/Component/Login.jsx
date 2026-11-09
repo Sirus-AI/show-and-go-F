@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { Link } from 'react-router-dom';
+import { CircleUserRound } from 'lucide-react';
 import {server} from '../Server';
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -105,9 +106,7 @@ const Login = () => {
       <div className="login-dispplay">
         <div className='login-container'>
           <div className='profile'>
-            <span className="material-symbols-outlined profile-logo">
-              account_circle
-            </span>
+            <span className="profile-logo"><CircleUserRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
           </div>
           <h1 className='h1'>LOGIN</h1>
           <form className='form' onSubmit={handleLogin}>

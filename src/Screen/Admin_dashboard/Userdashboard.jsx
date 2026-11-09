@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Navbar from '../../Component/Navigation/Navbar'
 import {server} from '../../Server'
+import { UserRound, UsersRound, UserMinus, UserPlus, Video, VideoOff } from 'lucide-react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 const Userdashboard = ({ registerUser, usertype, users }) => {
     const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -155,36 +156,28 @@ const Userdashboard = ({ registerUser, usertype, users }) => {
                         <div className='dashboard-card'>
 
                             <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    person
-                                </span>
+                                <span className="card-span"><UserRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
                                 <div className='present'>
                                     <p>Total</p>
 
                                 </div>
                             </div>
                             <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    diversity_3
-                                </span>
+                                <span className="card-span"><UsersRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
                                 <div className='present'>
                                     <p>Present</p>
                                     <p>375 <span>65%</span></p>
                                 </div>
                             </div>
                             <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    person_remove
-                                </span>
+                                <span className="card-span"><UserMinus size={20} strokeWidth={1.75} aria-hidden="true" /></span>
                                 <div className='present'>
                                     <p>Absent</p>
                                     <p>375 <span>65%</span></p>
                                 </div>
                             </div>
                             <div className='card'>
-                                <span class="material-symbols-outlined card-span">
-                                    person_add
-                                </span>
+                                <span className="card-span"><UserPlus size={20} strokeWidth={1.75} aria-hidden="true" /></span>
                                 <div className='present'>
                                     <p>Total</p>
                                     <p>375 <span>65%</span></p>

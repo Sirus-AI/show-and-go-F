@@ -1,91 +1,63 @@
+/* Mark-in screen: dark camera frames, mono camera labels. Face boxes are drawn server-side in the returned image. */
 .attendance-container {
-    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 20px;
+    align-items: stretch;
+    gap: 16px;
+    max-width: 760px;
+    margin: 0;
 }
+.attendance-content { display: flex; justify-content: flex-end; width: 100%; }
 
-img {
-    border: 2px solid #000;
-    margin: 10px;
-    width: 400px;
-    height: 300px;
-}
-
-.status {
-    font-size: 1.2em;
-    margin: 10px;
-}
-
-#buttons {
-    margin: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    margin: 0 10px;
-}
-.attendance-content{
-    display: flex;
-    justify-content: flex-end;
-    transition: margin-left 0.3s ease;
-    margin-left: 0;
-}
-.camera-selection {
-    margin: 20px;
- }
-
-#cameraSelect {
-    margin-left: 10px;
-    padding: 5px;
-}
-.inCameraSelect{
-    height: 2rem;
-    border-radius: 10px;
-    border-color: rgba(161, 159, 157, 0.432);
-}
-.Attendance-video video{
-    width: 400px;
-    height: 300px;
-}
-.Stop-Attendance-In,.Start-Attendance-in{
-    padding: 0.8rem 1.3rem;
-    background-color: #0f5ddb;
-    font-family: "Roboto", sans-serif;
+.camera-selection { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 0; }
+.camera-selection label {
+    font-family: var(--font-mono);
+    font-size: 11px;
     font-weight: 500;
-    font-style: normal;
-    color: #ffffff;
-    border: none;
-    font-size: 1rem;
-    border-radius: 10px;
-    margin-top: 1rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
-.Stop-Attendance-out,.Start-Attendance-out{
-    padding: 0.8rem 1.3rem;
-    background-color: #0f5ddb;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #ffffff;
-    border: none;
-    font-size: 1rem;
-    border-radius: 10px;
-    margin-top: 1rem;
+#cameraSelect, .inCameraSelect { width: 100%; margin: 0; }
+
+/* Dark camera frame with a faint scanline overlay */
+.Attendance-video, .recognition-frame {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    border-radius: var(--radius-frame);
+    aspect-ratio: 4 / 3;
+    width: 100%;
 }
-@media screen and (max-width: 450px){
-    .Attendance-video video{
-        width: 200px;
-        height: 150px;
-        margin-top: 1rem;
-    }
-    .attendance-content{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: margin-left 0.3s ease;
-        margin-left: 0;
-    }
+.Attendance-video::after, .recognition-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(243,238,227,.045) 0 1px, transparent 1px 4px);
+}
+.Attendance-video video, .recognition-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    object-fit: cover;
+}
+.recognition-frame img:not([src]) { visibility: hidden; }
+.recognition-frame { display: flex; flex-direction: column; }
+.recognition-frame p { display: none; }
+.recognition-status {
+    margin: 8px 0 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+#buttons { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0; }
+#buttons button { margin: 0; }
+.status { margin: 0; }
+
+@media (max-width: 480px) {
+    #buttons button { flex: 1 1 100%; }
 }

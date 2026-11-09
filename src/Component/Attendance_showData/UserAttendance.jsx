@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AttendanceData.css';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 import { server } from '../../Server';
+import EmptyState from '../EmptyState';
 
 const UserAttendance = () => {
     const [date, SetDate] = useState();
@@ -136,6 +137,7 @@ const UserAttendance = () => {
                                 type="date"
                                 name="date"
                                 id="date"
+                                aria-label="Date"
                                 className='date-input'
                                 onChange={(e) => SetDate(e.target.value.trim())}
                             />
@@ -192,7 +194,12 @@ const UserAttendance = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>No data available for the selected date.</p>
+                            <EmptyState
+                                title="Nothing to show yet"
+                                body="Choose a date and press Select to load attendance for that day."
+                                actionLabel="Choose a date"
+                                onAction={() => { const el = document.getElementById('date'); if (el) el.focus(); }}
+                            />
                         )}
                     </div>
 
@@ -217,7 +224,7 @@ const UserAttendance = () => {
                                 </tbody>
                             </table>
                         ) : (
-                            <p>No summary data available for the selected date.</p>
+                            <p>No summary yet. Totals appear once a date is loaded.</p>
                         )}
                     </div>
                 </div>
