@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useCallback, useEffect, useRef } from 'react'
+import { Pencil, UserRound } from 'lucide-react';
 import Navbar from '../../Component/Navigation/Navbar'
 import { server } from '../../Server'
 import NameChamge from '../../Component/Setting/NameChamge'
@@ -155,13 +156,9 @@ const Profile = () => {
                                 <div className='profile-avtar'>
 
                                     <div className="profilr-image" >
-                                        <span class="material-symbols-outlined edit-propfile-pic" onClick={handleProfileClick}>
-                                            edit
-                                        </span>
+                                        <button type="button" className="edit-propfile-pic" onClick={handleProfileClick} aria-label="Edit profile photo"><Pencil size={20} strokeWidth={1.75} aria-hidden="true" /></button>
                                         {profile && profile.profile_photo != null ? (
-                                            <img src={profile.profile_photo} />) : (<span class="material-symbols-outlined avtar">
-                                                person
-                                            </span>)}
+                                            <img src={profile.profile_photo} alt="Profile photo" />) : (<span className="avtar"><UserRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>)}
                                     </div>
                                     {isDropdownOpen ? (
                                         <div className="profile-dropdown-menu" ref={dropdownRef}>
@@ -190,9 +187,7 @@ const Profile = () => {
                                 <div className='prof prof-name'>
                                     <p className='title'>Name  :</p>{profile != null ? (
                                         <p className='profile-edit-name'>  {profile.f_name} {' '}
-                                            {profile.l_name}<span class="material-symbols-outlined edit-name" onClick={openEditNameModal}>
-                                                edit
-                                            </span></p>) : (<p>Your Name</p>)}
+                                            {profile.l_name}<button type="button" className="edit-name" onClick={openEditNameModal} aria-label="Edit name"><Pencil size={18} strokeWidth={1.75} aria-hidden="true" /></button></p>) : (<p>Your Name</p>)}
                                 </div>
 
                             </div>

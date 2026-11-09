@@ -2,6 +2,7 @@ import React from 'react'
 import { useState,  useEffect } from 'react'
 import Navbar from '../../Component/Navigation/Navbar'
 import {server} from '../../Server'
+import { UserRound, UsersRound, UserMinus, UserPlus, Video, VideoOff } from 'lucide-react';
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CButton } from '@coreui/react';
 
 const Admindashboard = ({ registerUser, usertype, users }) => {
@@ -141,28 +142,28 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
           <p className="overview">Overview</p>
           <div className="dashboard-card">
             <div className="card">
-              <span className="material-symbols-outlined card-span">person</span>
+              <span className="card-span"><UserRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
               <div className="present">
                 <p>Total</p>
                 <p>375 <span>65%</span></p>
               </div>
             </div>
             <div className="card">
-              <span className="material-symbols-outlined card-span">diversity_3</span>
+              <span className="card-span"><UsersRound size={20} strokeWidth={1.75} aria-hidden="true" /></span>
               <div className="present">
                 <p>Present</p>
                 <p>375 <span>65%</span></p>
               </div>
             </div>
             <div className="card">
-              <span className="material-symbols-outlined card-span">person_remove</span>
+              <span className="card-span"><UserMinus size={20} strokeWidth={1.75} aria-hidden="true" /></span>
               <div className="present">
                 <p>Absent</p>
                 <p>375 <span>65%</span></p>
               </div>
             </div>
             <div className="card">
-              <span className="material-symbols-outlined card-span">person_add</span>
+              <span className="card-span"><UserPlus size={20} strokeWidth={1.75} aria-hidden="true" /></span>
               <div className="present">
                 <p>New User</p>
                 <p>375 <span>65%</span></p>
@@ -179,8 +180,8 @@ const Admindashboard = ({ registerUser, usertype, users }) => {
             <div className="new-card camera-card">
               <h3>Camera Controls</h3>
               <div className="camera-controls">
-                <span className="camera-icon">🎥</span>
-                <span className="camera-icon">🚫</span>
+                <span className="camera-icon"><Video size={20} strokeWidth={1.75} aria-hidden="true" /></span>
+                <span className="camera-icon"><VideoOff size={20} strokeWidth={1.75} aria-hidden="true" /></span>
               </div>
               <div className="camera-buttons">
                 <button className='on-off' >Camera On</button>

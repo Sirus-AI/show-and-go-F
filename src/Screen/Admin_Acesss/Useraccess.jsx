@@ -101,7 +101,7 @@ const Useraccess = () => {
                                         <div className="userAcess-details">
                                             <p><strong>Email:</strong> {org.user.email}</p>
                                             <p><strong>Phone:</strong> {org.user.phone}</p>
-                                            <p><strong>Status :</strong> inactive</p>
+                                            <p><strong>Status :</strong> <span className='badge badge-absent'>inactive</span></p>
                                         </div>
                                         <div className='userAcess-func'>
                                             <div className='userAcess-toggle-btn'>
@@ -138,7 +138,7 @@ const Useraccess = () => {
                                             <p><strong>User Name:</strong> {user_type}</p>
                                             <p><strong>Email:</strong> {org.users.email}</p>
                                             <p><strong>Phone:</strong> {org.users.phone}</p>
-                                            <p><strong>Status :</strong> inactive</p>
+                                            <p><strong>Status :</strong> <span className='badge badge-absent'>inactive</span></p>
                                         </div>
                                         <div className='userAcess-func'>
                                             <div className='userAcess-toggle-btn'>

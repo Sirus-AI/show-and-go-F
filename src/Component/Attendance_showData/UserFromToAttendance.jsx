@@ -150,11 +150,13 @@ if (userType === 'Orgadmin') {
                                 <input
                                     type="date"
                                     className='date-input'
+                                    aria-label='From date'
                                     onChange={(e) => setFromDate(e.target.value.trim())}
                                 />
                                 <input
                                     type="date"
                                     className='date-input'
+                                    aria-label='To date'
                                     onChange={(e) => setToDate(e.target.value.trim())}
                                 />
                             </div>

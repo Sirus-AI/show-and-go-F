@@ -221,13 +221,13 @@ const Attendance = () => {
                         </div>
 
                         <div>
-                            <img ref={inFrameRef} alt="Attendance In Recognition Result" />
-                            <p>{inStatus}</p>
+                            <div className="recognition-frame"><img ref={inFrameRef} alt="Attendance In Recognition Result" /></div>
+                            <p className="recognition-status">{inStatus}</p>
                         </div>
 
                         <div>
-                            <img ref={outFrameRef} alt="Attendance Out Recognition Result" />
-                            <p>{outStatus}</p>
+                            <div className="recognition-frame"><img ref={outFrameRef} alt="Attendance Out Recognition Result" /></div>
+                            <p className="recognition-status">{outStatus}</p>
                         </div>
                     </div>
                 </div>

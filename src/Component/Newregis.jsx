@@ -127,12 +127,11 @@ const Newregis = () => {
       </CModal>
       <div className="register-display">
         <div className='register-container'>
-          <div className='profile'>
-            <span className="material-symbols-outlined profile-logo">
-              account_circle
-            </span>
+          <div className='login-brand'>
+            <img src='/assets/logo-mark-ink.png' alt='' width='36' height='36' />
+            <span className='login-brand-name'>SirusAI <span className='sirus-ams'>AMS</span></span>
           </div>
-          <h1 className='h1'>REGISTRATION</h1>
+          <h1 className='h1 login-headline'>Create your <em>account</em></h1>
           <form className='form' onSubmit={handleSubmit}>
             <div className='credential'>
               <div className='user-name'>
@@ -176,7 +175,7 @@ const Newregis = () => {
                 className='email'
                 onChange={(e) => setEmail(e.target.value.trim())}
               />
-              {fieldErrors.email && <p style={{ color: 'red' }}>{fieldErrors.email}</p>}  {/* Email Error */}
+              {fieldErrors.email && <p className='field-error'>{fieldErrors.email}</p>}  {/* Email Error */}
             </div>
             <div className='credential'>
               <div className='flex'>
@@ -189,7 +188,7 @@ const Newregis = () => {
                 className='email'
                 onChange={(e) => setPhone(e.target.value.trim())}
               />
-              {fieldErrors.phone && <p style={{ color: 'red' }}>{fieldErrors.phone}</p>}  {/* Phone Error */}
+              {fieldErrors.phone && <p className='field-error'>{fieldErrors.phone}</p>}  {/* Phone Error */}
             </div>
             <div className='credential'>
               <div className='flex'>

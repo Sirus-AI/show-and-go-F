@@ -1,101 +1,20 @@
-.attendance-heading{
-    font-size: 2rem;
-    text-align: center;
-    font-weight: 700;
-    padding: 1rem;
-    color: rgb(7, 104, 216);
+.attendance-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 8px 0 24px;
+    color: var(--text);
 }
-.cover-user-Attendance{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 2rem;
-    
-}
-.input-date-button{
-    margin-top: 2rem;
-}
-
-.fromdate{
-    margin-left: 2rem;
-}
-.todate{
-    margin-right: 2rem;
-}
-.date-input{
-    border: .2em solid #1e87e9;
-	padding: .7em .9em;
-	border-radius:5px;
-	color: #000000;
-}
-.attendance-table{
-    border: 2px solid black;
-}
-.attendance-table-cover{
-    margin-top: 4rem;
-}
-.attendance-thead{
-    background-color: black;
-    color: #ffffff;
-}
-.attendance-thead tr td{
-    padding:0.3rem 1.5rem;
-    border: 2px solid rgb(255, 255, 255);
-    font-size: 1.1rem;
-   
-
-    }
-.attendance-tbody tr td{
-padding:0.3rem 1.5rem;
-border: 2px solid rgb(99, 98, 98);
-
-}
-
-.date-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.date-wise{
-    text-align: center;
-    margin: 1rem 0.2rem;
-}
-.attend-update{
-    margin: 3rem 1rem;
-    display: flex;
-    justify-content: center;
-    
-   
-}
-.attend-op{
-    border: 2px solid rgb(236, 239, 245);
-    height: 50px;
-    width: 150px;
-    align-items: center;
-    text-align: center;
-    background-color: rgb(190, 201, 199);
-    color: rgb(26, 25, 25);
-    padding: 12px;
-    border-radius: 5px;
-   
-}
-.attend-get{
-    background-color: rgb(7, 104, 216);
-    border: 2px solid rgb(236, 239, 245);
-    height: 50px;
-    width: 150px;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding: 12px;
-    border-radius: 5px;
-}
-
-.title-name{
-    height: 80px;
-    color:  rgb(13, 86, 155);
-    padding: 5px;
-    text-decoration: underline;
-    
-}
+.cover-user-Attendance { display: flex; flex-direction: column; align-items: stretch; margin-top: 0; }
+.date-form { display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 16px; margin-top: 0; width: 100%; }
+.date-form > div { flex: 0 1 220px; min-width: 0; }
+.date-form .input-date-button { flex: none; margin-top: 0; }
+.fromdate, .todate { margin: 0; }
+.date-input { width: 100%; }
+.date-wise { text-align: left; margin: 0; }
+.date-form .input-date { display: flex; flex-wrap: wrap; gap: 12px; flex: 1 1 320px; }
+.date-form .input-date input { flex: 1 1 150px; width: auto; }
+.date-wise { font-family: var(--font-mono); font-size: 13px; font-weight: 500; padding: 16px 20px 8px; }
+.attendance-date-group + .attendance-date-group { border-top: 1px solid var(--line); }

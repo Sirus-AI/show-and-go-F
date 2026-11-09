@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Captureface.css';
 import Navbar from '../../Component/Navigation/Navbar';
 import { WEBSOCKET_URL } from '../../Server';
+import { CircleCheck } from 'lucide-react';
 
 const Captureface = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -204,9 +205,7 @@ const Captureface = () => {
                 <p className='completion'>
                   <span className='digits'>{progressPercentage}%</span>
                   <span className='percentage-complete'>Complete</span>
-                  <span className={`material-symbols-outlined ${progressPercentage === 100 ? 'percentage-progress-success' : 'percentage-progress-color'}`}>
-                    check_circle
-                  </span>
+                  <span className={`${progressPercentage === 100 ? 'percentage-progress-success' : 'percentage-progress-color'}`}><CircleCheck size={18} strokeWidth={1.75} aria-hidden="true" /></span>
                 </p>
               </div>
             </div>
